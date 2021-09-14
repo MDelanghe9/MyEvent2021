@@ -6,7 +6,10 @@ const CityList = (props) => {
         props.onchange(event.target.value);
     }
     return(
+        <>
+      <label for="villes">Choisisez une ville :</label>
         <select name="villes" onChange={handleChange}>
+            <option value="here">Les evenements autour de moi</option>
             <option value="bourg">Bour-en-Bresse (01)</option>
             <option value="laon">Laon (02)</option>
             <option value="moulins">Moulins (03)</option>
@@ -104,6 +107,7 @@ const CityList = (props) => {
             <option value="creteil">Créteil (94)</option>
             <option value="pontoise">Pontoise (95)</option>
         </select> 
+        </>
     )
 };
 

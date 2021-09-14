@@ -3,18 +3,23 @@ import axios from "axios";
 import { Row, Col, Container , Dropdown} from "react-bootstrap";
 import GetGeoLocation from "../components/GetGeoLocation";
 import CityList from "../components/CityList";
+///////////////////////////////////////////////////
+import DistanceList from "../components/DistanceList";
+///////////////////////////////////////////////////
 
 function HomePage() {
   const [events, setEvents] = useState(false);
-  const [eventsFiltred, setEventsFiltred] = useState([]);
+  const [eventsFiltred, setEventsFiltred] = useState(false);
   const [filtredEventsActive, setFiltredEventsActive] = useState(false);
+  const [dist, setDist] = useState(1000);
+  const [curentDate, setCurentDate] = useState(1000);
 
   
 
   const [autoriseGps, SetAutoriseGps] = useState(false);
   const gps = GetGeoLocation();
-  const [city, setCity] = useState(false);
-  const [dataTags, setDataTags] = useState([]);
+  const [city, setCity] = useState("here");
+  const [dataTags, setDataTags] = useState(false);
   
  /* const [token, setToken] = useState(false);
 
@@ -36,6 +41,11 @@ function HomePage() {
   })*/
 
   useEffect(() => {
+    var today = new Date();
+    var date = "";
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    console.log(date);
+    setCurentDate(date);
    // getEvent();
    /* let token = (JSON.parse(window.localStorage.getItem("userInfo")).token);
     if(token){
@@ -57,10 +67,12 @@ function HomePage() {
 
   const getEventByCoord = async () => {
     try {
-      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=&geofilter.distance="+gps.coordinates.lat+"%2C+"+gps.coordinates.lng+"%2C100000");
+      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start>=+"+curentDate+"&sort=-date_start&rows=-1&facet=&geofilter.distance="+gps.coordinates.lat+"%2C+"+gps.coordinates.lng+"%2C"+dist);
    //   console.log(response.data);
+   
       console.log(response.data.records);
       setEvents(response.data.records)
+      setEventsFiltred(response.data.records);
       var tempo = "";
       response.data.records.forEach((element) => {
         tempo = tempo + element.fields.tags;
@@ -68,7 +80,42 @@ function HomePage() {
       });
       tempo = tempo.replaceAll(',,', ',');
       tempo = tempo.replaceAll(',undefined', '');
+      tempo = tempo.replaceAll('"', '');
       let array = tempo.split(',');
+      array.sort();
+      array.shift();
+
+      const counts = {};
+      array.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
+      console.log(counts)
+
+      setDataTags(array);
+
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
+  const getEventByCity = async () => {
+    try {
+      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start>=+"+curentDate+"&sort=-date_start&rows=-1&facet=&geofilter.distance="+gps.coordinates.lat+"%2C+"+gps.coordinates.lng+"%2C"+dist);
+   //   console.log(response.data);
+   
+      console.log(response.data.records);
+      setEvents(response.data.records);
+      setEventsFiltred(response.data.records);
+      var tempo = "";
+      response.data.records.forEach((element) => {
+        tempo = tempo + element.fields.tags;
+        tempo = tempo + ",";
+      });
+      tempo = tempo.replaceAll(',,', ',');
+      tempo = tempo.replaceAll(',undefined', '');
+      tempo = tempo.replaceAll('undefined', '');
+      tempo = tempo.replaceAll(' ', '');
+      let array = tempo.split(',');
+      array.sort();
+      array.shift();
       //Todo erase double
       setDataTags(array);
 
@@ -78,30 +125,33 @@ function HomePage() {
   }
 
   const getPossition = () => {
-    console.log(gps)
-    if (gps.loaded == false) {
-      alert("veuillez d'abors accepter ou refuser le partage de vos coordoner")
+    if (city == "here") {
+      if (gps.loaded == false) {
+        alert("veuillez d'abors accepter ou refuser le partage de vos coordoner")
+      }else{
+        if (gps.error) {
+          console.log(gps.error.message)
+          alert("Vos avez refusser le partage de coordonee, vous pouvez malgre tout chercher les evenment par villes, si c'est une errur recharger la page")
+        }
+        else{
+          console.log(gps.coordinates.lat)
+          console.log(gps.coordinates.lng)
+          getEventByCoord()
+        }
+      }
     }else{
-      if (gps.error) {
-        console.log(gps.error.message)
-        alert("Vos avez refusser le partage de coordonee, vous pouvez malgre tout chercher les evenment par les filtres, si c'est une errur recharger la page")
-      }
-      else{
-        console.log(gps.coordinates.lat)
-        console.log(gps.coordinates.lng)
-        getEventByCoord()
-      }
+      getEventByCity();
     }
-  }
-  const validFilter = () => {
-    console.log(city);
   }
 
   const onchangeListCity = (data) => {
     setCity(data)
     console.log(data);
   }
-
+///////////////////////////////////////////////////
+  const onchangeDistlist = (data) => {setDist(data)}
+///////////////////////////////////////////////////
+//todo retirer event, we just need filtred events all time
   const filtreType = (e) => {
     if (e.target.value !== "null") {
         const arrayTempo = []
@@ -127,37 +177,37 @@ function HomePage() {
   const letsFiltre = (data) => {
 
   }
+  /// metre la recherche autour de moi dans la listes des villes
+  //save
+  //<button onClick={()=> getPossition()}>les evenements autour de moi</button>
+  //
   return (
   <div>
     <div className="back-red">
-      <button onClick={()=> getPossition()}>les evenements autour de moi</button>
     </div>
 
     <div>
-      {gps.loaded &&
+      <CityList data={city} onchange={(e) => { onchangeListCity(e) }}/>
+      <DistanceList data={dist} onchange={(e) => { onchangeDistlist(e) }}/>
+      <button onClick={()=> getPossition()}>Recherchez</button>
+    </div>
+
+    <div>
+      {dataTags &&
       <>
-      <h2>Filtres</h2>
-      <label for="typeFiltre-select">Choisisez un type d'evenement:</label>
-      <select name="typeFiltre-select" onChange={filtreType}>
-        {gps && gps.loaded && dataTags.map((data) =>
-          <option value={data}>{data}</option>
-        )}
+        <label for="typeFiltre-select">Choisisez un type d'evenement : </label>
+        <select name="typeFiltre-select" onChange={filtreType}>
         <option value="null">-- Tous --</option>
-      </select>
-      </>
-      ||
-      <>
-        <h2>Recherches</h2>
-        <CityList data={city} onchange={(e) => { onchangeListCity(e) }}/>
-        <button onClick={()=> validFilter()}>Recherchez</button>
+          {dataTags.map((data) =>
+            <option value={data}>{data.toLowerCase().charAt(0).toUpperCase() + data.slice(1)}</option>
+          )}
+        </select>
       </>
       }
     </div>
 
     <Container>
-      {filtredEventsActive &&
-      <>
-        {eventsFiltred.map((event) =>
+        {eventsFiltred && eventsFiltred.map((event) =>
           <Row>
             <Col className="back-green">Adress :{event.fields.city}</Col>
             {event.fields.image &&
@@ -167,23 +217,7 @@ function HomePage() {
             }
           </Row>
         )}
-      </>
-      ||
-      <>
-        {events && events.map((event) =>
-          <Row>
-            <Col className="back-green">Adress :{event.fields.city}</Col>
-            {event.fields.image &&
-            <Col className="back-green"><img src={event.fields.image} alt="" width="250" height="200" /></Col>
-            ||
-            <Col className="back-green"><img src={require('../defaultposter.png')} alt="" width="250" height="200" /></Col>
-            }
-          </Row>
-        )}
-      </>
-      }
-
-  </Container>
+    </Container>
 
 
   </div>       
