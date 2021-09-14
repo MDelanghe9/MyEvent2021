@@ -1,15 +1,201 @@
-.back-blue{
-    background-color: moccasin;
+.back-blue {
+  background-color: moccasin;
 }
-.back-green{
-    background-color: seashell;
+.back-green {
+  background-color: seashell;
 }
-.back-red{
-    background-color: coral;
+.back-red {
+  background-color: coral;
 }
-.back-yellow{
-    background-color: sandybrown;
+.back-yellow {
+  background-color: sandybrown;
 }
-.back-prune{
-    background-color: peru;
+.back-prune {
+  background-color: peru;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+/* NavBar*/
+.navbar {
+  background: linear-gradient(
+    0deg,
+    rgba(89, 16, 214, 0.37) 0%,
+    rgba(45, 253, 146, 0.438) 100%
+  );
+  border-radius: 0% 0% 10px 10px;
+  padding-bottom: 10px;
+  width: 100%;
+}
+.navbar .navTitle {
+  text-decoration: none;
+  color: white !important;
+}
+.navTitle {
+  font-size: 3em !important;
+  margin-left: -4.5em;
+}
+.icon-home {
+  font-size: 2.5em;
+  margin-left: 35em;
+  margin-right: 0;
+  color: #f3f1f1 !important;
+}
+.icon-user {
+  font-size: 2.5em;
+  margin-left: 0.5em;
+  color: #f3f1f1 !important;
+}
+.icon-home:hover,
+.icon-user:hover,
+.navTitle:hover {
+  color: #4f22838f !important;
+}
+.btn-AutourDeMoi {
+  margin: auto;
+}
+/*search bar*/
+.input-group.md-form.form-sm.form-1 input {
+  display: flex;
+  border: 1px solid #bdbdbd;
+  width: 70%;
+  height: 2em;
+  margin-top: 2em;
+  border-radius: 7px;
+}
+.input-group-prepend {
+  padding: 31px 23px 0 34px;
+  font-size: 1.5em;
+  color: white;
+}
+
+/*liste evenements*/
+.eventAvenir {
+  text-align: center;
+  /* text-shadow:0 1px 0 #ccc, 
+               0 2px 0 #c9c9c9,
+               0 3px 0 #bbb,
+               0 4px 0 #b9b9b9,
+               0 5px 0 #aaa,
+               0 6px 1px rgba(0,0,0,.1),
+               0 0 5px rgba(0,0,0,.1),
+               0 1px 3px rgba(0,0,0,.3),
+               0 3px 5px rgba(0,0,0,.2),
+               0 5px 10px rgba(0,0,0,.25),
+               0 10px 10px rgba(0,0,0,.2),
+               0 20px 20px rgba(0,0,0,.15);color:#fff; */
+}
+.events-list-container {
+  margin-right: 30px;
+}
+.events-list-container hr {
+  margin-left: 10px;
+}
+.desc {
+  margin: 0.6em;
+  padding: 10px;
+  text-align: center;
+  text-shadow: 5px 9px 5px rgba(0, 0, 0, 0.5), 0 0 150px #ec63e5;
+  color: #a117d8;
+}
+.events-list {
+  border: 1px solid rgba(87, 10, 131, 0.075);
+  border-radius: 7px;
+  box-shadow: 8px 10px 5px rgba(104, 10, 141, 0.198);
+  margin: 10px 0px 20px 10px !important;
+  list-style-type: none;
+}
+.events-list p {
+  text-align: justify;
+  margin: 10px;
+}
+.eventImg {
+  margin-left: 20px;
+}
+.event-info {
+  border: 1px solid rgb(245, 246, 246);
+  border-radius: 7px;
+  box-shadow: 4px 5px 5px rgb(212, 220, 223);
+  margin: 10px;
+  padding-left: 5px;
+}
+.gras {
+  font-weight: bold;
+}
+@media (max-width: 1830px) {
+  .navbar {
+    width: 97%;
+    margin: auto;
+  }
+  .navTitle {
+    margin-right: 21em !important;
+    margin-left: 0em !important;
+  }
+  .icon-home,
+  .icon-user {
+    margin-left: 0px !important;
+    padding-top: 0px !important;
+  }
+}
+@media (max-width: 1500px) {
+  .navTitle {
+    margin-right: 19em !important;
+  }
+}
+@media (max-width: 1400px) {
+  .navTitle {
+    margin-right: 16.5em !important;
+  }
+}
+@media (max-width: 1200px) {
+  .navTitle {
+    margin-right: 13em !important;
+  }
+}
+@media (max-width: 1100px) {
+  .navTitle {
+    font-size: 2.5em !important;
+    margin-right: 8em !important;
+  }
+}
+@media (max-width: 760px) {
+  .navTitle {
+    margin-right: 5em !important;
+  }
+}
+@media (max-width: 560px) {
+  .navTitle {
+    margin-right: 3em !important;
+  }
+}
+/* Smartphone */
+@media (max-width: 414px) {
+  .navTitle {
+    font-size: 2em !important;
+    margin-right: 4em !important;
+    margin-left: 0em !important;
+  }
+  .icon-home,
+  .icon-user {
+    font-size: 1.8em;
+    margin-left: -5px !important;
+    margin-top: 5px !important;
+  }
+  /*Evenements */
+  .events-list img {
+    width: 90%;
+    height: auto;
+    margin: 3px;
+    border-radius: 5px;
+  }
 }
