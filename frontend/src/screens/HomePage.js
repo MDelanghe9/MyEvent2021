@@ -23,7 +23,7 @@ function HomePage() {
   const [curentDate, setCurentDate] = useState(1000);
 
   const gps = GetGeoLocation();
-  const [city, setCity] = useState("here");
+  const [city, setCity] = useState("Les evenements autour de moi");
   const [dataTags, setDataTags] = useState(false);
   
  /* const [token, setToken] = useState(false);
@@ -116,13 +116,13 @@ function HomePage() {
   }
 
   const setPossition = () => {
-    if (city === "here") {
+    if (city === "Les evenements autour de moi") {
       if (gps.loaded === false) {
-        alert("veuillez d'abors accepter ou refuser le partage de vos coordoner")
+        alert("Veuillez d'abord accepter ou refuser le partage de vos coordonées avant de continuer.")
       }else{
         if (gps.error) {
           console.log(gps.error.message)
-          alert("Vos avez refusser le partage de coordonee, vous pouvez malgre tout chercher les evenment par villes, si c'est une errur recharger la page")
+          alert("Vous avez refusé le partage de coordonées, vous pouvez malgré tout chercher les evenements par villes. Si c'est une erreur veuillez recharger la page")
         }
         else{
           console.log(gps.coordinates.lat)
@@ -169,42 +169,72 @@ function HomePage() {
       <MyNav />
 
       <div>
-        <h1 className="eventAvenir">Événements à venir</h1>
+        <h1 className="eventAvenir m-3">Événements à venir</h1>
         {gps.loaded &&
           <>
-            <h4>Filtres</h4>
             {dataTags &&
             <>
-              <label htmlFor="typeFiltre-select">Choisissez un type d'evenement :</label>
-              <select name="typeFiltre-select" onChange={filtreType}>
+            <Row>
+              <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
+              <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
                 <option value="null">-- Tous --</option>
                   {dataTags && dataTags.map((data, i) =>
-                    <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
+                <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
                   )}
               </select>
+            </Row>
             </>
             }
+            
+            <Row>
+              <Col>
+                <Col className='containerInput'>
+                  <div>
+                    <label htmlFor="villes">Choissisez une ville : </label>
+                      <p>...ou saisissez une ville : </p>
+                  </div>
 
-            <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
-            <Form.Control
-                type="text"
-                value={city}
-                placeholder="Enter le nom d'une ville"
-                onChange={(e) => setCity(e.target.value)}
-              />
-            <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }}/>
-            <div className="btn-setPosition">
-              <Button variant="outline-info" onClick={() => setPossition()}>
-                Rechercher
-              </Button>
-            </div>
+                    <div>
+                      <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
+                      <Form.Control
+                          type="text"
+                          value={city}
+                          placeholder="Entrez le nom d'une ville"
+                          onChange={(e) => setCity(e.target.value)}
+                          className="inputHome2"
+                      />
+                    </div>
+
+                    <div>
+                      <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }} />
+                    </div>
+                </Col>
+
+                <div className="btn-setPosition">
+                  <Button variant="outline-info" className="btn-home" onClick={() => setPossition()}>
+                    Rechercher
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           </>
           ||
           <>
-            en chargement ...
+            <Row>
+              <Col className="text-center">
+                <div class="lds-ellipsis">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </Col>
+            </Row>
+
           </>
         }
       </div>
+      
 
       <Container>
             {eventsFiltred &&
@@ -239,9 +269,9 @@ function HomePage() {
               ||
               <>
               <Row className="events-list-container w-100">
-                  <Col className="back-blue">
-                    Les event par defaut genre Paris ou les plus recent
-                    <img src="../defaultposter.png" alt="" width="250" height="200" />
+                  <Col className="event-list text-center">
+                    <p>Les events par defaut (ex: Paris) ou les plus recents</p>
+                    <img src="../defaultposter.png" alt="" width="250" height="200"/>
                   </Col>
               </Row>
               </>

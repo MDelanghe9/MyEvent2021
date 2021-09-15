@@ -7,17 +7,17 @@ const DistanceList = (props) => {
     }
     return(
     <>
-        <select name="Distance" onChange={handleChange}>
-            <option value="1000">10km</option>
-            <option value="2000">20km</option>
-            <option value="3000">30km</option>
-            <option value="4000">40km</option>
-            <option value="5000">50km</option>
-            <option value="6000">60km</option>
-            <option value="7000">70km</option>
-            <option value="8000">80km</option>
-            <option value="9000">90km</option>
-            <option value="10000">100km</option>
+        <select name="Distance" onChange={handleChange} className="inputHome">
+            <option value="1000">10 km</option>
+            <option value="2000">20 km</option>
+            <option value="3000">30 km</option>
+            <option value="4000">40 km</option>
+            <option value="5000">50 km</option>
+            <option value="6000">60 km</option>
+            <option value="7000">70 km</option>
+            <option value="8000">80 km</option>
+            <option value="9000">90 km</option>
+            <option value="10000">100 km</option>
         </select> 
     </>
     )
