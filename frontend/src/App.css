@@ -1,5 +1,5 @@
 .back-blue {
-  background-color: moccasin;
+  background-color: blueviolet;
 }
 .back-green {
   background-color: seashell;
@@ -61,9 +61,10 @@ code {
 .navTitle:hover {
   color: #4f22838f !important;
 }
-.btn-AutourDeMoi {
+.btn-setPosition {
   margin: auto;
 }
+
 /*search bar*/
 .input-group.md-form.form-sm.form-1 input {
   display: flex;

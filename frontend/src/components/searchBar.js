@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import '../App.css';
 import { MDBCol, MDBIcon } from "mdbreact";
 import {AiOutlineSearch} from 'react-icons/ai';

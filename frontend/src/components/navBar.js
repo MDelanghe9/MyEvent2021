@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import '../App.css';
 import {Navbar, Nav, Container} from 'react-bootstrap';
 import {AiOutlineHome, AiOutlineUser} from 'react-icons/ai';
-import SearchBar from './searchBar';
-
 
 export default class MyNav extends Component {
     render(){
