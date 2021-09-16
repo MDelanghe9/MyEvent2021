@@ -9744,6 +9744,13 @@
     "regenerator-runtime" "^0.13.7"
     "whatwg-fetch" "^3.4.1"
 
+"react-bootstrap-floating-label@^1.6.0":
+  "integrity" "sha512-UkNXeQ+ZfZfqgLDPERDS1DvHbtrM/QFh/82iTPXgdZkgseDUVB54PJ5LedyEHboqpG7TN3E9J7vb238qJWb+xA=="
+  "resolved" "https://registry.npmjs.org/react-bootstrap-floating-label/-/react-bootstrap-floating-label-1.6.0.tgz"
+  "version" "1.6.0"
+  dependencies:
+    "react-icons" "^4.2.0"
+
 "react-bootstrap@^1.6.3":
   "integrity" "sha512-zsd4l0g68pusOmJ/R5LhTfofT+9RniCwcZsMMNFGJo97d1vT1H2nGlbhLWp/j/pfeXXj9zzR8ugUtKkadcoWnA=="
   "resolved" "https://registry.npmjs.org/react-bootstrap/-/react-bootstrap-1.6.3.tgz"

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap');
 .back-blue {
   background-color: blueviolet;
 }
@@ -14,9 +15,10 @@
   background-color: peru;
 }
 
-body {
+*, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  padding:0;
+  font-family: 'Antic Slab', serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -226,7 +228,74 @@ code {
   border: 1px solid #80c1c9 !important;
   color:#282d2e !important;
 }
+/*LOGIN*/
+.boxContainer{
+  width: 280px;
+  min-height: 550px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 19px;
+  background-color: #fff;
+  box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+.topContainer{
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 1.8em;
+  padding-bottom: 5em;
+}
+/*Rideaux*/
+.backDrop{
+  width: 72%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  border-radius: 50%;
+  transform: rotate(27deg);
+  top: -300px;
+  left: -80px;
+  background: rgb(224, 223, 215);
+  background: linear-gradient(
+    0deg,
+    rgba(89, 16, 214, 0.37) 0%,
+    rgba(45, 253, 146, 0.438) 100%
+  );
+  margin-top:10%;
+  margin-left:16%
+}
+.headerContainer{
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin-top:-150px;
+}
+.headerText{
+  font-size:70px;
+  color:white;
+  font-weight: bold;
+  background-color: #042e4286;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: rgba(255,255,255,0.5) 0px 4px 3px;
+}
+.formContainer{
+  margin:auto;
+  margin-top:5%;
+  width:40%;
+  display:flex;
+  flex-direction: column;
+}
 
+/*Media queries */
 @media (max-width: 1830px) {
   .navbar {
     width: 97%;
@@ -256,6 +325,16 @@ code {
   .navTitle {
     margin-right: 13em !important;
   }
+  .backDrop{
+    height:120%;
+  }
+  .formContainer{
+    width:50%;
+  }
+  .headerContainer{
+    margin-left:-4% !important;
+  }
+  
 }
 @media (max-width: 1100px) {
   .navTitle {
@@ -267,11 +346,47 @@ code {
   .navTitle {
     margin-right: 5em !important;
   }
+  .headerContainer{
+    margin-left:0% !important;
+  }
+  .backDrop{
+    height:110%;
+    transform: rotate(60deg);
+  }
 }
 @media (max-width: 560px) {
   .navTitle {
     margin-right: 3em !important;
   }
+  /*Login for smartphone*/
+
+  /*Rideaux*/
+  .backDrop{
+    transform: rotate(27deg);
+    height:82%;
+    width:65%;
+    transform: rotate(30deg);
+  }
+  .headerText{
+    font-size:55px;
+    color:white;
+    font-weight: bold;
+    background-color: #042e4286;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: rgba(255,255,255,0.5) 0px 4px 3px;
+  }
+  .headerContainer{
+    margin-left: -7% !important;
+  }
+  .formContainer{
+    margin:auto;
+    margin-top:20%;
+    width:85%;
+  }
+  /*Fin login & Register for smartphone*/
 }
 /* Smartphone */
 @media (max-width: 414px) {
