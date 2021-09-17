@@ -262,15 +262,18 @@ const creatParty = (id_event) => {
               ||
               <Row className="events-list-container w-100">
                   <Col className="event-list text-center imgRandomHome">
-                        <div className="absolutTitle imgConcert">CONCERTS</div>
+                        <div className="absolutTitle imgConcert">
+                          <p>CONCERTS</p>
                         <img src="https://w.wallhaven.cc/full/01/wallhaven-01qlk1.jpg"
-                          alt="concerts" width="100%" height="auto"/>
-                        <div className="absolutTitle imgMusee">MUSÉES</div>
+                          alt="concerts" width="100%" height="auto"/></div>
+                        <div className="absolutTitle imgMusee">
+                          <p>MUSÉES</p>
                         <img src="https://w.wallhaven.cc/full/13/wallhaven-13k98v.jpg"
-                          alt="concerts" width="100%" height="auto"/>
-                        <div className="absolutTitle imgSport">SORTIES<br></br>SPORTIVES</div>
+                          alt="concerts" width="100%" height="auto"/></div>
+                        <div className="absolutTitle imgSport">
+                          <p>EXHIBITIONS</p>
                         <img src="https://w.wallhaven.cc/full/4l/wallhaven-4l337r.jpg"
-                          alt="concerts" width="100%" height="auto"/>
+                          alt="concerts" width="100%" height="auto"/></div>
                   </Col>
               </Row>
             }
