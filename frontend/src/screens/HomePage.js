@@ -25,6 +25,7 @@ function HomePage() {
   const gps = GetGeoLocation();
   const [city, setCity] = useState("Les evenements autour de moi");
   const [dataTags, setDataTags] = useState(false);
+  const [paginNbr, setPaginNbr] = useState(5);
   
  /* const [token, setToken] = useState(false);
 
@@ -46,11 +47,13 @@ function HomePage() {
   })*/
 
   useEffect(() => {
-    var today = new Date();
-    var date = "";
-    date = today.getFullYear();
-    console.log(date);
-    setCurentDate(date);
+    var yourDate = new Date();
+
+    const offset = yourDate.getTimezoneOffset()
+    yourDate = new Date(yourDate.getTime() - (offset*60*1000))
+    yourDate = yourDate.toISOString().split('T')[0]
+    console.log(yourDate);
+    setCurentDate(yourDate);
    // getEvent();
    /* let token = (JSON.parse(window.localStorage.getItem("userInfo")).token);
     if(token){
@@ -62,6 +65,16 @@ function HomePage() {
       // pas de user
     }*/
   }, []);
+
+  // changer le nombre a -2 pou viser 2 div event ou more dans le futur
+  const trackScrolling = (i) => {
+    if (i == paginNbr -1) {
+      setPaginNbr(paginNbr + 5)
+      console.log(paginNbr);
+    }else{
+      console.log(i);
+    }
+  };
 
   const creatArrayTags = (data) => {
     var tempo = "";
@@ -91,12 +104,12 @@ function HomePage() {
     setDataTags(array2);
   }
 
-
   const getEventByCoord = async () => {
     try {
-      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start>=+"+curentDate+"&sort=-date_start&rows=-1&facet=&geofilter.distance="+gps.coordinates.lat+"%2C+"+gps.coordinates.lng+"%2C"+dist);
+      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start>=+"+curentDate+"&sort=-date_start&rows=10000&facet=&geofilter.distance="+gps.coordinates.lat+"%2C+"+gps.coordinates.lng+"%2C"+dist);
       creatArrayTags(response.data.records);
       setEvents(response.data.records)
+      console.log(response.data.records);
       setEventsFiltred(response.data.records);
     } catch (error) {
       console.log(error.response);
@@ -143,24 +156,28 @@ function HomePage() {
   const onchangeDistlist = (data) => {setDist(data)}
 ///////////////////////////////////////////////////
 //todo retirer event, we just need filtred events all time
-  const filtreType = (e) => {
-    if (e.target.value !== "null") {
-        const arrayTempo = []
-        events.forEach((event) => {
-          if (event.fields.tags) {
-            arrayTempo.push(event);
-          }
-        });
-    //   console.log(arrayTempo)
-        const result = arrayTempo.filter((event, i) => 
-            event.fields.tags.includes(e.target.value)
-        );
-        console.log(result);
-        setEventsFiltred(result);
-    }else{
-      setEventsFiltred(events);
-    }
+const filtreType = (e) => {
+  if (e.target.value !== "null") {
+      const arrayTempo = []
+      events.forEach((event) => {
+        if (event.fields.tags) {
+          arrayTempo.push(event);
+        }
+      });
+  //   console.log(arrayTempo)
+      const result = arrayTempo.filter((event, i) => 
+          event.fields.tags.includes(e.target.value)
+      );
+      console.log(result);
+      setEventsFiltred(result);
+  }else{
+    setEventsFiltred(events);
   }
+}
+
+const creatParty = (id_event) => {
+  console.log(id_event);
+}
 
 
 
@@ -169,7 +186,6 @@ function HomePage() {
       <MyNav />
 
       <div>
-        <h1 className="eventAvenir m-3">Événements à venir</h1>
         {gps.loaded &&
           <>
             {dataTags &&
@@ -235,12 +251,12 @@ function HomePage() {
         }
       </div>
       
-
+      <div className="imgEventRandom w-100">
       <Container>
             {eventsFiltred &&
               <>
-              { eventsFiltred.map((event, i) =>
-                <Row key={i} className="events-list-container w-100">
+              { eventsFiltred.map((event, i) => i <= paginNbr-1 &&
+                <Row key={i} className="events-list-container w-100" onMouseOver={() => trackScrolling(i)}>
                   <div className="events-list">
                     <Col>
                       <h4 className="desc">{event.fields.description}</h4>
@@ -262,6 +278,10 @@ function HomePage() {
                       </Col>
                     }
                     <p>{event.fields.free_text}</p>
+                    {/*afficher seulement si l'useur et co ou message d'erreur genre => mec tes pas co '-' */}
+                    <Button variant="outline-info" onClick={() => creatParty(event.fields.uid)}>
+                      Créer sortie
+                    </Button>
                   </div>
                 </Row>
               )}
@@ -270,13 +290,29 @@ function HomePage() {
               <>
               <Row className="events-list-container w-100">
                   <Col className="event-list text-center">
-                    <p>Les events par defaut (ex: Paris) ou les plus recents</p>
-                    <img src="../defaultposter.png" alt="" width="250" height="200"/>
+                      <div>
+                        <div className="absolutTitle">CONCERTS</div>
+                        <img src="https://phrnleng.rosselcdn.net/sites/default/files/dpistyles_v2/ena_16_9_extra_big/2021/05/03/node_114543/3087369/public/2021/05/03/B9726915110Z.1_20210503125526_000%2BG95I2AJ1E.1-0.jpg?itok=5JIfKUyQ1620039333"
+                          alt="concerts" width="100%" height="auto"/>
+                      </div>
+
+                      <div>
+                        <div className="absolutTitle">MUSÉES</div>
+                        <img src="https://www.musees.strasbourg.eu/documents/30424/508640/mba_mai2015_2.jpg/9bd88370-288a-3cf3-6ce1-7720798dc055?t=1481549356308"
+                          alt="concerts" width="100%" height="auto"/>
+                      </div>
+
+                      <div>
+                        <div className="absolutTitle">SORTIES SPORTIVES</div>
+                        <img src="https://phrnleng.rosselcdn.net/sites/default/files/dpistyles_v2/ena_16_9_extra_big/2021/05/03/node_114543/3087369/public/2021/05/03/B9726915110Z.1_20210503125526_000%2BG95I2AJ1E.1-0.jpg?itok=5JIfKUyQ1620039333"
+                          alt="concerts" width="100%" height="auto"/>
+                      </div>
                   </Col>
               </Row>
               </>
             }
       </Container>
+      </div>
     </div>
   );
 }

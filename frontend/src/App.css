@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Antic&display=swap');
 .back-blue {
   background-color: blueviolet;
 }
@@ -228,6 +229,18 @@ code {
   border: 1px solid #80c1c9 !important;
   color:#282d2e !important;
 }
+.absolutTitle{
+  position:relative;
+  top:180px;
+  font-size:60px;
+  font-family: 'Antic', sans-serif;
+  font-weight: bold;
+  margin: 0;
+  color: white;
+  text-shadow: 0 0 0.05em #fff, 0 0 0.2em #5e16bd, 0 0 0.3em #0c2ec4;
+  transform: rotate(-8deg);
+}
+
 /*LOGIN*/
 .boxContainer{
   width: 280px;
