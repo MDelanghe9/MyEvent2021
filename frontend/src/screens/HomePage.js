@@ -298,7 +298,6 @@ const creatParty = (id_event) => {
                         <div className="absolutTitle imgMusee">MUSÉES</div>
                         <img src="https://w.wallhaven.cc/full/13/wallhaven-13k98v.jpg"
                           alt="concerts" width="100%" height="auto"/>
-
                         <div className="absolutTitle imgSport">SORTIES<br></br>SPORTIVES</div>
                         <img src="https://w.wallhaven.cc/full/4l/wallhaven-4l337r.jpg"
                           alt="concerts" width="100%" height="auto"/>
