@@ -25,6 +25,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+body {
+  background: url('https://image.freepik.com/vecteurs-libre/blanc-luxe-fond-vagues_52683-38544.jpg') no-repeat fixed !important;
+  background-size: cover !important;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -103,6 +107,7 @@ code {
 }
 /* NavBar*/
 .navbar {
+  font-weight: bold;
   background: linear-gradient(
     0deg,
     rgba(89, 16, 214, 0.37) 0%,
@@ -110,31 +115,54 @@ code {
   );
   border-radius: 0% 0% 10px 10px;
   padding-bottom: 10px;
+  margin-bottom:90px !important;
   width: 100%;
 }
+.navbar a {
+  font-family: 'Antic', sans-serif;
+  font-size:1.3em;
+  transition: all .3s ease-in;
+}
 .navbar .navTitle {
-  text-decoration: none;
   color: white !important;
 }
-.navTitle {
-  font-size: 3em !important;
-  margin-left: -4.5em;
+.navTitle{
+  font-size:2.5em !important;
 }
-.icon-home {
-  font-size: 2.5em;
-  margin-left: 35em;
-  margin-right: 0;
-  color: #f3f1f1 !important;
-}
-.icon-user {
-  font-size: 2.5em;
-  margin-left: 0.5em;
+.icon-home, .icon-user, .icon-log {
+  font-size: 2em !important;
   color: #f3f1f1 !important;
 }
 .icon-home:hover,
 .icon-user:hover,
+.icon-log:hover{
+  color: #4f22838f !important;
+  transition: transform .3s;
+  transform: scale(1.5);
+}
+.navbar-collapse {
+  flex-grow: 0 !important;
+}
+.navbar-burger-text{
+  display:none !important;
+}
+.navbar-burger-text a{
+  font-size:1.3em !important;
+  text-align: center !important;
+  transition: transform .5s;
+  transform: scale(1);
+}
 .navTitle:hover {
   color: #4f22838f !important;
+  transition: transform .3s;
+  transform: scale(1.1);
+}
+.navbar-toggler{
+  background-color: rgba(255, 255, 255, 0.397) !important;
+}
+.navbar-light .navbar-toggler {
+  color: rgba(163, 109, 233, 0.335) !important;
+  border-color: rgba(31, 199, 211, 0.87) !important;
 }
 .btn-setPosition {
   margin: auto;
@@ -173,11 +201,6 @@ code {
 }
 .events-list-container {
   margin-right: 30px;
-}
-.events-list-container hr {
-  margin-left: 10px;
-}
-.desc {
   margin: 0.6em;
   padding: 10px;
   text-align: center;
@@ -209,10 +232,13 @@ code {
   font-weight: bold;
 }
 /*Home*/
-.containerInput{
-  display: flex;
+.eventFilter{
+  margin-top:100px !important;
 }
-
+.containerInput, .row-spinner{
+  display: flex;
+  margin-top:7em !important;
+}
 .inputHome {
   width:300px;
   background:none;
@@ -231,14 +257,37 @@ code {
 }
 .absolutTitle{
   position:relative;
-  top:180px;
-  font-size:60px;
   font-family: 'Antic', sans-serif;
   font-weight: bold;
   margin: 0;
   color: white;
-  text-shadow: 0 0 0.05em #fff, 0 0 0.2em #5e16bd, 0 0 0.3em #0c2ec4;
+}
+/*img home random*/
+.imgRandomHome {
+  cursor: pointer;
+}
+.imgRandomHome img{
+  border-radius:25px;
+}
+.imgConcert{
+  font-size:7em;
+  text-shadow: 0 0 0.05em rgb(206, 160, 10), 0 0 0.2em #bd9016, 0 0 0.3em #db990b;
   transform: rotate(-8deg);
+  top:3.5em;
+}
+.imgMusee{
+  font-size:7em;
+  text-shadow: 0 0 0.05em #fff, 0 0 0.2em #3d3f3c, 0 0 0.3em #5a5f5a;
+  transform: rotate(10deg);
+  top:3em;
+  margin-top:-1em;
+}
+.imgSport{
+  font-size:7em;
+  text-shadow: 0 0 0.05em rgb(180, 177, 177), 0 0 0.2em #e60417, 0 0 0.3em #ff0000;
+  transform: rotate(-14deg);
+  top:5em;
+  margin-top:-2.4em;
 }
 
 /*LOGIN*/
@@ -302,63 +351,47 @@ code {
 }
 .formContainer{
   margin:auto;
-  margin-top:5%;
+  margin-top:2%;
   width:40%;
   display:flex;
   flex-direction: column;
 }
 
 /*Media queries */
-@media (max-width: 1830px) {
+ @media (max-width: 1830px) {
   .navbar {
-    width: 97%;
+    width: 99%;
     margin: auto;
-  }
-  .navTitle {
-    margin-right: 21em !important;
-    margin-left: 0em !important;
-  }
-  .icon-home,
-  .icon-user {
-    margin-left: 0px !important;
-    padding-top: 0px !important;
-  }
-}
-@media (max-width: 1500px) {
-  .navTitle {
-    margin-right: 19em !important;
-  }
-}
-@media (max-width: 1400px) {
-  .navTitle {
-    margin-right: 16.5em !important;
   }
 }
 @media (max-width: 1200px) {
-  .navTitle {
-    margin-right: 13em !important;
-  }
   .backDrop{
     height:120%;
   }
   .formContainer{
     width:50%;
   }
+  /*log*/
   .headerContainer{
     margin-left:-4% !important;
   }
-  
 }
-@media (max-width: 1100px) {
-  .navTitle {
-    font-size: 2.5em !important;
-    margin-right: 8em !important;
+@media (max-width: 900px) {
+  .imgConcert{
+    font-size: 5em;
+    top: 3em;
+  }
+  .imgMusee{
+    font-size: 5em;
+    top:2.5em;
+  }
+  .imgSport{
+    font-size:4.5em;
+    top:4.5em;
   }
 }
 @media (max-width: 760px) {
-  .navTitle {
-    margin-right: 5em !important;
-  }
+  /*log*/
   .headerContainer{
     margin-left:0% !important;
   }
@@ -366,14 +399,31 @@ code {
     height:110%;
     transform: rotate(60deg);
   }
+  /*home random*/
+  .imgConcert{
+    font-size: 4em;
+    top: 2.5em;
+  }
+  .imgMusee{
+    font-size: 4em;
+    top:2em;
+  }
+  .imgSport{
+    font-size:3.5em;
+    top:4.5em;
+  }
+}
+@media (max-width:575px){
+  /*navbar + burger*/
+  .navbar-burger-icon {
+    display:none !important;
+  }
+  .navbar-burger-text {
+    display: flex !important;
+  }
 }
 @media (max-width: 560px) {
-  .navTitle {
-    margin-right: 3em !important;
-  }
   /*Login for smartphone*/
-
-  /*Rideaux*/
   .backDrop{
     transform: rotate(27deg);
     height:82%;
@@ -399,26 +449,31 @@ code {
     margin-top:20%;
     width:85%;
   }
-  /*Fin login & Register for smartphone*/
 }
+
 /* Smartphone */
-@media (max-width: 414px) {
-  .navTitle {
-    font-size: 2em !important;
-    margin-right: 4em !important;
-    margin-left: 0em !important;
-  }
-  .icon-home,
-  .icon-user {
-    font-size: 1.8em;
-    margin-left: -5px !important;
-    margin-top: 5px !important;
-  }
+@media (max-width: 440px) {
   /*Evenements */
   .events-list img {
     width: 90%;
     height: auto;
     margin: 3px;
     border-radius: 5px;
+  }
+  /* img random home*/
+  .imgRandomHome{
+    margin-left:10px;
+  }
+  .imgConcert{
+    font-size: 3em;
+    top: 2.5em;
+  }
+  .imgMusee{
+    font-size: 3em;
+    top:2em;
+  }
+  .imgSport{
+    font-size:2.5em;
+    top:4em;
   }
 }

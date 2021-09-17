@@ -191,13 +191,15 @@ const creatParty = (id_event) => {
             {dataTags &&
             <>
             <Row>
-              <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
-              <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
-                <option value="null">-- Tous --</option>
-                  {dataTags && dataTags.map((data, i) =>
-                <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
-                  )}
-              </select>
+              <Col className="eventFilter">
+                <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
+                <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
+                  <option value="null">-- Tous --</option>
+                    {dataTags && dataTags.map((data, i) =>
+                  <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
+                    )}
+                </select>
+              </Col>
             </Row>
             </>
             }
@@ -236,7 +238,7 @@ const creatParty = (id_event) => {
           </>
           ||
           <>
-            <Row>
+            <Row className="row-spinner">
               <Col className="text-center">
                 <div class="lds-ellipsis">
                   <div></div>
@@ -289,24 +291,17 @@ const creatParty = (id_event) => {
               ||
               <>
               <Row className="events-list-container w-100">
-                  <Col className="event-list text-center">
-                      <div>
+                  <Col className="event-list text-center imgRandomHome">
                         <div className="absolutTitle imgConcert">CONCERTS</div>
-                        <img src="https://phrnleng.rosselcdn.net/sites/default/files/dpistyles_v2/ena_16_9_extra_big/2021/05/03/node_114543/3087369/public/2021/05/03/B9726915110Z.1_20210503125526_000%2BG95I2AJ1E.1-0.jpg?itok=5JIfKUyQ1620039333"
+                        <img src="https://w.wallhaven.cc/full/01/wallhaven-01qlk1.jpg"
                           alt="concerts" width="100%" height="auto"/>
-                      </div>
+                        <div className="absolutTitle imgMusee">MUSÉES</div>
+                        <img src="https://w.wallhaven.cc/full/13/wallhaven-13k98v.jpg"
+                          alt="concerts" width="100%" height="auto"/>
 
-                      <div>
-                        <div className="absolutTitle ">MUSÉES</div>
-                        <img src="https://www.musees.strasbourg.eu/documents/30424/508640/mba_mai2015_2.jpg/9bd88370-288a-3cf3-6ce1-7720798dc055?t=1481549356308"
+                        <div className="absolutTitle imgSport">SORTIES<br></br>SPORTIVES</div>
+                        <img src="https://w.wallhaven.cc/full/4l/wallhaven-4l337r.jpg"
                           alt="concerts" width="100%" height="auto"/>
-                      </div>
-
-                      <div>
-                        <div className="absolutTitle">SORTIES SPORTIVES</div>
-                        <img src="https://www.bump-games.com/uploads/photos/5/image-une/1622627570_photo-de-couverture.jpg"
-                          alt="concerts" width="100%" height="auto"/>
-                      </div>
                   </Col>
               </Row>
               </>
