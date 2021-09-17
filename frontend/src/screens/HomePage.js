@@ -191,13 +191,15 @@ const creatParty = (id_event) => {
             {dataTags &&
             <>
             <Row>
-              <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
-              <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
-                <option value="null">-- Tous --</option>
-                  {dataTags && dataTags.map((data, i) =>
-                <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
-                  )}
-              </select>
+              <Col className="eventFilter">
+                <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
+                <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
+                  <option value="null">-- Tous --</option>
+                    {dataTags && dataTags.map((data, i) =>
+                  <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
+                    )}
+                </select>
+              </Col>
             </Row>
             </>
             }
@@ -236,7 +238,7 @@ const creatParty = (id_event) => {
           </>
           ||
           <>
-            <Row>
+            <Row className="row-spinner">
               <Col className="text-center">
                 <div class="lds-ellipsis">
                   <div></div>
@@ -289,24 +291,16 @@ const creatParty = (id_event) => {
               ||
               <>
               <Row className="events-list-container w-100">
-                  <Col className="event-list text-center">
-                      <div>
+                  <Col className="event-list text-center imgRandomHome">
                         <div className="absolutTitle imgConcert">CONCERTS</div>
                         <img src="https://w.wallhaven.cc/full/01/wallhaven-01qlk1.jpg"
                           alt="concerts" width="100%" height="auto"/>
-                      </div>
-
-                      <div>
                         <div className="absolutTitle imgMusee">MUSÉES</div>
                         <img src="https://w.wallhaven.cc/full/13/wallhaven-13k98v.jpg"
                           alt="concerts" width="100%" height="auto"/>
-                      </div>
-
-                      <div>
                         <div className="absolutTitle imgSport">SORTIES<br></br>SPORTIVES</div>
                         <img src="https://w.wallhaven.cc/full/4l/wallhaven-4l337r.jpg"
                           alt="concerts" width="100%" height="auto"/>
-                      </div>
                   </Col>
               </Row>
               </>
