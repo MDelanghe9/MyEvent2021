@@ -23,8 +23,9 @@ function HomePage() {
   const [curentDate, setCurentDate] = useState(1000);
 
   const gps = GetGeoLocation();
-  const [city, setCity] = useState("here");
+  const [city, setCity] = useState("Les evenements autour de moi");
   const [dataTags, setDataTags] = useState(false);
+  const [paginNbr, setPaginNbr] = useState(5);
   
  /* const [token, setToken] = useState(false);
 
@@ -46,11 +47,13 @@ function HomePage() {
   })*/
 
   useEffect(() => {
-    var today = new Date();
-    var date = "";
-    date = today.getFullYear();
-    console.log(date);
-    setCurentDate(date);
+    var yourDate = new Date();
+
+    const offset = yourDate.getTimezoneOffset()
+    yourDate = new Date(yourDate.getTime() - (offset*60*1000))
+    yourDate = yourDate.toISOString().split('T')[0]
+    console.log(yourDate);
+    setCurentDate(yourDate);
    // getEvent();
    /* let token = (JSON.parse(window.localStorage.getItem("userInfo")).token);
     if(token){
@@ -62,6 +65,16 @@ function HomePage() {
       // pas de user
     }*/
   }, []);
+
+  // changer le nombre a -2 pou viser 2 div event ou more dans le futur
+  const trackScrolling = (i) => {
+    if (i == paginNbr -1) {
+      setPaginNbr(paginNbr + 5)
+      console.log(paginNbr);
+    }else{
+      console.log(i);
+    }
+  };
 
   const creatArrayTags = (data) => {
     var tempo = "";
@@ -91,12 +104,12 @@ function HomePage() {
     setDataTags(array2);
   }
 
-
   const getEventByCoord = async () => {
     try {
-      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start>=+"+curentDate+"&sort=-date_start&rows=-1&facet=&geofilter.distance="+gps.coordinates.lat+"%2C+"+gps.coordinates.lng+"%2C"+dist);
+      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start>=+"+curentDate+"&sort=-date_start&rows=10000&facet=&geofilter.distance="+gps.coordinates.lat+"%2C+"+gps.coordinates.lng+"%2C"+dist);
       creatArrayTags(response.data.records);
       setEvents(response.data.records)
+      console.log(response.data.records);
       setEventsFiltred(response.data.records);
     } catch (error) {
       console.log(error.response);
@@ -116,13 +129,13 @@ function HomePage() {
   }
 
   const setPossition = () => {
-    if (city === "here") {
+    if (city === "Les evenements autour de moi") {
       if (gps.loaded === false) {
-        alert("veuillez d'abors accepter ou refuser le partage de vos coordoner")
+        alert("Veuillez d'abord accepter ou refuser le partage de vos coordonées avant de continuer.")
       }else{
         if (gps.error) {
           console.log(gps.error.message)
-          alert("Vos avez refusser le partage de coordonee, vous pouvez malgre tout chercher les evenment par villes, si c'est une errur recharger la page")
+          alert("Vous avez refusé le partage de coordonées, vous pouvez malgré tout chercher les evenements par villes. Si c'est une erreur veuillez recharger la page")
         }
         else{
           console.log(gps.coordinates.lat)
@@ -143,24 +156,28 @@ function HomePage() {
   const onchangeDistlist = (data) => {setDist(data)}
 ///////////////////////////////////////////////////
 //todo retirer event, we just need filtred events all time
-  const filtreType = (e) => {
-    if (e.target.value !== "null") {
-        const arrayTempo = []
-        events.forEach((event) => {
-          if (event.fields.tags) {
-            arrayTempo.push(event);
-          }
-        });
-    //   console.log(arrayTempo)
-        const result = arrayTempo.filter((event, i) => 
-            event.fields.tags.includes(e.target.value)
-        );
-        console.log(result);
-        setEventsFiltred(result);
-    }else{
-      setEventsFiltred(events);
-    }
+const filtreType = (e) => {
+  if (e.target.value !== "null") {
+      const arrayTempo = []
+      events.forEach((event) => {
+        if (event.fields.tags) {
+          arrayTempo.push(event);
+        }
+      });
+  //   console.log(arrayTempo)
+      const result = arrayTempo.filter((event, i) => 
+          event.fields.tags.includes(e.target.value)
+      );
+      console.log(result);
+      setEventsFiltred(result);
+  }else{
+    setEventsFiltred(events);
   }
+}
+
+const creatParty = (id_event) => {
+  console.log(id_event);
+}
 
 
 
@@ -169,48 +186,77 @@ function HomePage() {
       <MyNav />
 
       <div>
-        <h1 className="eventAvenir">Événements à venir</h1>
         {gps.loaded &&
           <>
-            <h4>Filtres</h4>
             {dataTags &&
             <>
-              <label htmlFor="typeFiltre-select">Choisissez un type d'evenement :</label>
-              <select name="typeFiltre-select" onChange={filtreType}>
+            <Row>
+              <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
+              <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
                 <option value="null">-- Tous --</option>
                   {dataTags && dataTags.map((data, i) =>
-                    <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
+                <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
                   )}
               </select>
+            </Row>
             </>
             }
+            
+            <Row>
+              <Col>
+                <Col className='containerInput'>
+                  <div>
+                    <label htmlFor="villes">Choissisez une ville : </label>
+                      <p>...ou saisissez une ville : </p>
+                  </div>
 
-            <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
-            <Form.Control
-                type="text"
-                value={city}
-                placeholder="Enter le nom d'une ville"
-                onChange={(e) => setCity(e.target.value)}
-              />
-            <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }}/>
-            <div className="btn-setPosition">
-              <Button variant="outline-info" onClick={() => setPossition()}>
-                Rechercher
-              </Button>
-            </div>
+                    <div>
+                      <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
+                      <Form.Control
+                          type="text"
+                          value={city}
+                          placeholder="Entrez le nom d'une ville"
+                          onChange={(e) => setCity(e.target.value)}
+                          className="inputHome2"
+                      />
+                    </div>
+
+                    <div>
+                      <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }} />
+                    </div>
+                </Col>
+
+                <div className="btn-setPosition">
+                  <Button variant="outline-info" className="btn-home" onClick={() => setPossition()}>
+                    Rechercher
+                  </Button>
+                </div>
+              </Col>
+            </Row>
           </>
           ||
           <>
-            en chargement ...
+            <Row>
+              <Col className="text-center">
+                <div class="lds-ellipsis">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              </Col>
+            </Row>
+
           </>
         }
       </div>
-
+      
+      <div className="imgEventRandom w-100">
       <Container>
             {eventsFiltred &&
               <>
-              { eventsFiltred.map((event, i) =>
-                <Row key={i} className="events-list-container w-100">
+              { eventsFiltred.map((event, i) => i <= paginNbr-1 &&
+                <Row key={i} className="events-list-container w-100" onMouseOver={() => trackScrolling(i)}>
                   <div className="events-list">
                     <Col>
                       <h4 className="desc">{event.fields.description}</h4>
@@ -232,6 +278,10 @@ function HomePage() {
                       </Col>
                     }
                     <p>{event.fields.free_text}</p>
+                    {/*afficher seulement si l'useur et co ou message d'erreur genre => mec tes pas co '-' */}
+                    <Button variant="outline-info" onClick={() => creatParty(event.fields.uid)}>
+                      Créer sortie
+                    </Button>
                   </div>
                 </Row>
               )}
@@ -239,14 +289,30 @@ function HomePage() {
               ||
               <>
               <Row className="events-list-container w-100">
-                  <Col className="back-blue">
-                    Les event par defaut genre Paris ou les plus recent
-                    <img src="../defaultposter.png" alt="" width="250" height="200" />
+                  <Col className="event-list text-center">
+                      <div>
+                        <div className="absolutTitle">CONCERTS</div>
+                        <img src="https://phrnleng.rosselcdn.net/sites/default/files/dpistyles_v2/ena_16_9_extra_big/2021/05/03/node_114543/3087369/public/2021/05/03/B9726915110Z.1_20210503125526_000%2BG95I2AJ1E.1-0.jpg?itok=5JIfKUyQ1620039333"
+                          alt="concerts" width="100%" height="auto"/>
+                      </div>
+
+                      <div>
+                        <div className="absolutTitle">MUSÉES</div>
+                        <img src="https://www.musees.strasbourg.eu/documents/30424/508640/mba_mai2015_2.jpg/9bd88370-288a-3cf3-6ce1-7720798dc055?t=1481549356308"
+                          alt="concerts" width="100%" height="auto"/>
+                      </div>
+
+                      <div>
+                        <div className="absolutTitle">SORTIES SPORTIVES</div>
+                        <img src="https://phrnleng.rosselcdn.net/sites/default/files/dpistyles_v2/ena_16_9_extra_big/2021/05/03/node_114543/3087369/public/2021/05/03/B9726915110Z.1_20210503125526_000%2BG95I2AJ1E.1-0.jpg?itok=5JIfKUyQ1620039333"
+                          alt="concerts" width="100%" height="auto"/>
+                      </div>
                   </Col>
               </Row>
               </>
             }
       </Container>
+      </div>
     </div>
   );
 }
