@@ -182,79 +182,50 @@ const creatParty = (id_event) => {
 
 
   return (
-    <div>
+    <>
       <MyNav />
-
-      <div>
+      <Container>
         {gps.loaded &&
           <>
-            {dataTags &&
-            <>
             <Row>
-              <Col className="eventFilter">
-                <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
-                <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
-                  <option value="null">-- Tous --</option>
-                    {dataTags && dataTags.map((data, i) =>
-                  <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
-                    )}
-                </select>
-              </Col>
-            </Row>
-            </>
-            }
-            
-            <Row>
-              <Col>
-                <Col className='containerInput'>
-                  <div>
-                    <label htmlFor="villes">Choissisez une ville : </label>
-                      <p>...ou saisissez une ville : </p>
+              <Col className='containerInput'>
+                <div>
+                  <label htmlFor="villes">Choissisez une ville : </label>
+                    <p>...ou saisissez une ville : </p>
+                </div>
+                <div>
+                  <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
+                  <Form.Control
+                      type="text"
+                      value={city}
+                      placeholder="Entrez le nom d'une ville"
+                      onChange={(e) => setCity(e.target.value)}
+                      className="inputHome2"
+                  />
+                </div>
+                <div>
+                  <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }} />
+                </div>
+                {dataTags &&
+                  <>
+                      <div>
+                        <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
+                        <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
+                          <option value="null">-- Tous --</option>
+                            {dataTags && dataTags.map((data, i) =>
+                          <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
+                            )}
+                        </select>
+                      </div>
+                  </>
+                  }
+                  <div className="btn-setPosition">
+                    <Button variant="outline-info" className="btn-home" onClick={() => setPossition()}>
+                      Rechercher
+                    </Button>
                   </div>
-
-                    <div>
-                      <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
-                      <Form.Control
-                          type="text"
-                          value={city}
-                          placeholder="Entrez le nom d'une ville"
-                          onChange={(e) => setCity(e.target.value)}
-                          className="inputHome2"
-                      />
-                    </div>
-
-                    <div>
-                      <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }} />
-                    </div>
-                </Col>
-
-                <div className="btn-setPosition">
-                  <Button variant="outline-info" className="btn-home" onClick={() => setPossition()}>
-                    Rechercher
-                  </Button>
-                </div>
               </Col>
             </Row>
-          </>
-          ||
-          <>
-            <Row className="row-spinner">
-              <Col className="text-center">
-                <div class="lds-ellipsis">
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                  <div></div>
-                </div>
-              </Col>
-            </Row>
-
-          </>
-        }
-      </div>
-      
-      <div className="imgEventRandom w-100">
-      <Container>
             {eventsFiltred &&
               <>
               { eventsFiltred.map((event, i) => i <= paginNbr-1 &&
@@ -289,7 +260,6 @@ const creatParty = (id_event) => {
               )}
               </>
               ||
-              <>
               <Row className="events-list-container w-100">
                   <Col className="event-list text-center imgRandomHome">
                         <div className="absolutTitle imgConcert">CONCERTS</div>
@@ -303,11 +273,22 @@ const creatParty = (id_event) => {
                           alt="concerts" width="100%" height="auto"/>
                   </Col>
               </Row>
-              </>
             }
-      </Container>
-      </div>
-    </div>
+          </>
+          ||
+          <Row className="row-spinner">
+            <Col className="text-center">
+              <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </Col>
+          </Row>
+      }
+    </Container>
+    </>
   );
 }
 
