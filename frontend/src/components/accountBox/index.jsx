@@ -34,7 +34,7 @@ export function AccountBox(props) {
                 <Form.Control type="email" placeholder="exemple@gmail.com" />
             </FloatingLabel>
 
-            <FloatingLabel controlId="passwordLogin" label="password">
+            <FloatingLabel controlId="passwordLogin" label="password" className="mb-3">
                 <Form.Control type="password" placeholder="Mot de passe" />
             </FloatingLabel>
 
