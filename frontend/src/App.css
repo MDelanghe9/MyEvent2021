@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic+Slab&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Antic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap');
+
 .back-blue {
   background-color: blueviolet;
 }
@@ -107,38 +110,41 @@ code {
 }
 /* NavBar*/
 .navbar {
+  width:99% !important;
+  margin:auto;
   font-weight: bold;
-  background: linear-gradient(
-    0deg,
-    rgba(89, 16, 214, 0.37) 0%,
-    #1931ce 100%
-  );
+  background-image: url('https://media.istockphoto.com/vectors/metal-texture-blue-metal-scratched-background-vector-id1095405596?k=20&m=1095405596&s=170667a&w=0&h=LyoMQ4St3oBjeeqYKUoLAkfIpetXcuVjeavpHsJxZQM=');
+  background-size: cover;
   border-radius: 0% 0% 10px 10px;
   padding-bottom: 10px;
   margin-bottom:90px !important;
   width: 100%;
+  box-shadow:8px 8px 5px rgba(63, 10, 83, 0.507) !important;
 }
 .navbar a {
-  font-family: 'Antic', sans-serif;
-  font-size:1.3em;
+  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
   transition: all .3s ease-in;
 }
 .navbar .navTitle {
   color: white !important;
 }
 .navTitle{
+  font-family: 'Raleway Dots', cursive !important;
   font-size:2.5em !important;
+  position: relative;
+  z-index: 0;
+  text-decoration: overline 1.5px rgba(255, 255, 255, 0.671);
 }
 .icon-home, .icon-user, .icon-log {
   font-size: 2em !important;
-  color: #f3f1f1 !important;
+  color: white !important;
 }
 .icon-home:hover,
 .icon-user:hover,
 .icon-log:hover{
-  color: #2a0441 !important;
+  color: #70cfec !important;
   transition: transform .3s;
-  transform: scale(1.5);
+  transform: scale(1.04);
 }
 .navbar-collapse {
   flex-grow: 0 !important;
@@ -147,22 +153,40 @@ code {
   display:none !important;
 }
 .navbar-burger-text a{
-  font-size:1.3em !important;
+  margin: 0 20px 3px 20px;
+  box-shadow:2px 2px 10px black inset;
+  -moz-box-shadow:2px 2px 10px black inset;
+  -webkit-box-shadow:2px 2px 10px black inset;
+  border-radius:3px;
+  font-size:1.2em !important;
   text-align: center !important;
   transition: transform .5s;
   transform: scale(1);
 }
-.navTitle:hover {
-  color: #2a0441 !important;
-  transition: transform .3s;
-  transform: scale(1.1);
+.navTitle::after {
+    position: absolute;
+    z-index: -1;
+    bottom: 7px;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    width: 100%;
+    height: 1.5px;
+    transition: all 250ms;
+    border-radius:3px;
+    box-shadow:2px 2px 7px rgba(0, 0, 0, 0.671) inset;
+    -moz-box-shadow:2px 2px 7px rgba(0, 0, 0, 0.671) inset;
+    -webkit-box-shadow:2px 2px 7px rgba(0, 0, 0, 0.671) inset;
+  }
+
+.navTitle:hover::after{
+  height: 80%;
+  width: 105%; 
 }
-.navbar-toggler{
-  background-color: rgba(255, 255, 255, 0.397) !important;
-}
+
 .navbar-light .navbar-toggler {
-  color: rgba(163, 109, 233, 0.335) !important;
-  border-color: rgba(31, 199, 211, 0.87) !important;
+  color: rgba(0, 0, 0, 0.233) !important;
+  border-color: rgba(185, 204, 206, 0.507) !important;
 }
 .btn-setPosition {
   margin: auto;
