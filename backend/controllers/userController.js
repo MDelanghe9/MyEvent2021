@@ -94,4 +94,20 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, updateUserProfile, registerUser };
+
+// @desc    POST user party
+// @route   POST /api/users/creatparty
+// @access  Private
+const userCreatParty = asyncHandler(async (req, res) => {
+  console.log(req)
+  const user = await User.findById(req.user._id);
+  if (user) {
+    res.json(req.body);
+  }else{
+    res.status(404);
+    throw new Error("Utilisateur inconnue");
+  }
+});
+
+
+export { authUser, updateUserProfile, registerUser, userCreatParty };

@@ -229,7 +229,7 @@ const creatParty = (id_event) => {
             {eventsFiltred &&
               <>
               { eventsFiltred.map((event, i) => i <= paginNbr-1 &&
-                <Row key={i} className="events-list-container w-100" onMouseOver={() => trackScrolling(i)}>
+                <Row key={i} className="events-list-container w-100 m-2" onMouseOver={() => trackScrolling(i)}>
                   <div className="events-list">
                     <Col>
                       <h4 className="desc">{event.fields.description}</h4>
@@ -260,17 +260,20 @@ const creatParty = (id_event) => {
               )}
               </>
               ||
-              <Row className="events-list-container w-100">
+              <Row className="events-list-container w-100 m-3">
                   <Col className="event-list text-center imgRandomHome">
-                        <div className="absolutTitle imgConcert">CONCERTS</div>
+                        <div className="absolutTitle imgConcert">
+                          <p>CONCERTS</p>
                         <img src="https://w.wallhaven.cc/full/01/wallhaven-01qlk1.jpg"
-                          alt="concerts" width="100%" height="auto"/>
-                        <div className="absolutTitle imgMusee">MUSÉES</div>
+                          alt="photo concerts" width="80%" height="auto"/></div>
+                        <div className="absolutTitle imgMusee">
+                          <p>MUSÉES</p>
                         <img src="https://w.wallhaven.cc/full/13/wallhaven-13k98v.jpg"
-                          alt="concerts" width="100%" height="auto"/>
-                        <div className="absolutTitle imgSport">SORTIES<br></br>SPORTIVES</div>
+                          alt="photo musees" width="8%" height="auto"/></div>
+                        <div className="absolutTitle imgSport">
+                          <p>EXHIBITIONS</p>
                         <img src="https://w.wallhaven.cc/full/4l/wallhaven-4l337r.jpg"
-                          alt="concerts" width="100%" height="auto"/>
+                          alt="photo sports" width="80%" height="auto"/></div>
                   </Col>
               </Row>
             }

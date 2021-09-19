@@ -60,163 +60,156 @@ const CityList = (props) => {
             <option value="Chalon-sur-Saône">Chalon-sur-Saône</option>
             <option value="Chambéry">Chambéry</option>
             <option value="Chantepie">Chantepie</option>
-
+            <option value="Charleville-Mézières">Charleville-Mézières</option>
+            <option value="Chartres">Chartres</option>
+            <option value="Châtellerault">Châtellerault</option>
+            <option value="Châtenay-Malabry">Châtenay-Malabry</option>
+            <option value="Chaumont">Chaumont</option>
+            <option value="Clermont-Ferrand">Clermont-Ferrand</option>
+            <option value="Colmar">Colmar</option>
+            <option value="Colombes">Colombes</option>
+            <option value="Colomiers">Colomiers</option>
+            <option value="Compiègne">Compiègne</option>
+            <option value="Cornebarrieu">Cornebarrieu</option>
+            <option value="Crest">Crest</option>
+            <option value="Créteil">Créteil</option>
+            <option value="Dijon">Dijon</option>
+            <option value="Douai">Douai</option>
+            <option value="Dunkerque">Dunkerque</option>
+            <option value="Élancourt">Élancourt</option>
+            <option value="Elbeuf">Elbeuf</option>
+            <option value="Épinal">Épinal</option>
+            <option value="Erquy">Erquy</option>
+            <option value="Évreux">Évreux</option>
+            <option value="Fécamp">Fécamp</option>
+            <option value="Fontainebleau">Fontainebleau</option>
+            <option value="Fontenay-sous-Bois">Fontenay-sous-Bois</option>
+            <option value="Geneva">Geneva</option>
+            <option value="Genève">Genève</option>
+            <option value="Gif-sur-Yvette">Gif-sur-Yvette</option>
+            <option value="Grenoble">Grenoble</option>
+            <option value="Guérande">Guérande</option>
+            <option value="Guyancourt">Guyancourt</option>
+            <option value="Issy-les-Moulineaux">Issy-les-Moulineaux</option>
+            <option value="Ivry-sur-Seine">Ivry-sur-Seine</option>
+            <option value="La Ciotat">La Ciotat</option>
+            <option value="La Côte-Saint-André">La Côte-Saint-André</option>
+            <option value="La Rochelle">La Rochelle</option>
+            <option value="La Roche-sur-Yon">La Roche-sur-Yon</option>
+            <option value="Labège">Labège</option>
+            <option value="Langres">Langres</option>
+            <option value="Laval">Laval</option>
+            <option value="Le Blanc-Mesnil">Le Blanc-Mesnil</option>
+            <option value="Le Haillan">Le Haillan</option>
+            <option value="Le Havre">Le Havre</option>
+            <option value="Le Kremlin-Bicêtre">Le Kremlin-Bicêtre</option>
+            <option value="Le Mans">Le Mans</option>
+            <option value="Les Lilas">Les Lilas</option>
+            <option value="Libourne">Libourne</option>
+            <option value="Lille">Lille</option>
+            <option value="Limoges">Limoges</option>
+            <option value="Lisieux">Lisieux</option>
+            <option value="Lorient">Lorient</option>
+            <option value="Lormont">Lormont</option>
+            <option value="Lyon">Lyon</option>
+            <option value="Mantes-la-Jolie">Mantes-la-Jolie</option>
+            <option value="Marseille">Marseille/</option>
+            <option value="Martigues">Martigues</option>
+            <option value="Massy">Massy</option>
+            <option value="Melun">Melun</option>
+            <option value="Menton">Menton</option>
+            <option value="Mérignac">Mérignac</option>
+            <option value="Metz">Metz</option>
+            <option value="Meudon">Meudon</option>
+            <option value="Montaigu-Vendée">Montaigu-Vendée</option>
+            <option value="Montauban">Montauban</option>
+            <option value="Montfort-sur-Meu">Montfort-sur-Meu</option>
+            <option value="Montigny-le-Bretonneux">Montigny-le-Bretonneux</option>
+            <option value="Montpellier">Montpellier</option>
+            <option value="Montreuil">Montreuil</option>
+            <option value="Moulins">Moulins</option>
+            <option value="Mulhouse">Mulhouse</option>
+            <option value="Nancy">Nancy</option>
+            <option value="Nanterre">Nanterre</option>
+            <option value="Nantes">Nantes</option>
+            <option value="Narbonne">Narbonne</option>
+            <option value="Nevers">Nevers</option>
+            <option value="Nice">Nice</option>
+            <option value="Nîmes">Nîmes</option>
+            <option value="Niort">Niort</option>
+            <option value="Noisiel">Noisiel</option>
+            <option value="Noisy-le-Sec">Noisy-le-Sec</option>
+            <option value="Olivet">Olivet</option>
+            <option value="Orleans">Orleans</option>
+            <option value="Orsay">Orsay</option>
+            <option value="Pantin">Pantin</option>
+            <option value="Paris">Paris</option>
+            <option value="Passy">Passy</option>
+            <option value="Pau">Pau</option>
+            <option value="Périgueux">Périgueux</option>
+            <option value="Perpignan">Perpignan</option>
+            <option value="Pessac">Passac</option>
+            <option value="Poitiers">Poitiers</option>
+            <option value="Pontoise">Pontoise</option>
+            <option value="Quimper">Quimper</option>
+            <option value="Rambouillet">Rambouillet</option>
+            <option value="Ramonville-Saint-Agne">Ramonville-Saint-Agne</option>
+            <option value="Reims">Reims</option>
+            <option value="Rennes">Rennes</option>
+            <option value="Riom">Riom</option>
+            <option value="Rochefort">Rochefort</option>
+            <option value="Rodez">Rodez</option>
+            <option value="Romainville">Romainville</option>
+            <option value="Romans-sur-Isère">Romans-sur-Isère</option>
+            <option value="Roubaix">Roubaix</option>
+            <option value="Rouen">Rouen</option>
+            <option value="Royan">Royan</option>
+            <option value="Ruoms">Ruoms</option>
+            <option value="Saint-Brieuc">Saint-Brieuc</option>
+            <option value="Saint-Chamond">Saint-Chamond</option>
+            <option value="Saint-Denis">Saint-Denis</option>
+            <option value="Saint-Dizier">Saint-Dizier</option>
+            <option value="Saintes">Santes</option>
+            <option value="Saint-Étienne">Saint-Étienne</option>
+            <option value="Saint-Étienne-du-Rouvray">Saint-Étienne-du-Rouvray</option>
+            <option value="Saint-Germain-en-Laye">Saint-Germain-en-Laye</option>
+            <option value="Saint-Jacques-de-la-Lande">Saint-Jacques-de-la-Lande</option>
+            <option value="Saint-Jean-le-Blanc">Saint-Jean-le-Blanc</option>
+            <option value="Saint-Malo">Saint-Malo</option>
+            <option value="Saint-Nazaire">Saint-Nazaire</option>
+            <option value="Saint-Omer">Saint-Omer</option>
+            <option value="Saint-Ouen">Saint-Ouen</option>
+            <option value="Saint-Paul">Saint-Paul</option>
+            <option value="Saint-Pierre">Saint-Pierre</option>
+            <option value="Salon-de-Provence">Salon-de-Provence</option>
+            <option value="Saumur">Saumur</option>
+            <option value="Sceaux">Sceaux</option>
+            <option value="Senlis">Senlis</option>
+            <option value="Strasbourg">Strasbourg</option>
+            <option value="Talence">Talence</option>
+            <option value="Tarbes">Tarbes</option>
+            <option value="Thonon-les-Bains">Thonon-les-Bains</option>
+            <option value="Toulon">Toulon</option>
+            <option value="Toulouse">Tououse</option>
+            <option value="Tourcoing">Tourcoing</option>
+            <option value="Tournefeuille">Tournefeuille</option>
+            <option value="Tours">Tours</option>
+            <option value="Trappes">Trappes</option>
+            <option value="Troyes">Troyes</option>
+            <option value="Valence">Valence</option>
+            <option value="Vannes">Vannes</option>
+            <option value="Vauréal">Vauréal</option>
+            <option value="Versailles">Versailles</option>
+            <option value="Vieux">Vieux</option>
+            <option value="Villenave-d'Ornon">Villenave-d'Ornon</option>
+            <option value="Villeneuve-d'Ascq">Villeneuve-d'Ascq</option>
+            <option value="Villepinte">Villepinte</option>
+            <option value="Villers-lès-Nancy">Viller-lès-Nancy</option>
+            <option value="Villeurbanne">Villeurbanne</option>
+            <option value="Vitry-sur-Seine">Vitry-sur-Seine</option>
         </select> 
         </>
     )
 };
 
 export default CityList;
-/*
-
-
-Charleville-Mézières
-Chartres
-Châtellerault
-Châtenay-Malabry
-Chaumont
-Clermont-Ferrand
-Colmar
-Colombes
-Colomiers
-Compiègne
-Cornebarrieu
-Crest
-Créteil
-Dijon
-Douai
-Dunkerque
-Élancourt
-Elbeuf
-Épinal
-Erquy
-Évreux
-Fécamp
-Fontainebleau
-Fontenay-sous-Bois
-Geneva
-Genève
-Gif-sur-Yvette
-Grenoble
-Guérande
-GUYANCOURT
-Guyancourt
-Issy-les-Moulineaux
-Ivry-sur-Seine
-La Ciotat
-La Côte-Saint-André
-La Rochelle
-La Roche-sur-Yon
-Labège
-Langres
-Laval
-Le Blanc-Mesnil
-Le Haillan
-Le Havre
-Le Kremlin-Bicêtre
-Le Mans
-Les Lilas
-Libourne
-Lille
-Limoges
-Lisieux
-Lorient
-Lormont
-Lyon
-Mantes-la-Jolie
-Marseille
-Martigues
-Massy
-Melun
-Menton
-Mérignac
-Metz
-Meudon
-Montaigu-Vendée
-Montauban
-Montfort-sur-Meu
-Montigny-le-Bretonneux
-Montpellier
-Montreuil
-Moulins
-Mulhouse
-Nancy
-Nanterre
-Nantes
-Narbonne
-Nevers
-Nice
-Nîmes
-Niort
-Noisiel
-Noisy-le-Sec
-Olivet
-Orleans
-Orléans
-Orsay
-Pantin
-Paris
-Passy
-Pau
-Périgueux
-Perpignan
-Pessac
-Poitiers
-Pontoise
-Quimper
-Rambouillet
-Ramonville-Saint-Agne
-Reims
-Rennes
-Riom
-Rochefort
-Rodez
-Romainville
-Romans-sur-Isère
-Roubaix
-Rouen
-Royan
-Ruoms
-Saint-Brieuc
-Saint-Chamond
-Saint-Denis
-Saint-Dizier
-Saintes
-Saint-Étienne
-Saint-Étienne-du-Rouvray
-Saint-Germain-en-Laye
-Saint-Jacques-de-la-Lande
-Saint-Jean-le-Blanc
-Saint-Malo
-Saint-Nazaire
-Saint-Omer
-Saint-Ouen
-Saint-Paul
-Saint-Pierre
-Salon-de-Provence
-Saumur
-Sceaux
-Senlis
-Strasbourg
-Talence
-Tarbes
-Thonon-les-Bains
-Toulon
-Toulouse
-Tourcoing
-Tournefeuille
-Tours
-Trappes
-Troyes
-Valence
-Vannes
-Vauréal
-Versailles
-Vieux
-Villenave-d'Ornon
-Villeneuve-d'Ascq
-Villepinte
-Villers-lès-Nancy
-Villeurbanne
-Vitry-sur-Seine
-*/
