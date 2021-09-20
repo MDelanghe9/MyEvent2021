@@ -245,7 +245,8 @@ code {
   margin-top:100px !important;
 }
 .containerInput, .row-spinner{
-  display: flex;
+ /*display: flex;*/
+
   margin-top:7em !important;
 }
 .inputHome {

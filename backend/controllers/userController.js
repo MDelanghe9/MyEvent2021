@@ -1,5 +1,6 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
+import Party from "../models/partyModel.js";
 import generateToken from "../utils/generateToken.js";
 
 //@description     Auth the user
@@ -28,6 +29,40 @@ const authUser = asyncHandler(async (req, res) => {
 //@route           POST /api/users/register
 //@access          Public
 const registerUser = asyncHandler(async (req, res) => {
+
+  const { name, email} = req.body.user;
+  var imageUrl = req.body.user.imageUrl;
+  if (imageUrl == "") {
+    //set image par default
+    imageUrl = "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg";
+  }
+  
+  const userExists = await User.findOne({ email });
+  if (userExists) {
+    res.status(201).json("Email est deja utiliser so je le co juste");
+  }else{
+    //j'enregistre l'utilisateur
+    const user = await User.create({
+      name,
+      email,
+      imageUrl,
+    });
+    res.status(201).json({
+      response:"Utilisateur cree",
+      name,
+      email,
+      imageUrl,
+    });
+  }
+});
+
+/* old register
+
+//@description     Register new user
+//@route           POST /api/users/register
+//@access          Public
+const registerUser = asyncHandler(async (req, res) => {
+
   const { name, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
@@ -65,6 +100,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
   throw new Error("$9$Email pas au format email$9$");
 });
+*/
 
 // @desc    GET user profile
 // @route   GET /api/users/profile
@@ -99,13 +135,27 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @route   POST /api/users/creatparty
 // @access  Private
 const userCreatParty = asyncHandler(async (req, res) => {
-  console.log(req)
-  const user = await User.findById(req.user._id);
-  if (user) {
-    res.json(req.body);
-  }else{
-    res.status(404);
-    throw new Error("Utilisateur inconnue");
+  const { id_event, email_auth, name_auth } = req.body;
+   var event_identifiant = id_event;
+  /*res.status(400).json({
+    id_event,
+    email_auth,
+    name_auth,
+  });*/
+  const partyEvent = await Party.create({
+    event_identifiant,
+    email_auth,
+    name_auth,
+  });
+
+  if (partyEvent) {
+    res.status(201).json({
+      partyEvent
+    });
+  } else {
+    res.status(400).json({
+      "error":"Sortie Non cree",
+    });
   }
 });
 

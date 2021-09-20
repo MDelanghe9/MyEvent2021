@@ -9,7 +9,8 @@ function App() {
   return (
     <Router>
         <main className="App">
-          <Route exact path="/" render={(props) => <HomePage {...props} />} />
+          <Route exact path="/" render={(props) => <LoginPage {...props} />} />
+          <Route exact path="/home" render={(props) => <HomePage {...props} />} />
           <Route exact path="/login" render={(props) => <LoginPage {...props} />} />
         </main>
     </Router>

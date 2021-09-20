@@ -4,9 +4,13 @@ import { GoogleLogout } from 'react-google-login';
 const clientId =
   '707788443358-u05p46nssla3l8tmn58tpo9r5sommgks.apps.googleusercontent.com';
 
-function GoogleLogoutUtils() {
+function GoogleLogoutUtils(props) {
   const onSuccess = () => {
-    console.log('deconnexion réussie ');
+    localStorage.removeItem('authToken');
+    alert(
+      `Vous avez ete deconecter`
+    );
+    props.history.push("/");
   };
 
   return (

@@ -7,7 +7,8 @@ import {
   } from "react-bootstrap";
   import FloatingLabel from "react-bootstrap-floating-label";
 
-export function AccountBox(props) {
+function AccountBox(props) {
+    
     return(
     <Row className="w-100">
         <Col className="w-100">
@@ -46,3 +47,5 @@ export function AccountBox(props) {
     </Row>
     )
 }
+
+export default AccountBox;

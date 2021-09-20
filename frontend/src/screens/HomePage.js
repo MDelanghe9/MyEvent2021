@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 import GetGeoLocation from "../components/GetGeoLocation";
 import CityList from "../components/CityList";
 ///////////////////////////////////////////////////
@@ -27,7 +28,12 @@ function HomePage() {
   const [dataTags, setDataTags] = useState(false);
   const [paginNbr, setPaginNbr] = useState(5);
   
- /* const [token, setToken] = useState(false);
+  const [token, setToken] = useState(false);
+  const [imgProfil, setImgProfil] = useState(false);
+
+
+  
+  /*
 
   const handleChange = ({ currentTarget }) => {
     const { name, value } = currentTarget;
@@ -47,6 +53,17 @@ function HomePage() {
   })*/
 
   useEffect(() => {
+
+//verif if token
+//si token set token
+    var tokenExist = localStorage.getItem('authToken');
+    if (tokenExist) {
+      var decoded = jwt_decode(tokenExist);
+      setToken(decoded);
+      setImgProfil(decoded.picture);
+      console.log("token =>" , decoded);
+    }
+
     var yourDate = new Date();
 
     const offset = yourDate.getTimezoneOffset()
@@ -70,9 +87,9 @@ function HomePage() {
   const trackScrolling = (i) => {
     if (i == paginNbr -1) {
       setPaginNbr(paginNbr + 5)
-      console.log(paginNbr);
+     // console.log(paginNbr);
     }else{
-      console.log(i);
+     // console.log(i);
     }
   };
 
@@ -175,15 +192,36 @@ const filtreType = (e) => {
   }
 }
 
-const creatParty = (id_event) => {
-  console.log(id_event);
+const creatParty = async (id_event) => {
+  //par default la sortie sera private , il peux changer cela dans son profil
+  console.log(token);
+  var config = {};
+  var id_event = id_event;
+  var email_auth= token.email;
+  var name_auth= token.name;
+
+  config.headers = {
+      "Authorization" : "Bearer xx", //ici le berarer token
+  }
+  try {
+    const response = await axios.post("http://localhost:4242/api/users/creatparty", {id_event, email_auth, name_auth}, config); 
+    //console.log(response);
+    alert("Votre sortie a bien ete cree")
+  } catch (error) {
+   //console.log(error.response);
+   alert("Une erreur est return")
+
+  }
+
 }
 
 
 
   return (
     <>
-      <MyNav />
+      <MyNav token={token}/>
+      
+      
       <Container>
         {gps.loaded &&
           <>
