@@ -36,11 +36,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.modalSize {
-  width:100% !important;
-  margin-left:-10px !important;
-  position:absolute !important;
+/*Modal de l'enfer*/
+.modal-backdrop {
   z-index:1031 !important;
+}
+.modal-dialog{
+  max-width:100% !important;
+  max-height:100% !important;
+  margin : 0 !important;
 }
 /*Chargement */
 .lds-ellipsis {

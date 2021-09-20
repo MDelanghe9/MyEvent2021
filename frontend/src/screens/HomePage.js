@@ -14,7 +14,8 @@ import {
   Container,
   Button,
   Form,
-  Modal
+  Modal,
+  Dropdown
 } from "react-bootstrap";
 
 
@@ -227,7 +228,7 @@ const [infosEvent, setInfosEvent] = useState(false);
           <Col>
           <Col>
             <div>
-            <Modal.Dialog className='modal-fullscreen modalSize'>
+            <Modal show={displayModal}>
                 <Modal.Header>
                   <Modal.Title>{infosEvent.title}</Modal.Title>
                 </Modal.Header>
@@ -246,7 +247,7 @@ const [infosEvent, setInfosEvent] = useState(false);
                     Créer sortie
                   </Button>
                 </Modal.Footer>
-            </Modal.Dialog>
+            </Modal>
             </div>
           </Col>
           </Col>
@@ -295,33 +296,37 @@ const [infosEvent, setInfosEvent] = useState(false);
                   </div>
               </Col>
             </Row>
+
             {eventsFiltred &&
+
               <>
               { eventsFiltred.map((event, i) => i <= paginNbr-1 &&
+
                 <Row key={i} className="events-list-container w-100 m-2" onMouseOver={() => trackScrolling(i)}>
                   <div className="events-list">
                     <Col>
-                      <h4 className="desc">{event.fields.description}</h4>
+                      <h2 className="desc">{event.fields.title}</h2>
                     </Col>
+                    <Dropdown.Divider className='m-3'/>
                     <Col>
-                      <span className="gras">Dates :</span>{" "}
+                      <span className="gras">Dates :</span>
                       {event.fields.date_start} ~ {event.fields.date_end}
                     </Col>
-                    <Col>
+                    <Col className='mb-3'>
                       <span className="gras">Localité :</span> {event.fields.city}
                     </Col>
                     {event.fields.image &&
                       <Col>
-                        <img src={event.fields.image} alt="affiche de l'event" width="250" height="200" />
+                        <img src={event.fields.image} alt="affiche de l'event" width="400px" height="auto" />
                       </Col>
                     ||
                       <Col>
                         <img src={require("../defaultposter.png")} alt="" width="250" height="200" />
                       </Col>
                     }
-                    <p>{event.fields.free_text}</p>
                     {/*afficher seulement si l'useur et co ou message d'erreur genre => mec tes pas co '-' */}
-                    <Button onClick={() => (setDisplayModal(true), setInfosEvent(event.fields))}>
+                    <Button className='m-3' variant='outline-dark'
+                      onClick={() => (setDisplayModal(true), setInfosEvent(event.fields))}>
                       En savoir +
                     </Button>
 
