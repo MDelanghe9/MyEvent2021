@@ -8,8 +8,8 @@ const CityList = (props) => {
     return(
         <>
       {/* <label htmlFor="villes">Choissisez une ville : </label> */}
-        <select name="villes" onChange={handleChange} className="inputHome">
-            <option value="Les evenements autour de moi" >Autour de moi</option>
+        <select name="villes" onChange={handleChange} className="inputHome selectList">
+            <option value="Ou entrez ici la ville de votre choix !" >Autour de moi</option>
             <option value="Abbeville">Abbeville</option>
             <option value="Agen">Agen</option>
             <option value="Aix-en-Provence">Aix-en-Provence</option>

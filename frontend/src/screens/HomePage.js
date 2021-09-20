@@ -26,7 +26,7 @@ function HomePage() {
   const [curentDate, setCurentDate] = useState(1000);
 
   const gps = GetGeoLocation();
-  const [city, setCity] = useState("Les evenements autour de moi");
+  const [city, setCity] = useState("Ou entrez ici la ville de votre choix !");
   const [dataTags, setDataTags] = useState(false);
   const [paginNbr, setPaginNbr] = useState(5);
   
@@ -257,44 +257,41 @@ const [infosEvent, setInfosEvent] = useState(false);
       <Container>
         {gps.loaded &&
           <>
-            <Row>
-              <Col className='containerInput'>
-                <div>
-                  <label htmlFor="villes">Choissisez une ville : </label>
-                    <p>...ou saisissez une ville : </p>
-                </div>
-                <div>
+            <Row className='containerInput'>
+              <span className='spanHome'>Choissisez une ville : </span>
+              <Col>
                   <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
+              </Col>
+              <Col>
                   <Form.Control
                       type="text"
                       value={city}
-                      placeholder="Entrez le nom d'une ville"
+                      placeholder="Ou entrez ici la ville de votre choix !"
                       onChange={(e) => setCity(e.target.value)}
                       className="inputHome2"
                   />
-                </div>
-                <div>
+                </Col>
+                <Col>
                   <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }} />
-                </div>
+                </Col>
                 {dataTags &&
                   <>
-                      <div>
+                      <Col>
                         <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
-                        <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
-                          <option value="null">-- Tous --</option>
+                        <select name="typeFiltre-select" onChange={filtreType} className='inputHome2 selectList'>
+                          <option value="null">Choisir un type d'événements</option>
                             {dataTags && dataTags.map((data, i) =>
                           <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
                             )}
                         </select>
-                      </div>
+                      </Col>
                   </>
                   }
-                  <div className="btn-setPosition">
+                  <Col className="btn-setPosition">
                     <Button variant="outline-info" className="btn-home" onClick={() => setPossition()}>
                       Rechercher
                     </Button>
-                  </div>
-              </Col>
+                  </Col>
             </Row>
 
             {eventsFiltred &&
@@ -336,7 +333,7 @@ const [infosEvent, setInfosEvent] = useState(false);
               )}
               </>
               ||
-              <Row className="events-list-container w-100 m-3">
+              <Row className=" w-100 m-3 mt-5">
                   <Col className="event-list text-center imgRandomHome">
                         <div className="absolutTitle imgConcert">
                           <p>CONCERTS</p>
