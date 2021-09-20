@@ -36,6 +36,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.modalSize {
+  width:100% !important;
+  margin-left:-10px !important;
+  position:absolute !important;
+  z-index:1031 !important;
+}
 /*Chargement */
 .lds-ellipsis {
   display: inline-block;
@@ -215,6 +221,8 @@ code {
   text-align: center;
   text-shadow: 5px 9px 5px rgba(0, 0, 0, 0.5), 0 0 150px #ec63e5;
   color: #a117d8;
+  /* background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMsKKn8IsSYPXXJKFNZqUKEpYpeaaKMj5KBjoR1qu8nRE8MbNqW25Oe9x3aws3HjK012E&usqp=CAU');
+  background-size:cover; */
 }
 .events-list {
   border: 1px solid rgba(87, 10, 131, 0.075);

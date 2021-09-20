@@ -14,6 +14,7 @@ import {
   Container,
   Button,
   Form,
+  Modal
 } from "react-bootstrap";
 
 
@@ -31,8 +32,6 @@ function HomePage() {
   const [token, setToken] = useState(false);
   const [imgProfil, setImgProfil] = useState(false);
 
-
-  
   /*
 
   const handleChange = ({ currentTarget }) => {
@@ -206,22 +205,54 @@ const creatParty = async (id_event) => {
   try {
     const response = await axios.post("http://localhost:4242/api/users/creatparty", {id_event, email_auth, name_auth}, config); 
     //console.log(response);
-    alert("Votre sortie a bien ete cree")
+    alert("Votre sortie a bien été créée")
   } catch (error) {
    //console.log(error.response);
    alert("Une erreur est return")
 
   }
-
 }
 
-
+// Modal
+const [displayModal, setDisplayModal] = useState(false);
+const [infosEvent, setInfosEvent] = useState(false);
 
   return (
     <>
       <MyNav token={token}/>
-      
-      
+
+      {displayModal && infosEvent &&
+      <Container fluid>
+        <Row>
+          <Col>
+          <Col>
+            <div>
+            <Modal.Dialog className='modal-fullscreen modalSize'>
+                <Modal.Header>
+                  <Modal.Title>{infosEvent.title}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                  <p>{infosEvent.description}</p>
+                  <img src={infosEvent.image} alt="affiche de l'event" width="100%" height="auto"/>
+                  <p>{infosEvent.free_text}</p>
+                </Modal.Body>
+
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => (setDisplayModal(false), setInfosEvent(false))}>
+                    Retour
+                  </Button>
+                  <Button variant="primary" onClick={() => creatParty(infosEvent.uid)}>
+                    Créer sortie
+                  </Button>
+                </Modal.Footer>
+            </Modal.Dialog>
+            </div>
+          </Col>
+          </Col>
+        </Row>
+      </Container>
+      }
       <Container>
         {gps.loaded &&
           <>
@@ -290,11 +321,13 @@ const creatParty = async (id_event) => {
                     }
                     <p>{event.fields.free_text}</p>
                     {/*afficher seulement si l'useur et co ou message d'erreur genre => mec tes pas co '-' */}
-                    <Button variant="outline-info" onClick={() => creatParty(event.fields.uid)}>
-                      Créer sortie
+                    <Button onClick={() => (setDisplayModal(true), setInfosEvent(event.fields))}>
+                      En savoir +
                     </Button>
+
                   </div>
                 </Row>
+                
               )}
               </>
               ||
