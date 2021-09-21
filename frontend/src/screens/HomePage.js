@@ -7,6 +7,7 @@ import CityList from "../components/CityList";
 import DistanceList from "../components/DistanceList";
 ///////////////////////////////////////////////////
 import MyNav from "../components/navBar";
+import ScrollTop from 'react-scrolltop-button';
 import "../App.css";
 import {
   Row,
@@ -309,10 +310,12 @@ let date = "";
                     </Col>
                     <Dropdown.Divider className='m-3'/>
                     <Col>
-                      <span className="gras">Dates :</span>
-                      {(event.fields.date_start.substring(8)) + "-" + (event.fields.date_start.substring(5, 7)) + "-" + (event.fields.date_start.substring(0,4))}
-                       ~
-                      {(event.fields.date_end.substring(8)) + "-" + (event.fields.date_end.substring(5, 7)) + "-" + (event.fields.date_end.substring(0,4))}
+                      <p className="gras text-center">
+                        <span>Du </span>
+                        {(event.fields.date_start.substring(8)) + "-" + (event.fields.date_start.substring(5, 7)) + "-" + (event.fields.date_start.substring(0,4))}
+                        <span> au </span>
+                        {(event.fields.date_end.substring(8)) + "-" + (event.fields.date_end.substring(5, 7)) + "-" + (event.fields.date_end.substring(0,4))}
+                      </p>
                     </Col>
                     <Col className='mb-3'>
                       <span className="gras">Localité :</span>
@@ -336,20 +339,20 @@ let date = "";
               )}
               </>
               ||
-              <Row className=" w-100 m-3 mt-5">
+              <Row className=" w-100">
                   <Col className="event-list text-center imgRandomHome">
                         <div className="absolutTitle imgConcert">
                           <p>CONCERTS</p>
-                        <img src="https://w.wallhaven.cc/full/01/wallhaven-01qlk1.jpg"
-                          alt="photo concerts" width="80%" height="auto"/></div>
+                        <img src="https://www.lusineamusique.fr/wp-content/uploads/2018/05/CONCERTS-e1535802666628.jpg"
+                          alt="photo concerts" width="100%" height="auto"/></div>
                         <div className="absolutTitle imgMusee">
                           <p>MUSÉES</p>
-                        <img src="https://w.wallhaven.cc/full/13/wallhaven-13k98v.jpg"
-                          alt="photo musees" width="8%" height="auto"/></div>
+                        <img src="https://storage.lebonguide.com/crop-1600x700/56/42/7364E7F4-B7AF-4C20-97CA-4A1D561C03FB.png"
+                          alt="photo musees" width="100%" height="auto"/></div>
                         <div className="absolutTitle imgSport">
                           <p>EXHIBITIONS</p>
-                        <img src="https://w.wallhaven.cc/full/4l/wallhaven-4l337r.jpg"
-                          alt="photo sports" width="80%" height="auto"/></div>
+                        <img src="https://www.ggba-switzerland.ch/wp-content/uploads/2018/04/Sports-HSC.jpg"
+                          alt="photo sports" width="100%" height="auto"/></div>
                   </Col>
               </Row>
             }
@@ -366,6 +369,11 @@ let date = "";
             </Col>
           </Row>
       }
+      <ScrollTop
+        breakpoint={3000}
+        text=' '
+        icon={<img src="https://img.icons8.com/dotty/80/000000/thick-arrow-pointing-up.png" width="30px" height="30px"/>}
+      />
     </Container>
     </>
   );

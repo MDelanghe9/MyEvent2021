@@ -54,7 +54,14 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
+/*Scroll button*/
+.react-scrolltop-button, react-scrolltop-button-mobile{
+  font-size: 1em;
+  background-color:#fff0 !important;
+}
+.react-scrolltop-button, react-scrolltop-button-mobile:hover{
+  background-color:rgba(255, 255, 255, 0.507) !important;
+}
 /* NavBar*/
 .navbar {
   background-image:url('https://media.istockphoto.com/vectors/rainbow-colors-on-a-horizontal-line-of-watercolor-splashes-vector-id467715656?k=20&m=467715656&s=170667a&w=0&h=nTkgJzC1Fs1t9Ln3XRBVoxBYjH2qX518yEFtBY1rtnQ=');
@@ -68,8 +75,9 @@ code {
   box-shadow:8px 8px 5px rgba(63, 10, 83, 0.507) !important;
 }
 .navbar a {
-  text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.5);
+  text-shadow: 4px 4px 2px rgba(0, 0, 0, 0.5);
   transition: all .3s ease-in;
+  color:white !important;
 }
 .navbar .navTitle {
   color: rgb(0, 0, 0) !important;
@@ -100,9 +108,9 @@ code {
 }
 .navbar-burger-text a{
   margin: 0 20px 3px 20px;
-  box-shadow:2px 2px 10px black inset;
-  -moz-box-shadow:2px 2px 10px black inset;
-  -webkit-box-shadow:2px 2px 10px black inset;
+  box-shadow:2px 2px 7px black inset;
+  -moz-box-shadow:2px 2px 7px black inset;
+  -webkit-box-shadow:2px 2px 7px black inset;
   border-radius:3px;
   font-size:1.2em !important;
   text-align: center !important;
@@ -166,6 +174,8 @@ code {
   margin-top:7em !important;
   margin-left:0.5em !important;
   max-width:100% !important;
+  position:relative;
+  z-index:10;
 }
 .spanHome{
   margin-left:2px;
@@ -237,21 +247,26 @@ code {
 .imgConcert p {
   transform: rotate(-10deg);
   margin-bottom:-30px;
+  margin-top:1em;
 }
 .imgMusee p {
   transform: rotate(9deg);
   margin-top:30px;
-  margin-bottom:-20px;
+  margin-bottom:-40px;
 }
 .imgMusee{
   font-size:7em;
-  text-shadow: 0 0 0.05em #fff, 0 0 0.2em #3d3f3c, 0 0 0.3em #5a5f5a;
+  text-shadow: 0 0 0.05em rgb(199, 191, 191), 0 0 0.2em #eabf18, 0 0 0.3em #f4a40c;
   transform: rotate(10deg);
 }
 .imgSport{
   font-size:7em;
   text-shadow: 0 0 0.05em rgb(177, 180, 177), 0 0 0.2em #1ee604, 0 0 0.3em #0fc561;
   transform: rotate(-14deg);
+}
+.imgSport p {
+  transform: rotate(10deg);
+
 }
 
 /*liste evenements*/
@@ -272,6 +287,10 @@ code {
   background-image:url('https://image.freepik.com/vecteurs-libre/fond-aquarelle-feuille-or_52683-46208.jpg');
   background-size:cover;
   background-position: center;
+}
+.events-list h2{
+  margin:10px;
+  color:black;
 }
 .events-list p {
   text-align: justify;
@@ -581,6 +600,9 @@ code {
     font-size:2.5em;
     top:3.5em;
   }
+  .imgConcert p{
+    margin-top:200px;
+  }
   /*Boutons homePage*/
   .containerInput{
     margin-left:3em !important;
@@ -592,5 +614,8 @@ code {
   }
   .googleInput{
     margin-left:0 !important;
+  }
+  .imgConcert p{
+    margin-top:-50px;
   }
 }
