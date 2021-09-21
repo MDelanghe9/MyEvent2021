@@ -190,9 +190,12 @@ code {
   width:300px !important;
   background:none !important;
   border: 1px solid #80c1c9 !important;
-  color:#282d2e !important;
+  color:#ffffff !important;
   margin-bottom:8px;
+  padding-left:5px;
   font-family: 'Metrophobic', sans-serif !important;
+  background-image:url('https://besthqwallpapers.com/Uploads/14-11-2019/111369/thumb2-blue-metal-grid-grunge-metal-grid-textures-blue-metal-background-metal-grid-backgrounds.jpg') !important;
+  background-size:cover !important;
 }
 .selectList{
   height:37px;
@@ -213,7 +216,9 @@ code {
 }
 .btn-home {
   width:300px !important;
-  color:#313435 !important;
+  color:#ffffff !important;
+  background-image:url('https://besthqwallpapers.com/Uploads/14-11-2019/111369/thumb2-blue-metal-grid-grunge-metal-grid-textures-blue-metal-background-metal-grid-backgrounds.jpg') !important;
+  background-size:cover !important;
 }
 
 /*img home random*/
@@ -230,7 +235,7 @@ code {
 }
 .imgConcert p {
   transform: rotate(-10deg);
-  margin-bottom:-25px;
+  margin-bottom:-30px;
 }
 .imgMusee p {
   transform: rotate(9deg);
