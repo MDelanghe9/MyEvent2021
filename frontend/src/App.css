@@ -234,6 +234,7 @@ code {
 /*img home random*/
 .imgRandomHome {
   cursor: pointer;
+  margin-bottom: 300px;
 }
 .imgRandomHome img{
   border-radius:25px;
