@@ -281,7 +281,7 @@ let date = "";
                 {dataTags &&
                   <>
                       <Col>
-                        <select name="typeFiltre-select" onChange={filtreType} className='inputHome2 selectList'>
+                        <select name="typeFiltre-select" onChange={filtreType} className='inputHome3 selectList'>
                           <option value="null">Filtrer les types d'événements ici</option>
                             {dataTags && dataTags.map((data, i) =>
                           <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
