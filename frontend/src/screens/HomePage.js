@@ -15,7 +15,8 @@ import {
   Button,
   Form,
   Modal,
-  Dropdown
+  Dropdown,
+  PopoverTitle
 } from "react-bootstrap";
 
 
@@ -194,7 +195,7 @@ const filtreType = (e) => {
 
 const creatParty = async (event) => {
   //par default la sortie sera private , il peux changer cela dans son profil
-  console.log(event.fields);
+  console.log(event);
   var config = {};
   var id_event = event.uid;
   var email_auth= token.email;
@@ -220,7 +221,7 @@ const creatParty = async (event) => {
 // Modal
 const [displayModal, setDisplayModal] = useState(false);
 const [infosEvent, setInfosEvent] = useState(false);
-
+let date = "";
   return (
     <>
       <MyNav token={token}/>
@@ -308,11 +309,13 @@ const [infosEvent, setInfosEvent] = useState(false);
                     </Col>
                     <Dropdown.Divider className='m-3'/>
                     <Col>
-                      <span className="gras">Dates : </span>
-                      {(event.fields.date_start).split(3)} ~ {event.fields.date_end}
+                      <span className="gras">Dates :</span>
+                      {(event.fields.date_start.substring(8)) + "-" + (event.fields.date_start.substring(5, 7)) + "-" + (event.fields.date_start.substring(0,4))}
+                       ~
+                      {(event.fields.date_end.substring(8)) + "-" + (event.fields.date_end.substring(5, 7)) + "-" + (event.fields.date_end.substring(0,4))}
                     </Col>
                     <Col className='mb-3'>
-                      <span className="gras">Localité :</span> {event.fields.city}
+                      <span className="gras">Localité :</span>
                     </Col>
                     {event.fields.image &&
                       <Col>
