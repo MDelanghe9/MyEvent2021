@@ -45,13 +45,13 @@ function ProfilPage() {
  const [descriptionActualParty, setDescriptionActualParty] = useState("Vindez vous amusez !!");
  const [newMessage, setNewMessage] = useState("");
  const [intervalTime, setIntervalTime] = useState(5000);
-
+/*
  useInterval(() => {
    // Do some API call here
    refreshChat();
    setTimeout(() => {
    }, 5000);
- }, intervalTime);
+ }, intervalTime);*/
 
 
 
