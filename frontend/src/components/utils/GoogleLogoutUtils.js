@@ -19,6 +19,7 @@ function GoogleLogoutUtils(props) {
         clientId={clientId}
         buttonText="Deconnexion"
         onLogoutSuccess={onSuccess}
+        className='googleInput'
       ></GoogleLogout>
     </div>
   );

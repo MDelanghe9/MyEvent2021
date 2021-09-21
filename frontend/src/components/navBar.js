@@ -16,8 +16,8 @@ export default class MyNav extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="navbar-burger-icon m-auto">
-                                <Nav.Link className='icon-home' href="/home"><img src="https://img.icons8.com/dotty/80/ffffff/home-page.png"/></Nav.Link>
-                                <Nav.Link className='icon-log' href="/login"><img src="https://img.icons8.com/dotty/80/ffffff/enter-2.png"/></Nav.Link>
+                                <Nav.Link className='icon-home' href="/home"><img src="https://img.icons8.com/dotty/80/home-page.png"/></Nav.Link>
+                                <Nav.Link className='icon-log' href="/login"><img src="https://img.icons8.com/dotty/80/enter-2.png"/></Nav.Link>
                                     <Nav.Link href="/profil">
                                         {this.props.token && 
                                         <img src={this.props.token.picture} alt="Image de profil" className='profilImg'/>
