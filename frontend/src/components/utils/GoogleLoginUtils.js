@@ -48,6 +48,7 @@ function GoogleLoginUtils(props) {
         cookiePolicy={'single_host_origin'}
         style={{ marginTop: '100px' }}
         isSignedIn={false}
+        className='googleInput'
       />
     </div>
   );

@@ -47,7 +47,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  background: url('https://image.freepik.com/vecteurs-libre/blanc-luxe-fond-vagues_52683-38544.jpg') no-repeat fixed !important;
+  background: url('https://image.freepik.com/vecteurs-libre/fond-peinture-aquarelle-rose-vibrante_53876-58930.jpg') no-repeat fixed !important;
   background-size: cover !important;
 }
 code {
@@ -59,13 +59,11 @@ code {
 .navbar {
   width:99% !important;
   margin:auto;
+  background-color:rgba(233, 10, 10, 0.322) !important;
   font-weight: bold;
-  background-image: url('https://media.istockphoto.com/vectors/metal-texture-blue-metal-scratched-background-vector-id1095405596?k=20&m=1095405596&s=170667a&w=0&h=LyoMQ4St3oBjeeqYKUoLAkfIpetXcuVjeavpHsJxZQM=');
-  background-size: cover;
   border-radius: 0% 0% 10px 10px;
   padding-bottom: 10px;
   margin-bottom:90px !important;
-  width: 100%;
   box-shadow:8px 8px 5px rgba(63, 10, 83, 0.507) !important;
 }
 .navbar a {
@@ -73,7 +71,7 @@ code {
   transition: all .3s ease-in;
 }
 .navbar .navTitle {
-  color: white !important;
+  color: rgb(0, 0, 0) !important;
 }
 .navTitle{
   font-family: 'Raleway Dots', cursive !important;
@@ -176,13 +174,11 @@ code {
 .inputHome {
   width:300px;
   background:none;
-  border: 1px solid #80c1c9;
-  color:#ffffff;
+  border: 1px solid #13bebe;
   padding:5px;
   border-radius:4px;
   margin-bottom:8px;
-  background-image:url('https://besthqwallpapers.com/Uploads/14-11-2019/111369/thumb2-blue-metal-grid-grunge-metal-grid-textures-blue-metal-background-metal-grid-backgrounds.jpg');
-  background-size:cover;
+  background-color:rgba(255, 255, 255, 0.322) !important;
   font-family: 'Metrophobic', sans-serif !important;
 }
 
@@ -190,12 +186,10 @@ code {
   width:300px !important;
   background:none !important;
   border: 1px solid #80c1c9 !important;
-  color:#ffffff !important;
   margin-bottom:8px;
   padding-left:5px;
   font-family: 'Metrophobic', sans-serif !important;
-  background-image:url('https://besthqwallpapers.com/Uploads/14-11-2019/111369/thumb2-blue-metal-grid-grunge-metal-grid-textures-blue-metal-background-metal-grid-backgrounds.jpg') !important;
-  background-size:cover !important;
+  background-color:rgba(255, 255, 255, 0.322) !important;
 }
 .selectList{
   height:37px;
@@ -216,9 +210,9 @@ code {
 }
 .btn-home {
   width:300px !important;
-  color:#ffffff !important;
-  background-image:url('https://besthqwallpapers.com/Uploads/14-11-2019/111369/thumb2-blue-metal-grid-grunge-metal-grid-textures-blue-metal-background-metal-grid-backgrounds.jpg') !important;
-  background-size:cover !important;
+  background-color:rgba(255, 255, 255, 0.322) !important;
+  color:black !important;
+  border-color: #13bebe !important;
 }
 
 /*img home random*/
@@ -268,7 +262,7 @@ code {
   box-shadow: 12px 12px 8px rgba(19, 8, 80, 0.609);
   margin: 10px 0px 20px 10px !important;
   list-style-type: none;
-  background:url('https://static.vecteezy.com/system/resources/previews/001/857/414/non_2x/blue-metallic-metal-vector.jpg');
+  background-image:url('https://thumbs.dreamstime.com/b/cadre-rivet%C3%A9-par-acier-banni%C3%A8re-en-m%C3%A9tal-121190491.jpg');
   background-size:cover;
 }
 .events-list p {
@@ -371,17 +365,6 @@ code {
   }
 }
 /*LOGIN*/
-.boxContainer{
-  width: 280px;
-  min-height: 550px;
-  display: flex;
-  flex-direction: column;
-  border-radius: 19px;
-  background-color: #fff;
-  box-shadow: 0 0 2px rgba(15, 15, 15, 0.28);
-  position: relative;
-  overflow: hidden;
-}
 .topContainer{
   width: 100%;
   height: 250px;
@@ -391,7 +374,7 @@ code {
   padding: 0 1.8em;
   padding-bottom: 5em;
 }
-/*Rideaux*/
+/*Cercle*/
 .backDrop{
   width: 72%;
   height: 100%;
@@ -435,13 +418,24 @@ code {
   width:40%;
   display:flex;
   flex-direction: column;
+  position:relative;
+  z-index:1;
 }
-
+.googleInput{
+  width:500px !important;
+  margin-left:150px;
+}
 /*Media queries */
  @media (max-width: 1830px) {
   .navbar {
     width: 99%;
     margin: auto;
+  }
+}
+@media (max-width:1400px) {
+  .googleInput{
+    width:400px !important;
+    margin-left:50px;
   }
 }
 @media (max-width: 1200px) {
@@ -471,6 +465,9 @@ code {
   .containerInput{
     margin-left:7em !important;
   }
+  .googleInput{
+    margin-left:0 !important;
+  }
 }
 @media (max-width: 760px) {
   /*log*/
@@ -480,6 +477,9 @@ code {
   .backDrop{
     height:110%;
     transform: rotate(60deg);
+  }
+  .googleInput{
+    width:300px !important;
   }
   /*home random*/
   .imgConcert{
@@ -531,6 +531,12 @@ code {
     margin-top:20%;
     width:85%;
   }
+  .googleInput{
+    margin-left:50px !important;
+  }
+  .formContainer{
+    margin-top: 2em !important;
+  }
 }
 @media(max-width:545px) {
   .containerInput{
@@ -575,5 +581,8 @@ code {
 @media(max-width:430px){
   .containerInput{
     margin-left:0.5em !important;
+  }
+  .googleInput{
+    margin-left:0 !important;
   }
 }
