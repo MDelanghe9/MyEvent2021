@@ -15,7 +15,8 @@ import {
   Button,
   Form,
   Modal,
-  Dropdown
+  Dropdown,
+  PopoverTitle
 } from "react-bootstrap";
 
 
@@ -194,16 +195,16 @@ const filtreType = (e) => {
 
 const creatParty = async (event) => {
   //par default la sortie sera private , il peux changer cela dans son profil
-  console.log(event.fields);
+  console.log(event);
   var config = {};
-  var id_event = event.fields.uid;
+  var id_event = event.uid;
   var email_auth= token.email;
   var name_auth= token.name; 
-  var title = event.fields.title;
-  var date = event.fields.date_start;
-  var description = event.fields.free_text;
-  var picture = event.fields.image;
-  var adress = event.fields.address;
+  var title = event.title;
+  var date = event.date_start;
+  var description = event.free_text;
+  var picture = event.image;
+  var adress = event.address;
   config.headers = {
       "Authorization" : "Bearer xx", //ici le berarer token
   }
@@ -221,7 +222,7 @@ const creatParty = async (event) => {
 // Modal
 const [displayModal, setDisplayModal] = useState(false);
 const [infosEvent, setInfosEvent] = useState(false);
-
+let date = "";
   return (
     <>
       <MyNav token={token}/>
@@ -247,7 +248,7 @@ const [infosEvent, setInfosEvent] = useState(false);
                   <Button variant="secondary" onClick={() => (setDisplayModal(false), setInfosEvent(false))}>
                     Retour
                   </Button>
-                  <Button variant="primary" onClick={() => creatParty(event)}>
+                  <Button variant="primary" onClick={() => creatParty(infosEvent)}>
                     Créer sortie
                   </Button>
                 </Modal.Footer>
@@ -310,10 +311,12 @@ const [infosEvent, setInfosEvent] = useState(false);
                     <Dropdown.Divider className='m-3'/>
                     <Col>
                       <span className="gras">Dates :</span>
-                      {event.fields.date_start} ~ {event.fields.date_end}
+                      {(event.fields.date_start.substring(8)) + "-" + (event.fields.date_start.substring(5, 7)) + "-" + (event.fields.date_start.substring(0,4))}
+                       ~
+                      {(event.fields.date_end.substring(8)) + "-" + (event.fields.date_end.substring(5, 7)) + "-" + (event.fields.date_end.substring(0,4))}
                     </Col>
                     <Col className='mb-3'>
-                      <span className="gras">Localité :</span> {event.fields.city}
+                      <span className="gras">Localité :</span>
                     </Col>
                     {event.fields.image &&
                       <Col>
