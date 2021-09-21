@@ -136,8 +136,9 @@ function ProfilPage() {
     message[token.name] = newMessage;
     console.log(message);
     try {
-      const response = await axios.put("http://localhost:4242/api/party/chat", {message, _id}); 
-      console.log(response.data.party);
+      const response = await axios.put("http://localhost:4242/api/party/chat", {message, _id});
+      setActualParty(response.data.party[0]);
+      console.log(response.data.party[0]);
     } catch (error) {
       console.log(error.response);
     }
@@ -286,12 +287,15 @@ function ProfilPage() {
             </Col>
           </Row>
           <Row className="back-yellow"> {/*Chat*/}
-            { 
-
-            }
-            <p>message</p>
-            <p>message</p>
-            <p>message</p>
+            {actualParty && actualParty.chat.map((msg, i) =>
+              <>
+              { Object.keys(msg)[0] === token.name &&
+                <p style={{color:'red'}}>{Object.keys(msg)[0]} : {msg[Object.keys(msg)[0]]}</p>
+                ||
+                <p>{Object.keys(msg)[0]} : {msg[Object.keys(msg)[0]]}</p>
+              }
+              </>
+            )}
           </Row>
           <Row>
           <Form onSubmit={submitMessage}>

@@ -63,25 +63,23 @@ const getAllPartys = asyncHandler(async (req, res) => {
 // @route   PUT /api/party/chat
 const newMessage = asyncHandler(async (req, res) => {
   const { _id, message } = req.body;
-  /*
-  const party = await Party.findOne({_id});*/
-  /*res.json({
-    message
-  });*/
-  const partyEvent = Party.updateOne(
-    {_id},
-    { $addToSet: { chat: message } },
-    function (error, success) {
-        if (error) {
-          res.json({
-            error
-          });
-        } else {
-          res.json({
-            success
-          });
-        }
+  const partyEvent = await Party.updateOne({_id},{ $addToSet: { chat: message } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Message pas envoyer",
+      });
+    }
+  } else {
+    res.status({
+      error: "Message pas envoyer",
     });
+  }
 });
 
 

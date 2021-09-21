@@ -15,7 +15,7 @@ function LoginPage(props) {
 
   return (
     <>
-      <AccountBox/>
+      <AccountBox {...props}/>
       {/* <GoogleLoginUtils {...props}/>
       <GoogleLogoutUtils {...props} /> */}
     </>
