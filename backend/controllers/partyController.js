@@ -83,4 +83,20 @@ const newMessage = asyncHandler(async (req, res) => {
 });
 
 
-export { partyCreat, getAllPartys, newMessage };
+// @desc    POST chat of party
+// @route   POST /api/party/chat
+const getParty = asyncHandler(async (req, res) => {
+  const { _id } = req.body;
+  const party = await Party.find({_id});
+  if (party) {
+    res.json({
+      party
+    });
+  }else{
+    res.status({
+      error: "Message pas envoyer",
+    });
+  }
+});
+
+export { partyCreat, getAllPartys, newMessage, getParty };

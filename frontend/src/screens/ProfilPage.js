@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import MyNav from "../components/navBar";
@@ -12,6 +12,25 @@ import {
   Dropdown,
 } from "react-bootstrap";
 
+const useInterval = (callback, delay) => {
+  const savedCallback = useRef();
+
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
 
 function ProfilPage() {
  const [token, setToken] = useState(false);
@@ -25,6 +44,16 @@ function ProfilPage() {
  const [adressActualParty, setAdressActualParty] = useState("108 rue du jambon");
  const [descriptionActualParty, setDescriptionActualParty] = useState("Vindez vous amusez !!");
  const [newMessage, setNewMessage] = useState("");
+ const [intervalTime, setIntervalTime] = useState(5000);
+
+ useInterval(() => {
+   // Do some API call here
+   refreshChat();
+   setTimeout(() => {
+   }, 5000);
+ }, intervalTime);
+
+
 
  
  
@@ -46,9 +75,9 @@ function ProfilPage() {
   useEffect(() => {
     window.addEventListener("resize", handleResize)
   })*/
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
-
 //verif if token
 //si token set token
     var tokenExist = localStorage.getItem('authToken');
@@ -143,7 +172,21 @@ function ProfilPage() {
       console.log(error.response);
     }
   };
-  
+
+  const refreshChat = async (e) => {
+    var _id = actualParty._id;
+    console.log(actualParty)
+    console.log(_id)
+    if (_id) {
+      try {
+        const response = await axios.post("http://localhost:4242/api/party/chat", {_id});
+        setActualParty(response.data.party[0]);
+        console.log(response.data.party[0]);
+      } catch (error) {
+        console.log(error.response);
+      }
+    }
+  }
   
   return (
     <>
