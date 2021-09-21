@@ -196,14 +196,14 @@ const creatParty = async (event) => {
   //par default la sortie sera private , il peux changer cela dans son profil
   console.log(event.fields);
   var config = {};
-  var id_event = event.fields.uid;
+  var id_event = event.uid;
   var email_auth= token.email;
   var name_auth= token.name; 
-  var title = event.fields.title;
-  var date = event.fields.date_start;
-  var description = event.fields.free_text;
-  var picture = event.fields.image;
-  var adress = event.fields.address;
+  var title = event.title;
+  var date = event.date_start;
+  var description = event.free_text;
+  var picture = event.image;
+  var adress = event.address;
   config.headers = {
       "Authorization" : "Bearer xx", //ici le berarer token
   }
@@ -213,11 +213,10 @@ const creatParty = async (event) => {
     alert("Votre sortie a bien été créée")
   } catch (error) {
    //console.log(error.response);
-   alert("Une erreur est return")
+   alert("Une erreur s'est produite, veuillez réessayer.")
 
   }
 }
-
 // Modal
 const [displayModal, setDisplayModal] = useState(false);
 const [infosEvent, setInfosEvent] = useState(false);
@@ -247,7 +246,7 @@ const [infosEvent, setInfosEvent] = useState(false);
                   <Button variant="secondary" onClick={() => (setDisplayModal(false), setInfosEvent(false))}>
                     Retour
                   </Button>
-                  <Button variant="primary" onClick={() => creatParty(event)}>
+                  <Button variant="primary" onClick={() => creatParty(infosEvent)}>
                     Créer sortie
                   </Button>
                 </Modal.Footer>
@@ -310,7 +309,7 @@ const [infosEvent, setInfosEvent] = useState(false);
                     <Dropdown.Divider className='m-3'/>
                     <Col>
                       <span className="gras">Dates :</span>
-                      {event.fields.date_start} ~ {event.fields.date_end}
+                      {(event.fields.date_start).split(3)} ~ {event.fields.date_end}
                     </Col>
                     <Col className='mb-3'>
                       <span className="gras">Localité :</span> {event.fields.city}

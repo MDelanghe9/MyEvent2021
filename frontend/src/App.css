@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Antic&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mr+Dafoe&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Metrophobic&display=swap');
 
 .back-blue {
   background-color: blueviolet;
@@ -39,7 +40,7 @@
 *, body {
   margin: 0;
   padding:0;
-  font-family: 'Antic Slab', serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+  font-family: 'Metrophobic', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -170,15 +171,19 @@ code {
 .spanHome{
   margin-left:2px;
   margin-bottom:5px;
+  font-size:17px !important;
 }
 .inputHome {
   width:300px;
   background:none;
   border: 1px solid #80c1c9;
-  color:#282d2e;
+  color:#ffffff;
   padding:5px;
   border-radius:4px;
   margin-bottom:8px;
+  background-image:url('https://besthqwallpapers.com/Uploads/14-11-2019/111369/thumb2-blue-metal-grid-grunge-metal-grid-textures-blue-metal-background-metal-grid-backgrounds.jpg');
+  background-size:cover;
+  font-family: 'Metrophobic', sans-serif !important;
 }
 .inputHome2 {
   width:300px !important;
@@ -186,23 +191,24 @@ code {
   border: 1px solid #80c1c9 !important;
   color:#282d2e !important;
   margin-bottom:8px;
+  font-family: 'Metrophobic', sans-serif !important;
 }
 .selectList{
   height:37px;
   border-radius:5px;
 }
-.distance{
-  width:
-}
 .absolutTitle{
   position:relative;
-  font-family: 'Antic', sans-serif;
   font-weight: bold;
   margin: 0;
   color: white;
 }
+.absolutTitle  p{
+  font-family: 'Antic', sans-serif !important;
+}
 .btn-setPosition {
   margin:auto;
+  font-family: 'Metrophobic', sans-serif !important;
 }
 .btn-home {
   width:300px !important;
