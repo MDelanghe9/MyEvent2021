@@ -192,19 +192,23 @@ const filtreType = (e) => {
   }
 }
 
-const creatParty = async (id_event) => {
+const creatParty = async (event) => {
   //par default la sortie sera private , il peux changer cela dans son profil
-  console.log(token);
+  console.log(event.fields);
   var config = {};
-  var id_event = id_event;
+  var id_event = event.fields.uid;
   var email_auth= token.email;
-  var name_auth= token.name;
-
+  var name_auth= token.name; 
+  var title = event.fields.title;
+  var date = event.fields.date_start;
+  var description = event.fields.free_text;
+  var picture = event.fields.image;
+  var adress = event.fields.address;
   config.headers = {
       "Authorization" : "Bearer xx", //ici le berarer token
   }
   try {
-    const response = await axios.post("http://localhost:4242/api/users/creatparty", {id_event, email_auth, name_auth}, config); 
+    const response = await axios.post("http://localhost:4242/api/party/creatparty", {id_event, email_auth, name_auth, title, picture, date, adress, description}, config); 
     //console.log(response);
     alert("Votre sortie a bien été créée")
   } catch (error) {
@@ -243,7 +247,7 @@ const [infosEvent, setInfosEvent] = useState(false);
                   <Button variant="secondary" onClick={() => (setDisplayModal(false), setInfosEvent(false))}>
                     Retour
                   </Button>
-                  <Button variant="primary" onClick={() => creatParty(infosEvent.uid)}>
+                  <Button variant="primary" onClick={() => creatParty(event)}>
                     Créer sortie
                   </Button>
                 </Modal.Footer>
@@ -325,10 +329,8 @@ const [infosEvent, setInfosEvent] = useState(false);
                       onClick={() => (setDisplayModal(true), setInfosEvent(event.fields))}>
                       En savoir +
                     </Button>
-
                   </div>
                 </Row>
-                
               )}
               </>
               ||

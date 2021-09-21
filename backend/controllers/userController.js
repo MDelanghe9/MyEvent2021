@@ -130,34 +130,19 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-
-// @desc    POST user party
-// @route   POST /api/users/creatparty
-// @access  Private
-const userCreatParty = asyncHandler(async (req, res) => {
-  const { id_event, email_auth, name_auth } = req.body;
-   var event_identifiant = id_event;
-  /*res.status(400).json({
-    id_event,
-    email_auth,
-    name_auth,
-  });*/
-  const partyEvent = await Party.create({
-    event_identifiant,
-    email_auth,
-    name_auth,
-  });
-
-  if (partyEvent) {
-    res.status(201).json({
-      partyEvent
+// @desc    GET all user in databasse
+// @route   GET /api/users/all
+const getAllUser = asyncHandler(async (req, res) => {
+  const filter = {};
+  const users = await User.find(filter);
+  if (users) {
+    res.json({
+      users
     });
   } else {
-    res.status(400).json({
-      "error":"Sortie Non cree",
+    res.status({
+      error: "pas d'utilisateur trouver",
     });
   }
 });
-
-
-export { authUser, updateUserProfile, registerUser, userCreatParty };
+export { authUser, updateUserProfile, registerUser, getAllUser };

@@ -3,7 +3,7 @@ import {
   authUser,
   registerUser,
   updateUserProfile,
-  userCreatParty,
+  getAllUser,
 } from "../controllers/userController.js";
 import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
@@ -11,6 +11,6 @@ const router = express.Router();
 router.route("/register").post(registerUser);
 router.post("/login", authUser);
 router.route("/profile").post(protect, updateUserProfile);
-router.route("/creatparty").post(userCreatParty);
+router.route("/all").get(getAllUser);
 
 export default router;
