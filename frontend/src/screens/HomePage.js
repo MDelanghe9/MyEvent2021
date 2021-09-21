@@ -14,6 +14,8 @@ import {
   Container,
   Button,
   Form,
+  Modal,
+  Dropdown
 } from "react-bootstrap";
 
 
@@ -24,15 +26,13 @@ function HomePage() {
   const [curentDate, setCurentDate] = useState(1000);
 
   const gps = GetGeoLocation();
-  const [city, setCity] = useState("Les evenements autour de moi");
+  const [city, setCity] = useState("Ou entrez ici la ville de votre choix !");
   const [dataTags, setDataTags] = useState(false);
   const [paginNbr, setPaginNbr] = useState(5);
   
   const [token, setToken] = useState(false);
   const [imgProfil, setImgProfil] = useState(false);
 
-
-  
   /*
 
   const handleChange = ({ currentTarget }) => {
@@ -210,99 +210,131 @@ const creatParty = async (event) => {
   try {
     const response = await axios.post("http://localhost:4242/api/party/creatparty", {id_event, email_auth, name_auth, title, picture, date, adress, description}, config); 
     //console.log(response);
-    alert("Votre sortie a bien ete cree")
+    alert("Votre sortie a bien été créée")
   } catch (error) {
    //console.log(error.response);
    alert("Une erreur est return")
 
   }
-
 }
 
-
+// Modal
+const [displayModal, setDisplayModal] = useState(false);
+const [infosEvent, setInfosEvent] = useState(false);
 
   return (
     <>
       <MyNav token={token}/>
-      
-      
+
+      {displayModal && infosEvent &&
+      <Container fluid>
+        <Row>
+          <Col>
+          <Col>
+            <div>
+            <Modal show={displayModal}>
+                <Modal.Header>
+                  <Modal.Title>{infosEvent.title}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                  <p>{infosEvent.description}</p>
+                  <img src={infosEvent.image} alt="affiche de l'event" width="100%" height="auto"/>
+                  <p>{infosEvent.free_text}</p>
+                </Modal.Body>
+
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={() => (setDisplayModal(false), setInfosEvent(false))}>
+                    Retour
+                  </Button>
+                  <Button variant="primary" onClick={() => creatParty(event)}>
+                    Créer sortie
+                  </Button>
+                </Modal.Footer>
+            </Modal>
+            </div>
+          </Col>
+          </Col>
+        </Row>
+      </Container>
+      }
       <Container>
         {gps.loaded &&
           <>
-            <Row>
-              <Col className='containerInput'>
-                <div>
-                  <label htmlFor="villes">Choissisez une ville : </label>
-                    <p>...ou saisissez une ville : </p>
-                </div>
-                <div>
+            <Row className='containerInput'>
+              <span className='spanHome'>Choissisez une ville : </span>
+              <Col>
                   <CityList data={city} onchange={(e) => {onchangeListCity(e); }}/>
+              </Col>
+              <Col>
                   <Form.Control
                       type="text"
                       value={city}
-                      placeholder="Entrez le nom d'une ville"
+                      placeholder="Ou entrez ici la ville de votre choix !"
                       onChange={(e) => setCity(e.target.value)}
                       className="inputHome2"
                   />
-                </div>
-                <div>
+                </Col>
+                <Col>
                   <DistanceList data={dist} onchange={(e) => {onchangeDistlist(e); }} />
-                </div>
+                </Col>
                 {dataTags &&
                   <>
-                      <div>
-                        <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
-                        <select name="typeFiltre-select" onChange={filtreType} className='inputHome2'>
-                          <option value="null">-- Tous --</option>
+                      <Col>
+                        <select name="typeFiltre-select" onChange={filtreType} className='inputHome2 selectList'>
+                          <option value="null">Vous pouvez filtrer les types d'événements ici</option>
                             {dataTags && dataTags.map((data, i) =>
                           <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
                             )}
                         </select>
-                      </div>
+                      </Col>
                   </>
                   }
-                  <div className="btn-setPosition">
+                  <Col className="btn-setPosition">
                     <Button variant="outline-info" className="btn-home" onClick={() => setPossition()}>
                       Rechercher
                     </Button>
-                  </div>
-              </Col>
+                  </Col>
             </Row>
+
             {eventsFiltred &&
+
               <>
               { eventsFiltred.map((event, i) => i <= paginNbr-1 &&
+
                 <Row key={i} className="events-list-container w-100 m-2" onMouseOver={() => trackScrolling(i)}>
                   <div className="events-list">
                     <Col>
-                      <h4 className="desc">{event.fields.description}</h4>
+                      <h2 className="desc">{event.fields.title}</h2>
                     </Col>
+                    <Dropdown.Divider className='m-3'/>
                     <Col>
-                      <span className="gras">Dates :</span>{" "}
+                      <span className="gras">Dates :</span>
                       {event.fields.date_start} ~ {event.fields.date_end}
                     </Col>
-                    <Col>
+                    <Col className='mb-3'>
                       <span className="gras">Localité :</span> {event.fields.city}
                     </Col>
                     {event.fields.image &&
                       <Col>
-                        <img src={event.fields.image} alt="affiche de l'event" width="250" height="200" />
+                        <img src={event.fields.image} alt="affiche de l'event" width="400px" height="auto" />
                       </Col>
                     ||
                       <Col>
                         <img src={require("../defaultposter.png")} alt="" width="250" height="200" />
                       </Col>
                     }
-                    <p>{event.fields.free_text}</p>
                     {/*afficher seulement si l'useur et co ou message d'erreur genre => mec tes pas co '-' */}
-                    <Button variant="outline-info" onClick={() => creatParty(event)}>
-                      Créer sortie
+                    <Button className='m-3' variant='outline-dark'
+                      onClick={() => (setDisplayModal(true), setInfosEvent(event.fields))}>
+                      En savoir +
                     </Button>
                   </div>
                 </Row>
               )}
               </>
               ||
-              <Row className="events-list-container w-100 m-3">
+              <Row className=" w-100 m-3 mt-5">
                   <Col className="event-list text-center imgRandomHome">
                         <div className="absolutTitle imgConcert">
                           <p>CONCERTS</p>
