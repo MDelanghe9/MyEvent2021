@@ -214,11 +214,10 @@ const creatParty = async (event) => {
     alert("Votre sortie a bien été créée")
   } catch (error) {
    //console.log(error.response);
-   alert("Une erreur est return")
+   alert("Une erreur s'est produite, veuillez réessayer.")
 
   }
 }
-
 // Modal
 const [displayModal, setDisplayModal] = useState(false);
 const [infosEvent, setInfosEvent] = useState(false);

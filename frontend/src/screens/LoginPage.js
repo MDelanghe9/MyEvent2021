@@ -18,7 +18,6 @@ function LoginPage(props) {
       <AccountBox/>
       <GoogleLoginUtils {...props}/>
       <GoogleLogoutUtils {...props} />
-      
     </>
   );
 }

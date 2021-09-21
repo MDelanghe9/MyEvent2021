@@ -147,7 +147,7 @@ function ProfilPage() {
   return (
     <>
       <MyNav token={token}/>
-      <Container style={{marginTop:175}} >
+      <Container style={{marginTop:150}}>
             <Row>
               <Col className="back-slime" xs={7} sm={7} md={7} lg={7} xl={7} xxl={7}> 
                 <p>{token.name}</p>
