@@ -7,7 +7,7 @@ const DistanceList = (props) => {
     }
     return(
     <>
-        <select name="Distance" onChange={handleChange} className="inputHome">
+        <select name="Distance" onChange={handleChange} className="inputHome2 selectList distance">
             <option value="1000">10 km</option>
             <option value="2000">20 km</option>
             <option value="3000">30 km</option>
