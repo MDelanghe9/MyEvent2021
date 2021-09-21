@@ -16,13 +16,13 @@ export default class MyNav extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                             <Nav className="navbar-burger-icon m-auto">
-                                <Nav.Link className='icon-home' href="/home"><AiOutlineHome/></Nav.Link>
-                                <Nav.Link className='icon-log' href="/login"><AiOutlineExport/></Nav.Link>
-                                <Nav.Link className='icon-user' href="/profil">
+                                <Nav.Link className='icon-home' href="/home"><img src="https://img.icons8.com/dotty/80/ffffff/home-page.png"/></Nav.Link>
+                                <Nav.Link className='icon-log' href="/login"><img src="https://img.icons8.com/dotty/80/ffffff/enter-2.png"/></Nav.Link>
+                                <Nav.Link href="/profil">
                                 {this.props.token && 
-                                <img src={this.props.token.picture} alt="Image de profil" width="35" height="35"/>
+                                <img src={this.props.token.picture} alt="Image de profil" className='profilImg'/>
                                 ||
-                                <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt="Image du profil par default" width="50" height="50" />
+                                <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt="Image du profil par default" width="50" height="50" style={{borderRadius:100}}/>
                                 }
                                 </Nav.Link>
                                 
