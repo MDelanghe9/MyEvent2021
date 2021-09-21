@@ -277,9 +277,8 @@ const [infosEvent, setInfosEvent] = useState(false);
                 {dataTags &&
                   <>
                       <Col>
-                        <label htmlFor="typeFiltre-select">Choisissez un type d'evenement : </label>
                         <select name="typeFiltre-select" onChange={filtreType} className='inputHome2 selectList'>
-                          <option value="null">Choisir un type d'événements</option>
+                          <option value="null">Vous pouvez filtrer les types d'événements ici</option>
                             {dataTags && dataTags.map((data, i) =>
                           <option key={i} value={data[0]}>{data[0] + " : " + data[1]}</option>
                             )}

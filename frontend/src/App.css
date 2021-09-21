@@ -147,6 +147,7 @@ code {
   display: flex;
   flex-wrap: wrap;
   margin-top:7em !important;
+  margin-left:0.5em !important;
   max-width:100% !important;
 }
 .spanHome{
@@ -172,6 +173,9 @@ code {
 .selectList{
   height:37px;
   border-radius:5px;
+}
+.distance{
+  width:
 }
 .absolutTitle{
   position:relative;
@@ -434,8 +438,10 @@ code {
     font-size:4.5em;
   }
 }
-@media(min-width:768px){
-
+@media(max-width:768px){
+  .containerInput{
+    margin-left:7em !important;
+  }
 }
 @media (max-width: 760px) {
   /*log*/
@@ -464,6 +470,9 @@ code {
   }
   .navbar-burger-text {
     display: flex !important;
+  }
+  .events-list{
+    margin-left: -0.9em !important;
   }
 }
 @media (max-width: 560px) {
@@ -494,7 +503,16 @@ code {
     width:85%;
   }
 }
-
+@media(max-width:545px) {
+  .containerInput{
+    margin-left:5em !important;
+  }
+}
+@media(max-width:480px) {
+  .containerInput{
+    margin-left:4em !important;
+  }
+}
 /* Smartphone */
 @media (max-width: 440px) {
   /*Evenements */
@@ -519,5 +537,14 @@ code {
   .imgSport{
     font-size:2.5em;
     top:3.5em;
+  }
+  /*Boutons homePage*/
+  .containerInput{
+    margin-left:3em !important;
+  }
+}
+@media(max-width:430px){
+  .containerInput{
+    margin-left:0.5em !important;
   }
 }
