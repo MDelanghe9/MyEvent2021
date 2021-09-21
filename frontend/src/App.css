@@ -49,6 +49,7 @@
 body {
   background: url('https://static.vecteezy.com/ti/vecteur-libre/t1/1180980-abstrait-geometrique-3d-texture-forme-fond-blanc-vectoriel.jpg') no-repeat fixed !important;
   background-size: cover !important;
+  overflow-x: hidden;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -58,9 +59,6 @@ code {
 .react-scrolltop-button, react-scrolltop-button-mobile{
   font-size: 1em;
   background-color:#fff0 !important;
-}
-.react-scrolltop-button, react-scrolltop-button-mobile:hover{
-  background-color:rgba(255, 255, 255, 0.507) !important;
 }
 /* NavBar*/
 .navbar {
@@ -90,13 +88,11 @@ code {
   text-decoration: overline 1.5px rgba(255, 255, 255, 0.671);
 }
 .icon-home img, .icon-log img {
-  color: white !important;
   width:40px !important;
 }
 .icon-home img:hover,
 .profilImg:hover,
 .icon-log img:hover{
-  color: #70cfec !important;
   transition: transform .3s;
   transform: scale(1.3);
 }
@@ -116,6 +112,10 @@ code {
   text-align: center !important;
   transition: transform .5s;
   transform: scale(1);
+}
+.navbar-burger-text a:hover{
+  transition: transform .3s;
+  transform: scale(1.1);
 }
 .navTitle::after {
   position: absolute;
@@ -137,8 +137,7 @@ code {
   width: 105%; 
 }
 .navbar-light .navbar-toggler {
-  color: rgba(0, 0, 0, 0.233) !important;
-  border-color: rgba(185, 204, 206, 0.507) !important;
+  border-color: black !important;
 }
 .profilImg{
   width:36px;
@@ -266,7 +265,6 @@ code {
 }
 .imgSport p {
   transform: rotate(10deg);
-
 }
 
 /*liste evenements*/
@@ -309,15 +307,51 @@ code {
 .gras {
   font-weight: bold;
 }
-
+.imgEvent{
+  border-radius: 5px;
+}
+.outline-purple{
+  background-color:transparent !important;
+  border:1px solid #a117d8 !important;
+  color:#a117d8 !important;
+}
+.outline-purple:hover{
+  background-color:#a117d8 !important;
+  color:white !important;
+}
 /*Modal de l'enfer*/
+.modal{
+  padding-right:0 !important;
+}
 .modal-backdrop {
   z-index:1031 !important;
 }
 .modal-dialog{
   max-width:100% !important;
-  max-height:100% !important;
+  min-height:100% !important;
   margin : 0 !important;
+}
+.modal-title{
+  color:#a117d8;
+  font-size:30px !important;
+  margin:auto;
+}
+.modal-body h4{
+  text-align:center;
+}
+.modal-img{
+  max-width:500px;
+  height:auto;
+  display: flex;
+}
+.adressEvent{
+  text-align:center;
+  color:#a117d8;
+  font-size:18px;
+}
+.textEvent{
+  margin-top:25px;
+  text-align:justify;
 }
 
 /*Chargement */
@@ -452,6 +486,59 @@ code {
   width:500px !important;
   margin-left:150px;
 }
+/*Footer*/
+.footer {
+  width:99%;
+  margin:auto;
+  position:fixed;
+  left:0;
+  bottom:0;
+  right:0;
+  padding:10px 0;
+  background-image:url('https://media.istockphoto.com/vectors/rainbow-colors-on-a-horizontal-line-of-watercolor-splashes-vector-id467715656?k=20&m=467715656&s=170667a&w=0&h=nTkgJzC1Fs1t9Ln3XRBVoxBYjH2qX518yEFtBY1rtnQ=');
+  background-position: 100% 0%;
+  color:black;
+  border-radius:15px 15px 0% 0%;
+  box-shadow:-8px -8px 5px rgba(63, 10, 83, 0.507) !important;
+}
+.footer ul {
+  padding:0;
+  list-style:none;
+  text-align:center;
+  font-size:18px;
+  line-height:1.6;
+  margin-bottom:0;
+}
+.footer li {
+  padding:0 10px;
+}
+.footer ul a {
+  color:inherit;
+  text-decoration:none;
+  opacity:0.7;
+}
+.footer ul a:hover {
+  opacity:1;
+}
+.footer .social {
+  text-align:center;
+  padding-bottom:25px;
+}
+
+.footer .social img:hover {
+  transition: transform .4s !important;
+  transform: scale(1.1) !important;
+}
+.footer .copyright {
+  margin-top:15px;
+  text-align:center;
+  font-size:14px;
+  font-weight: bold;
+  color:rgb(65, 63, 63);
+  margin-bottom:0;
+  text-shadow: 2px 2px 2px white;
+}
+
 /*Media queries */
  @media (max-width: 1830px) {
   .navbar {

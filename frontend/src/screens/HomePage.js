@@ -8,6 +8,7 @@ import DistanceList from "../components/DistanceList";
 ///////////////////////////////////////////////////
 import MyNav from "../components/navBar";
 import ScrollTop from 'react-scrolltop-button';
+import Footer from "../components/footer";
 import "../App.css";
 import {
   Row,
@@ -239,16 +240,24 @@ let date = "";
                 </Modal.Header>
 
                 <Modal.Body>
-                  <p>{infosEvent.description}</p>
-                  <img src={infosEvent.image} alt="affiche de l'event" width="100%" height="auto"/>
-                  <p>{infosEvent.free_text}</p>
+                  <Row>
+                    <h4 className="mb-3">{infosEvent.description}</h4>
+                      <hr></hr><hr></hr>
+                      <Col className='mt-3' sm>
+                        <img src={infosEvent.image} alt="affiche de l'event" width="100%" height="auto" className='modal-img'/>
+                      </Col>
+                      <Col className='mt-3' sm>
+                        <p className="adressEvent gras">{infosEvent.address}<br></br>{infosEvent.city_district}</p>
+                        <p className="textEvent">{infosEvent.free_text}</p>
+                      </Col>
+                  </Row>
                 </Modal.Body>
 
                 <Modal.Footer>
-                  <Button variant="secondary" onClick={() => (setDisplayModal(false), setInfosEvent(false))}>
+                  <Button variant="outline-dark" onClick={() => (setDisplayModal(false), setInfosEvent(false))}>
                     Retour
                   </Button>
-                  <Button variant="primary" onClick={() => creatParty(infosEvent)}>
+                  <Button className="outline-purple" onClick={() => creatParty(infosEvent)}>
                     Créer sortie
                   </Button>
                 </Modal.Footer>
@@ -318,11 +327,11 @@ let date = "";
                       </p>
                     </Col>
                     <Col className='mb-3'>
-                      <span className="gras">Localité :</span>
+                      <h4 className="gras">{event.fields.city}</h4>
                     </Col>
                     {event.fields.image &&
                       <Col>
-                        <img src={event.fields.image} alt="affiche de l'event" width="400px" height="auto" />
+                        <img src={event.fields.image} alt="affiche de l'event" width="400px" height="auto" className='imgEvent' />
                       </Col>
                     ||
                       <Col>
@@ -330,7 +339,7 @@ let date = "";
                       </Col>
                     }
                     {/*afficher seulement si l'useur et co ou message d'erreur genre => mec tes pas co '-' */}
-                    <Button className='m-3' variant='outline-dark'
+                    <Button className='m-3 outline-purple'
                       onClick={() => (setDisplayModal(true), setInfosEvent(event.fields))}>
                       En savoir +
                     </Button>
@@ -369,6 +378,7 @@ let date = "";
             </Col>
           </Row>
       }
+      <Footer/>
       <ScrollTop
         breakpoint={3000}
         text=' '
