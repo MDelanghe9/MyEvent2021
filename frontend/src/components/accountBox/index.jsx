@@ -27,8 +27,8 @@ function AccountBox(props) {
             </div>
 
             <div className='formContainer'>
-                <div className='mb-3'><GoogleLoginUtils /></div>
-                <div className='mb-3'><GoogleLogoutUtils /></div>
+                <div className='mb-3'><GoogleLoginUtils {...props}/></div>
+                <div className='mb-3'><GoogleLogoutUtils {...props}/></div>
             </div>
             {/* <div className="formContainer">
                 <FloatingLabel controlId="pseudoLogin" label="pseudo" className="mb-3">
