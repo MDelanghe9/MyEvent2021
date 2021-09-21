@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.route("/creatparty").post(partyCreat);
 router.route("/all").get(getAllPartys);
-router.route("/chat").post(newMessage);
+router.route("/chat").put(newMessage);
 
 export default router;

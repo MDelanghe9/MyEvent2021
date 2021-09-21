@@ -131,13 +131,13 @@ function ProfilPage() {
 
   const submitMessage = async (e) => {
     e.preventDefault();
-    console.log(newMessage);
-    console.log(actualParty.id);
-
-    
+    var _id = actualParty._id;
+    var message = {};
+    message[token.name] = newMessage;
+    console.log(message);
     try {
-      const response = await axios.post("http://localhost:4242/api/party/chat", {newMessage}); 
-      console.log(response);
+      const response = await axios.put("http://localhost:4242/api/party/chat", {message, _id}); 
+      console.log(response.data.party);
     } catch (error) {
       console.log(error.response);
     }
@@ -194,7 +194,8 @@ function ProfilPage() {
                     { actualParty &&
                       <>
                       <p>Titre de l'event : {actualParty.title}</p>
-                      <p>Date de l'event : {actualParty.date}</p>
+                      <p>Date de l'event : {(actualParty.date.substring(8)) + "-" + (actualParty.date.substring(5, 7)) + "-" + (actualParty.date.substring(0,4))}</p>
+
                       <p>Adresse de l'event : {actualParty.adress}</p>
                       <img className="" src={actualParty.picture} alt="Image de la sortie" width="50" height="50" />
                       <p>Description : {actualParty.description}</p>
