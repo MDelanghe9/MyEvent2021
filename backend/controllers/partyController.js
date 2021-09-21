@@ -99,4 +99,251 @@ const getParty = asyncHandler(async (req, res) => {
   }
 });
 
-export { partyCreat, getAllPartys, newMessage, getParty };
+// @desc    POST ask invitation to a party
+// @route   POST /api/party/askInvitation
+const askInvitation = asyncHandler(async (req, res) => {
+  const { _id, name } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $addToSet: { askingInvitation: [name] } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Invitation pas envoyer",
+      });
+    }
+  } else {
+    res.status({
+      error: "Party not find",
+    });
+  }
+});
+
+// @desc    POST refused invitation to a party
+// @route   POST /api/party/refuseInvitation
+const refuseInvitation = asyncHandler(async (req, res) => {
+  const { _id, name } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $pullAll: { askingInvitation: [name] } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+
+// @desc    POST accept invitation to a party
+// @route   POST /api/party/acceptInvitation
+const acceptInvitation = asyncHandler(async (req, res) => {
+  const { _id, name } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $pullAll: { askingInvitation: [name] } })
+  const partyEvent2 = await Party.updateOne({_id},{ $addToSet: { menber: [name] } })
+  if (partyEvent && partyEvent2) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+// @desc    POST bannie un menbre to a party
+// @route   POST /api/party/kickUser
+const kickUser = asyncHandler(async (req, res) => {
+  const { _id, name } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $pullAll: { menber: [name] } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+// @desc    POST invite un user to a party
+// @route   POST /api/party/inviteUser
+const inviteUser = asyncHandler(async (req, res) => {
+  const { _id, name } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $addToSet: { askingInvitationByAuthor: [name] } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+// @desc    POST cancel invitation d'un user to a auth party
+// @route   POST /api/party/cancelInvite
+const cancelInvite = asyncHandler(async (req, res) => {
+  const { _id, name } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $pullAll: { askingInvitationByAuthor: [name] } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+// @desc    POST user leave target party
+// @route   POST /api/party/leaveParty
+const leaveParty = asyncHandler(async (req, res) => {
+  const { _id, name } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $pullAll: { menber: [name] } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+// @desc    POST delete msg in chat party
+// @route   POST /api/party/deleteMsg
+const deleteMsg = asyncHandler(async (req, res) => {
+  const { _id, msg } = req.body;
+  const partyEvent = await Party.updateOne({_id},{ $pullAll: { chat: [msg] } })
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+// @desc    POST insert field custom for party
+// @route   POST /api/party/setFieldParty
+const setFieldParty = asyncHandler(async (req, res) => {
+  const { _id, titleActualParty, adressActualParty, descriptionActualParty } = req.body;
+  const partyEvent = await Party.updateOne({_id}, 
+    {title_auth: titleActualParty,
+      adress_auth: adressActualParty,
+     description_auth: descriptionActualParty }
+  )
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+// @desc    POST change visibily of party
+// @route   POST /api/party/setVisibility
+const setVisibility = asyncHandler(async (req, res) => {
+  const { _id, visibility } = req.body;
+  const partyEvent = await Party.updateOne({_id}, 
+    {visibility: visibility }
+  )
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+// @desc    POST delete party
+// @route   POST /api/party/cancelParty
+const cancelParty = asyncHandler(async (req, res) => {
+  const { _id, visibility } = req.body;
+  const result = await Party.deleteOne({_id});
+  res.json({
+    result
+  });
+});
+
+export { partyCreat, cancelParty, getAllPartys, newMessage, deleteMsg, getParty, setFieldParty, setVisibility,
+   askInvitation, refuseInvitation, acceptInvitation, kickUser, inviteUser, cancelInvite, leaveParty};

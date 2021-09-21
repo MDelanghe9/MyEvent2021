@@ -10,6 +10,10 @@ const partySchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    name_auth: {
+      type: String,
+      required: true,
+    },
     description_auth: {
       type: String,
     },
@@ -46,6 +50,12 @@ const partySchema = mongoose.Schema(
       type: Array,
     },
     chat: {
+      type: Array,
+    },
+    askingInvitationByAuthor: {
+      type: Array,
+    },
+    askingInvitation: {
       type: Array,
     },
   },
