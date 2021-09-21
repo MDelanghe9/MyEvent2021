@@ -11,7 +11,7 @@ function GoogleLoginUtils(props) {
   const onSuccess = (res) => {
     isUser(res);
     refreshTokenSetup(res);
-    props.history.push("/home");
+    props.history.push("/home"); 
   };
 
   const isUser = async (res) => {

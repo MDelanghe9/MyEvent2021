@@ -47,7 +47,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  background: url('https://image.freepik.com/vecteurs-libre/fond-peinture-aquarelle-rose-vibrante_53876-58930.jpg') no-repeat fixed !important;
+  background: url('https://static.vecteezy.com/ti/vecteur-libre/t1/1180980-abstrait-geometrique-3d-texture-forme-fond-blanc-vectoriel.jpg') no-repeat fixed !important;
   background-size: cover !important;
 }
 code {
@@ -57,9 +57,10 @@ code {
 
 /* NavBar*/
 .navbar {
+  background-image:url('https://media.istockphoto.com/vectors/rainbow-colors-on-a-horizontal-line-of-watercolor-splashes-vector-id467715656?k=20&m=467715656&s=170667a&w=0&h=nTkgJzC1Fs1t9Ln3XRBVoxBYjH2qX518yEFtBY1rtnQ=');
+  background-position: 25% 25%;
   width:99% !important;
   margin:auto;
-  background-color:rgba(233, 10, 10, 0.322) !important;
   font-weight: bold;
   border-radius: 0% 0% 10px 10px;
   padding-bottom: 10px;
@@ -137,7 +138,7 @@ code {
   padding:1px;
   margin-top:2px;
   border-radius: 100%;
-  border: 1px dotted white;
+  border: 1px dotted rgb(0, 0, 0);
 }
 
 /*search bar*/
@@ -174,22 +175,28 @@ code {
 .inputHome {
   width:300px;
   background:none;
-  border: 1px solid #13bebe;
+  border: 1px solid #17ebeb;
   padding:5px;
   border-radius:4px;
   margin-bottom:8px;
-  background-color:rgba(255, 255, 255, 0.322) !important;
   font-family: 'Metrophobic', sans-serif !important;
+  background-color:rgba(255, 255, 255, 0.322) !important;
 }
 
-.inputHome2 {
+.inputHome2, .inputHome3 {
   width:300px !important;
   background:none !important;
-  border: 1px solid #80c1c9 !important;
+  border: 1px solid #eef12f !important;
   margin-bottom:8px;
   padding-left:5px;
   font-family: 'Metrophobic', sans-serif !important;
   background-color:rgba(255, 255, 255, 0.322) !important;
+}
+.inputHome3 {
+  border: 1px solid #6af52a !important;
+}
+.distance{
+  border: 1px solid #e61313 !important;
 }
 .selectList{
   height:37px;
@@ -212,7 +219,7 @@ code {
   width:300px !important;
   background-color:rgba(255, 255, 255, 0.322) !important;
   color:black !important;
-  border-color: #13bebe !important;
+  border-color: #c21edf !important;
 }
 
 /*img home random*/
@@ -262,8 +269,9 @@ code {
   box-shadow: 12px 12px 8px rgba(19, 8, 80, 0.609);
   margin: 10px 0px 20px 10px !important;
   list-style-type: none;
-  background-image:url('https://thumbs.dreamstime.com/b/cadre-rivet%C3%A9-par-acier-banni%C3%A8re-en-m%C3%A9tal-121190491.jpg');
+  background-image:url('https://image.freepik.com/vecteurs-libre/fond-aquarelle-feuille-or_52683-46208.jpg');
   background-size:cover;
+  background-position: center;
 }
 .events-list p {
   text-align: justify;
