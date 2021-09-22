@@ -234,7 +234,7 @@ code {
 /*img home random*/
 .imgRandomHome {
   cursor: pointer;
-  margin-bottom: 300px;
+  margin-bottom: 200px;
 }
 .imgRandomHome img{
   border-radius:25px;
@@ -656,6 +656,9 @@ code {
 @media(max-width:545px) {
   .containerInput{
     margin-left:5em !important;
+  }
+  .navTitle {
+    font-size:1.5em !important;
   }
 }
 @media(max-width:480px) {

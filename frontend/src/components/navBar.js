@@ -28,7 +28,7 @@ export default class MyNav extends Component {
                             <Nav className="navbar-burger-text m-auto">
                                 <Nav.Link className='icon-home' href="/home">Accueil</Nav.Link>
                                 <Nav.Link className='icon-user' href="/profil">Profil</Nav.Link>
-                                <Nav.Link className='icon-log' href="/">Connexion / Déconnexion</Nav.Link>
+                                <Nav.Link className='icon-log' href="/">Déconnexion</Nav.Link>
                             </Nav>
 
                     </Navbar.Collapse>
