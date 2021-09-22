@@ -30,6 +30,7 @@ function HomePage() {
 
   const gps = GetGeoLocation();
   const [city, setCity] = useState("Ou entrez ici la ville de votre choix !");
+  
   const [dataTags, setDataTags] = useState(false);
   const [paginNbr, setPaginNbr] = useState(5);
   
@@ -149,7 +150,7 @@ function HomePage() {
   }
 
   const setPossition = () => {
-    if (city === "Les evenements autour de moi") {
+    if (city === "Ou entrez ici la ville de votre choix !") {
       if (gps.loaded === false) {
         alert("Veuillez d'abord accepter ou refuser le partage de vos coordonées avant de continuer.")
       }else{

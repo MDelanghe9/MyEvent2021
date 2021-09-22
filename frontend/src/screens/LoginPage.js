@@ -12,6 +12,7 @@ function LoginPage(props) {
 
   useEffect(() => {
     console.log("start");
+    localStorage.removeItem("authToken");
   });
 
   return (
