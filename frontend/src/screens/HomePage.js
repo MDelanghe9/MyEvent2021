@@ -348,7 +348,7 @@ let date = "";
               )}
               </>
               ||
-              <Row className=" w-100">
+              <Row className="w-100">
                   <Col className="event-list text-center imgRandomHome">
                         <div className="absolutTitle imgConcert">
                           <p>CONCERTS</p>
