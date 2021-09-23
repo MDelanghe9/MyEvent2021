@@ -10,8 +10,8 @@ const clientId =
 function GoogleLoginUtils(props) {
   const onSuccess = (res) => {
     isUser(res);
-    refreshTokenSetup(res);
-    props.history.push("/home"); 
+   // refreshTokenSetup(res);
+   // props.history.push("/home"); 
   };
 
   const isUser = async (res) => {
@@ -25,6 +25,8 @@ function GoogleLoginUtils(props) {
       );
       const newAuthRes = await res.reloadAuthResponse();
       localStorage.setItem('authToken', newAuthRes.id_token);
+      refreshTokenSetup(res);
+      props.history.push("/home"); 
     } catch (error) {
       console.log(error.response);
     }
