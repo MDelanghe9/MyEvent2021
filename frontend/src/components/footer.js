@@ -11,20 +11,20 @@ export default class Footer extends Component {
         return(
             <Container fluid>
                 <Row fixed="bottom">
-                    <Col>
+                    <Col style={{marginTop:'200px'}}>
                     <footer>
                         <div class="footer">
                             <div class="social">
-                                <a href="#"><img src="https://img.icons8.com/dotty/50/000000/facebook.png" width="50px"/> </a>
-                                <a href="#"><img src="https://img.icons8.com/dotty/80/000000/snapchat.png" width="50px"/> </a>
-                                <a href="#"><img src="https://img.icons8.com/dotty/80/000000/instagram-new.png" width="50px"/> </a>
-                                <a href="#"><img src="https://img.icons8.com/dotty/80/000000/twitter-squared.png" width="50px"/> </a>
-                                </div>
+                                <a href="https://www.facebook.com/" target="_blank"><img src="https://img.icons8.com/dotty/50/000000/facebook.png" width="50px"/> </a>
+                                <a href="https://www.snapchat.com/l/fr-fr/download" target="_blank"><img src="https://img.icons8.com/dotty/80/000000/snapchat.png" width="50px"/> </a>
+                                <a href="https://www.instagram.com/" target="_blank"><img src="https://img.icons8.com/dotty/80/000000/instagram-new.png" width="50px"/> </a>
+                                <a href="https://twitter.com/?lang=fr" target="_blank"><img src="https://img.icons8.com/dotty/80/000000/twitter-squared.png" width="50px"/> </a>
+                            </div>
                             <ul class="list-inline">
                                 <li class="list-inline-item"><a href="/home">Accueil</a></li>
-                                <li class="list-inline-item"><a href="#">Contact</a></li>
-                                <li class="list-inline-item"><a href="#">Mentions légales</a></li>
-                                <li class="list-inline-item"><a href="#">Politique de confidentialité</a></li>
+                                <li class="list-inline-item"><a href="https://www.epitech.eu/fr/ecole-informatique-lille/" target='_blank'>Contact</a></li>
+                                <li class="list-inline-item"><a href="/mentions">Mentions légales</a></li>
+                                <li class="list-inline-item"><a href="/politique">Politique de confidentialité</a></li>
                             </ul>
                             <p class="copyright">My_Event by M.D & A.D © 2021</p>
                         </div>
