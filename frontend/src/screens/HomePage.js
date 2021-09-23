@@ -151,11 +151,11 @@ function HomePage(props) {
   const setPossition = () => {
     if (city === "Ou entrez ici la ville de votre choix !") {
       if (gps.loaded === false) {
-        alert("Veuillez d'abord accepter ou refuser le partage de vos coordonées avant de continuer.")
+        toast.info("Partage de vos coordonnées : Vous devez confirmer votre choix avant de pouvoir continuer.")
       }else{
         if (gps.error) {
           console.log(gps.error.message)
-          alert("Vous avez refusé le partage de coordonées, vous pouvez malgré tout chercher les evenements par villes. Si c'est une erreur veuillez recharger la page")
+          toast.warning("Vous avez refusé le partage de coordonées, vous pouvez malgré tout chercher les evenements par villes. Si c'est une erreur veuillez recharger la page")
         }
         else{
           console.log(gps.coordinates.lat)
@@ -241,11 +241,11 @@ const creatParty = async (event) => {
     
     //console.log(response);
 
-    toast("Votre sortie a bien été créée ! Rendez vous sur votre profil afin de la configurer et la passer en publique.")
+    toast.dark("✅ Votre sortie a bien été créée ! 🦄 Rendez vous sur votre profil afin de la configurer et la passer en publique.")
     
   } catch (error) {
    //console.log(error.response);
-   alert("Une erreur s'est produite, veuillez réessayer.")
+   toast.error("Une erreur s'est produite, veuillez réessayer.")
 
   }
 }
@@ -420,7 +420,7 @@ let date = "";
               )}
               </>
               ||
-              <Row className=" w-100">
+              <Row className="w-100">
                   <Col className="event-list text-center imgRandomHome">
                         <div  onClick={() => (getEventByType("concert"))} className="absolutTitle imgConcert">
                           <p>CONCERTS</p>
@@ -456,7 +456,18 @@ let date = "";
         text=' '
         icon={<img src="https://img.icons8.com/dotty/80/000000/thick-arrow-pointing-up.png" width="30px" height="30px"/>}
       />
-      <ToastContainer/>
+      <ToastContainer
+        position="top-center"
+        autoClose={10000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </Container>
     </>
   );

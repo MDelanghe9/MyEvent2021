@@ -3,6 +3,7 @@ import { GoogleLogin } from 'react-google-login';
 // refresh token
 import { refreshTokenSetup } from  './refreshToken';
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 const clientId =
   '707788443358-u05p46nssla3l8tmn58tpo9r5sommgks.apps.googleusercontent.com';
@@ -21,7 +22,7 @@ function GoogleLoginUtils(props) {
       console.log(response);
       console.log('Connexion reussi:', res.profileObj);
       alert(
-        `Connexion reussi 😉 ${res.profileObj.name}`
+        `Connexion reussie 😉 ! Bienvenue ${res.profileObj.name}`
       );
       const newAuthRes = await res.reloadAuthResponse();
       localStorage.setItem('authToken', newAuthRes.id_token);
@@ -35,8 +36,8 @@ function GoogleLoginUtils(props) {
 
   const onFailure = (res) => {
     console.log('Login rater =>', res);
-    alert(
-      `Connexion loupe 😢`
+    toast.error(
+      `Echec de la connexion 😢`
     );
   };
 
@@ -51,6 +52,18 @@ function GoogleLoginUtils(props) {
         style={{ marginTop: '100px' }}
         isSignedIn={false}
         className='googleInput'
+      />
+      <ToastContainer
+        position="top-center"
+        autoClose={10000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
       />
     </div>
   );

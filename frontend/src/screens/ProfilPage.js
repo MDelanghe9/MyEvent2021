@@ -46,9 +46,10 @@ function ProfilPage(props) {
  const [newMessage, setNewMessage] = useState("");
  const [intervalTime, setIntervalTime] = useState(5000);
 
+
  useInterval(() => {
    // Do some API call here
-   refreshChat();
+   //refreshChat();
    setTimeout(() => {
    }, 5000);
  }, intervalTime);
@@ -193,19 +194,22 @@ function ProfilPage(props) {
   return (
     <>
       <MyNav token={token}/>
-        <Container style={{marginTop:150}}>
+        <Container style={{marginTop:100}} fluid >
           <Row>
-            <Col className="back-slime" xs={7} sm={7} md={7} lg={7} xl={7} xxl={7}> 
-              <p>{token.name}</p>
-              <p>{token.email}</p>
+            <Col className='profil'>
+              <p className='name'>
+              <img className="fond-profil" alt="fond profil" src='https://cdn4.vectorstock.com/i/thumb-large/76/78/abstract-light-gray-watercolor-stain-shape-vector-37737678.jpg'/>
+              <img src={token.picture} alt="Image de profil" style={{borderRadius:'100%', maxWidth:'40px', height:'auto', marginRight:'10px'}}/>
+                {token.name}
+                <hr></hr>
+                <span className="email">{token.email}</span>
+              </p>
             </Col>
-            <Col className="back-blue" xs={1} sm={1} md={1} lg={1} xl={1} xxl={1}> 
-              <img className="roundedPicture right" src={token.picture} alt="Image de profil" width="50" height="50" />
-            </Col>
-            <Col className="back-prune" xs={4} sm={4} md={4} lg={4} xl={4} xxl={4}> 
+
+            <Col className='m-auto btns-profil mb-4'> 
               <Dropdown>
-                <Dropdown.Toggle variant="info" id="dropdown-basic">
-                    Sorties Publique ou je ne suis pas
+                <Dropdown.Toggle id="dropdown-basic" className='btn-profil mt-2'>
+                    Les sorties publiques
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                 {partyList && partyList.map((data) =>
@@ -220,8 +224,8 @@ function ProfilPage(props) {
                 </Dropdown.Menu>
               </Dropdown>
               <Dropdown>
-                <Dropdown.Toggle variant="info" id="dropdown-basic">
-                    Mes Sorties a moi
+                <Dropdown.Toggle id="dropdown-basic" className='btn-profil'>
+                    Mes sorties personnalisées
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                 {partyList && partyList.map((data, i) =>
@@ -236,8 +240,8 @@ function ProfilPage(props) {
                 </Dropdown.Menu>
               </Dropdown>
               <Dropdown>
-                <Dropdown.Toggle variant="info" id="dropdown-basic">
-                    Les Sorties ou je participe ou suis inviter
+                <Dropdown.Toggle id="dropdown-basic" className='btn-profil btn-long'>
+                    Les sorties auxquelles je participe / Invitations
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                 {partyList && partyList.map((data, i) =>
@@ -258,14 +262,13 @@ function ProfilPage(props) {
                   </>
                 )}
                 </Dropdown.Menu>
+
+                  { actualParty && actualParty.email_auth === token.email &&
+                    <Button className="btn-none btn-profil m-auto" onClick={() => party("","cancelParty")}>
+                      Annuler ma sortie
+                    </Button>
+                  }
               </Dropdown>
-            </Col>
-            <Col className="back-black">
-              { actualParty && actualParty.email_auth === token.email &&
-                <Button variant="outline-warning" className="btn-home" onClick={() => party("","cancelParty")}>
-                  Annuler la sortie
-                </Button>
-              }
             </Col>
           </Row>
           { actualParty &&
@@ -276,15 +279,16 @@ function ProfilPage(props) {
                 <Col className="back-blue2"> 
                 { actualParty && actualParty.email_auth === token.email &&
                   <>
-                    <p>Titre de l'event : {actualParty.title}</p>
-                    <p>Date de l'event : {(actualParty.date.substring(8)) + "-" + (actualParty.date.substring(5, 7)) + "-" + (actualParty.date.substring(0,4))}</p>
-                    <p>Adresse de l'event : {actualParty.adress}</p>
-                    <img className="" src={actualParty.picture} alt="Image de la sortie" width="50" height="50" />
-                    <p>Description : {actualParty.description}</p>
+                  <h4>Résumé</h4>
+                    <p><span className='gras'>Titre de l'event : </span> {actualParty.title}</p>
+                    <p><span className='gras'>Date de l'event : </span> {(actualParty.date.substring(8)) + "-" + (actualParty.date.substring(5, 7)) + "-" + (actualParty.date.substring(0,4))}</p>
+                    <p><span className='gras'>Adresse de l'event : </span> {actualParty.adress}</p>
+                    <p><img className="" src={actualParty.picture} alt="Image de la sortie" width="50" height="50" /></p>
+                    <p><span className='gras'>Description : </span> {actualParty.description}</p>
 
                     <Form onSubmit={submitHandlerParty}>
                         <Form.Group>
-                          <Form.Label>Titre de la sortie :</Form.Label>
+                          <Form.Label>Titre de ma sortie :</Form.Label>
                           <Form.Control
                             type="text"
                             value={titleActualParty}
@@ -293,7 +297,7 @@ function ProfilPage(props) {
                           />
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Lieu de la sortie :</Form.Label>
+                          <Form.Label>Lieu de ma sortie :</Form.Label>
                           <Form.Control
                             type="text"
                             value={adressActualParty}
@@ -302,7 +306,7 @@ function ProfilPage(props) {
                           />
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Description de la sortie : </Form.Label>
+                          <Form.Label>Description de ma sortie : </Form.Label>
                           <Form.Control
                             type="text"
                             value={descriptionActualParty}
@@ -310,17 +314,17 @@ function ProfilPage(props) {
                             onChange={(e) => setDescriptionActualParty(e.target.value)}
                           />
                         </Form.Group>
-                        <Button variant="primary" type="submit">
+                        <Button className="outline-purple" type="submit">
                           Valider
                         </Button>
                       </Form>
                       {actualParty.visibility === "private" &&
-                        <Button style={{marginTop:10}} onClick={() => setVisibility("public")}>
-                          Ma sortie est actuelement prive
+                        <Button style={{marginTop:10}} onClick={() => setVisibility("public")} variant="outline-dark">
+                          Ma sortie est actuelement privée
                         </Button>
                         ||
-                        <Button style={{marginTop:10}} onClick={() => setVisibility("private")}>
-                          Ma sortie est actuelement public
+                        <Button style={{marginTop:10}} onClick={() => setVisibility("private")} variant="outline-success">
+                          Ma sortie est actuelement publique
                         </Button>
                       }
 
@@ -334,9 +338,9 @@ function ProfilPage(props) {
                     <p>Description : {actualParty.description}</p>
                     
                     { actualParty.name_auth && <p>Createur/Creatrice de la sortie : {actualParty.name_auth}</p>}
-                    <p>Titre de la sortie : { actualParty.title_auth && <span>{actualParty.title_auth}</span> || <span>le createur ne la pas encore definie</span> }</p>
-                    <p>Lieux de la sortie : { actualParty.adress_auth && <span>{actualParty.adress_auth}</span> || <span>le createur ne la pas encore definie</span> }</p>
-                    <p>Description de la sortie : { actualParty.description_auth && <span>{actualParty.description_auth}</span> || <span>le createur ne la pas encore definie</span> }</p>
+                    <p>Titre : { actualParty.title_auth && <span>{actualParty.title_auth}</span> || <span>Le créateur de cette sortie n'a pas encore défini sa sortie</span> }</p>
+                    <p>Lieu : { actualParty.adress_auth && <span>{actualParty.adress_auth}</span> || <span>Le créateur n'a pas encore choisi le lieu</span> }</p>
+                    <p>Description de la sortie : { actualParty.description_auth && <span>{actualParty.description_auth}</span> || <span>Le créateur n'a pas encore édité de description</span> }</p>
                   </>
                 }
                 </Col>
@@ -346,7 +350,7 @@ function ProfilPage(props) {
           <Container>
             {actualParty &&
               <Row>
-              <h4 style={{marginTop:20}}>Listes des menbres</h4>
+              <h4 style={{marginTop:20}}>Listes des participants</h4>
                 <Col className="back-green"  >  {/*list des gens qui ont rejoins*/}
                 <div className="scroll_div">
                     <>
@@ -355,12 +359,12 @@ function ProfilPage(props) {
                           <p key={i}> {user}</p>
                           {actualParty.name_auth === token.name && 
                             <Button onClick={() => party(user, "kickUser")}>
-                              retirer
+                              Retirer de la liste
                             </Button>
                           }
                           {(actualParty.menber.indexOf(token.name) > -1) &&
                             <Button onClick={() => leaveParty(token.name)}>
-                              Quiter la sortie
+                              Quitter cet événement
                             </Button>
                           }
                         </div>
@@ -372,7 +376,7 @@ function ProfilPage(props) {
             }
             { actualParty && actualParty.name_auth === token.name &&
               <Row>
-                <h4 style={{marginTop:20}}>Inviter des personnes</h4>
+                <h4 style={{marginTop:20}}>Membres à inviter</h4>
                 <Col className="back-prune"  > {/*list des gens a inviter*/}
                   <div className="scroll_div">
                   <>
@@ -383,7 +387,7 @@ function ProfilPage(props) {
                           <>
                             <span>{user.name}</span>
                             <Button variant="info" className="btn-home" onClick={() => party(user.name, "inviteUser")}>
-                              inviter
+                              Inviter
                             </Button>
                           </>
                           }
@@ -401,11 +405,11 @@ function ProfilPage(props) {
                   <>
                     {(actualParty.askingInvitation.indexOf(token.name) > -1) && 
                       <Button variant="warning" onClick={() => party(token.name, "refuseInvitation")}>
-                        Annuler la demande d'invitation
+                        Annuler l'invitation
                       </Button>
                     ||
                       <Button variant="info" className="btn-home" onClick={() => party(token.name, "askInvitation")}>
-                        demander a se faire inviter
+                        Demander à participer
                       </Button>
                     }
                   </>
@@ -416,10 +420,10 @@ function ProfilPage(props) {
             <Row>
               <Col>
                 <Button variant="info" className="btn-home" onClick={() => party(token.name, "acceptInvitation")}>
-                  accepter l'invitation
+                  Accepter l'invitation
                 </Button>
                 <Button variant="info" className="btn-home" onClick={() => party(token.name, "cancelInvite")}>
-                  refuser l'invitation
+                  Refuser l'invitation
                 </Button>
               </Col>
             </Row>
@@ -428,17 +432,17 @@ function ProfilPage(props) {
 
             { actualParty && actualParty.name_auth === token.name &&
               <Row> {/*list de demande*/}
-                <h4 style={{marginTop:20}}>Liste des demandes</h4>
+                <h4 style={{marginTop:20}}>Demandes de participation</h4>
                 <Col className="back-red">
                   <div className="scroll_div">
                   {actualParty.askingInvitation.map((user, i) =>
                   <div style={{display:"flex",}}>
                     <h5>{user}</h5>
                     <Button style={{width:15, }} variant="success"  onClick={() => party(user, "acceptInvitation")}>
-                    ✓
+                    ✔
                     </Button>
                     <Button  style={{width:15,}} variant="danger" onClick={() => party(user, "refuseInvitation")}>
-                    X
+                    ✘
                     </Button>
                   </div>
                   )}
