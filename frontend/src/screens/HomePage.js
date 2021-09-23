@@ -59,6 +59,15 @@ function HomePage() {
 
 
   useEffect(() => {
+    toast('🦄 Wow so easy!', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
 //verif if token
 //si token set token
     var tokenExist = localStorage.getItem('authToken');
@@ -215,6 +224,7 @@ const creatParty = async (event) => {
   try {
     const response = await axios.post("http://localhost:4242/api/party/creatparty", {id_event, email_auth, name_auth, title, picture, date, adress, description}, config); 
     //console.log(response);
+
     toast("Votre sortie a bien été créée ! Rendez vous sur votre profil afin de la configurer et la passer en publique.")
     
   } catch (error) {

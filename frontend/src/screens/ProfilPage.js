@@ -97,7 +97,7 @@ function ProfilPage(props) {
     try {
       const response = await axios.post("http://localhost:4242/api/party/"+action , {name, _id}); 
       console.log(response);
-      if (action === "cancelParty") {
+      if (action === "cancelParty" || action === "cancelInvite") {
         props.history.go(0); // route evenet anuuler
       }else{
         setActualParty(response.data.party[0]);
@@ -153,6 +153,9 @@ function ProfilPage(props) {
         try {
           const response = await axios.post("http://localhost:4242/api/party/chat", {_id});
           setActualParty(response.data.party[0]);
+          if(response.data.party[0].lenght == 0){
+            props.history.go(0); // reirection to cancel party
+          }
           // console.log(response.data.party[0]);
         } catch (error) {
           props.history.go(0);
