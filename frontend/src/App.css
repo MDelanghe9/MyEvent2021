@@ -32,8 +32,6 @@
   background-color: peru;
 }
 
-
-.roundedPicture{ border-radius: 50%;}
 .scroll_div{ height: 150px; overflow-y: scroll; overflow-x: auto;}
 
 
@@ -493,6 +491,52 @@ code {
   width:500px !important;
   margin-left:150px;
 }
+
+/*profil page*/
+.profil{
+  margin-top:25px !important;
+}
+.fond-profil{
+  width: 330px;
+  height: 334px;
+  position: absolute;
+  z-index: -1;
+  bottom: -83px;
+  left: -36px;
+}
+.profil p {
+  padding:30px;
+}
+.btns-profil .dropdown, .profil{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+.btn-profil{
+  width:350px !important;
+  margin-bottom:10px;
+  color:black !important;
+  border: 1px solid rgba(87, 10, 131, 0.075) !important;
+  box-shadow: 4px 4px 8px rgba(19, 8, 80, 0.609) !important;
+  background-color:#dcdcdc54 !important;
+}
+.btn-long{
+  white-space: normal !important;
+}
+.name{
+  font-size:25px;
+  position:relative;
+}
+.email{
+  font-size:15px;
+  color:rgb(94, 100, 100);
+}
+.btn-none{
+  background-color: rgba(255, 2, 2, 0.068) !important;
+  color:red !important;
+  font-size:18px !important;
+}
+
 /*Footer*/
 .footer {
   width:99%;
@@ -622,7 +666,7 @@ code {
     display: flex !important;
   }
   .events-list{
-    margin-left: -0.9em !important;
+    margin-left: -0.5em !important;
   }
 }
 @media (max-width: 560px) {
