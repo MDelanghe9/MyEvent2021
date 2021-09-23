@@ -344,6 +344,20 @@ const cancelParty = asyncHandler(async (req, res) => {
     result
   });
 });
+// @desc    POST party
+// @route   POST /api/party
+const party = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+  const event_identifiant = id
+  const result = await Party.find({event_identifiant});
+  res.json({
+    result
+  });
+  //const result = Party.find({ 'event_identifiant': { $in: {id} } });
+  res.json({
+    result
+  });
+});
 
 export { partyCreat, cancelParty, getAllPartys, newMessage, deleteMsg, getParty, setFieldParty, setVisibility,
-   askInvitation, refuseInvitation, acceptInvitation, kickUser, inviteUser, cancelInvite, leaveParty};
+   askInvitation, refuseInvitation, acceptInvitation, kickUser, inviteUser, cancelInvite, leaveParty, party};

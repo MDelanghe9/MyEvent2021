@@ -22,8 +22,9 @@ import {
 } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { random } from "colors";
 
-function HomePage() {
+function HomePage(props) {
   const [events, setEvents] = useState(false);
   const [eventsFiltred, setEventsFiltred] = useState(false);
   const [dist, setDist] = useState(1000);
@@ -37,39 +38,11 @@ function HomePage() {
   
   const [token, setToken] = useState(false);
   const [imgProfil, setImgProfil] = useState(false);
-
-  /*
-
-  const handleChange = ({ currentTarget }) => {
-    const { name, value } = currentTarget;
-    setMessage({ ...message, [name]: value });
-  };
-
-  const [isMobile, setIsMobile] = useState(false)
- 
-  //choose the screen size 
-  const handleResize = () => {
-    window.innerWidth <= 768 ? setIsMobile(true) : setIsMobile(false)
-  }
-
-  // create an event listener
-  useEffect(() => {
-    window.addEventListener("resize", handleResize)
-  })*/
-
+  const [partysOfEvent, setPartysOfEvent] = useState(false);
+  const [displayModal, setDisplayModal] = useState(false);
+  const [infosEvent, setInfosEvent] = useState(false);
 
   useEffect(() => {
-    toast('🦄 Wow so easy!', {
-      position: "bottom-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      });
-//verif if token
-//si token set token
     var tokenExist = localStorage.getItem('authToken');
     if (tokenExist) {
       var decoded = jwt_decode(tokenExist);
@@ -159,6 +132,22 @@ function HomePage() {
     }
   }
 
+  //exposition
+  const getEventByType  = async (type) => {
+    try {
+      const response = await axios.get("https://public.opendatasoft.com/api/records/1.0/search/?dataset=evenements-publics-cibul&q=date_start>=+"+curentDate+"&sort=-date_start&&refine.tags="+type);
+      creatArrayTags(response.data.records);
+      setEvents(response.data.records)
+      setEventsFiltred(response.data.records);
+      window.scrollTo(-500, -500);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
+  
+
+
   const setPossition = () => {
     if (city === "Ou entrez ici la ville de votre choix !") {
       if (gps.loaded === false) {
@@ -206,6 +195,32 @@ const filtreType = (e) => {
   }
 }
 
+const fetchParty = async (data) => {
+  console.log("uid =>", data.uid);
+  var id = data.uid;
+  try {
+    const response = await axios.post("http://localhost:4242/api/party/party", {id});
+    console.log(response.data.result);
+    setPartysOfEvent(response.data.result);
+  } catch (error) {
+   console.log(error.response);
+  }
+}
+
+const party = async (data, action) => {
+  var _id = data._id;
+  var name = token.name;
+  console.log("id =< ",_id);
+  console.log(name);
+  try {
+    const response = await axios.post("http://localhost:4242/api/party/"+action , {name, _id}); 
+    console.log(response);
+    fetchParty(infosEvent);
+  } catch (error) {
+    console.log(error.response);
+  }
+};
+
 const creatParty = async (event) => {
   //par default la sortie sera private , il peux changer cela dans son profil
   console.log(event);
@@ -223,6 +238,7 @@ const creatParty = async (event) => {
   }
   try {
     const response = await axios.post("http://localhost:4242/api/party/creatparty", {id_event, email_auth, name_auth, title, picture, date, adress, description}, config); 
+    
     //console.log(response);
 
     toast("Votre sortie a bien été créée ! Rendez vous sur votre profil afin de la configurer et la passer en publique.")
@@ -234,15 +250,13 @@ const creatParty = async (event) => {
   }
 }
 // Modal
-const [displayModal, setDisplayModal] = useState(false);
-const [infosEvent, setInfosEvent] = useState(false);
+
 let date = "";
   return (
     <>
-      <MyNav token={token}/>
-
+      <MyNav  token={token}/>
       {displayModal && infosEvent &&
-      <Container fluid>
+      <Container fluid  >
         <Row>
           <Col>
           <Col>
@@ -263,6 +277,51 @@ let date = "";
                         <p className="adressEvent gras">{infosEvent.address}<br></br>{infosEvent.city_district}</p>
                         <p className="textEvent">{infosEvent.free_text}</p>
                       </Col>
+                  </Row>
+                  <Row>
+                      {partysOfEvent && partysOfEvent.map((data, i) =>
+                      <div  style={{backgroundColor:"rgb("+ (i%2 * 100)+", 115, 200)"}}>
+                        {data.visibility === "private" && 
+                        <div key={i}>
+                          <p>Createur : {data.name_auth}</p>
+                          <p>Nombre de participant: {((data.menber).lenght) > 0 || 0}</p>
+                          {((data.menber.indexOf(token.name) > -1)) &&
+                            <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
+                              Deja menber
+                            </Button>
+                          ||
+                          <>
+                            { ((data.menber.indexOf(token.name) > -1)) && 
+                              <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
+                                Deja menbre
+                              </Button>
+                              ||
+                              <>
+                              { ((data.askingInvitation.indexOf(token.name) > -1)) && 
+                                <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
+                                  En attente
+                                </Button>
+                              ||
+                              <>
+                                {data.askingRequired === true && 
+                                <Button variant="outline-info" className="btn-home" onClick={() => party(data, "askInvitation")}>
+                                  Demander a rejoindre
+                                </Button>
+                                ||
+                                <Button variant="outline-info" className="btn-home" onClick={() => party(data, "acceptInvitation")}>
+                                  Rejoindre
+                                </Button>
+                                }
+                              </>
+                              }
+                            </>
+                            }
+                          </>
+                          }
+                        </div>
+                        }
+                      </div>
+                      )}
                   </Row>
                 </Modal.Body>
 
@@ -353,7 +412,7 @@ let date = "";
                     }
                     {/*afficher seulement si l'useur et co ou message d'erreur genre => mec tes pas co '-' */}
                     <Button className='m-3 outline-purple'
-                      onClick={() => (setDisplayModal(true), setInfosEvent(event.fields))}>
+                      onClick={() => (setDisplayModal(true), setInfosEvent(event.fields), fetchParty(event.fields))}>
                       En savoir +
                     </Button>
                   </div>
@@ -363,15 +422,15 @@ let date = "";
               ||
               <Row className=" w-100">
                   <Col className="event-list text-center imgRandomHome">
-                        <div className="absolutTitle imgConcert">
+                        <div  onClick={() => (getEventByType("concert"))} className="absolutTitle imgConcert">
                           <p>CONCERTS</p>
                         <img src="https://www.lusineamusique.fr/wp-content/uploads/2018/05/CONCERTS-e1535802666628.jpg"
                           alt="photo concerts" width="100%" height="auto"/></div>
-                        <div className="absolutTitle imgMusee">
+                        <div  onClick={() => (getEventByType("exposition"))} className="absolutTitle imgMusee">
                           <p>MUSÉES</p>
                         <img src="https://storage.lebonguide.com/crop-1600x700/56/42/7364E7F4-B7AF-4C20-97CA-4A1D561C03FB.png"
                           alt="photo musees" width="100%" height="auto"/></div>
-                        <div className="absolutTitle imgSport">
+                        <div onClick={() => (getEventByType("sport"))} className="absolutTitle imgSport">
                           <p>EXHIBITIONS</p>
                         <img src="https://www.ggba-switzerland.ch/wp-content/uploads/2018/04/Sports-HSC.jpg"
                           alt="photo sports" width="100%" height="auto"/></div>

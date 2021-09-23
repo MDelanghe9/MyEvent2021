@@ -58,6 +58,11 @@ const partySchema = mongoose.Schema(
     askingInvitation: {
       type: Array,
     },
+    askingRequired: {
+      type: Boolean,
+      default: true
+
+    },
   },
   {
     timestamps: true,
