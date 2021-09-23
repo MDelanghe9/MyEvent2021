@@ -14,7 +14,8 @@ import {
   leaveParty,
   deleteMsg,
   setFieldParty,
-  setVisibility
+  setVisibility,
+  party
 } from "../controllers/partyController.js";
 import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
@@ -22,6 +23,7 @@ const router = express.Router();
 router.route("/creatparty").post(partyCreat);
 router.route("/cancelParty").post(cancelParty);
 router.route("/all").get(getAllPartys);
+router.route("/party").post(party);
 router.route("/chat").put(newMessage);
 router.route("/chat").post(getParty);
 router.route("/askInvitation").post(askInvitation);
