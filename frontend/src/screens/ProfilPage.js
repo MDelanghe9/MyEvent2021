@@ -90,94 +90,18 @@ function ProfilPage(props) {
     setAdressActualParty(data.adress_auth);
   }
 
-  const cancelParty = async () => {
-    var _id = actualParty._id;
-    try {
-      const response = await axios.post("http://localhost:4242/api/party/cancelParty", {_id}); 
-      props.history.go(0);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-  const inviteUser = async (name) => {
-    console.log(name);
-    var _id = actualParty._id;
-    try {
-      const response = await axios.post("http://localhost:4242/api/party/inviteUser", {name, _id}); 
-      console.log(response);
-      setActualParty(response.data.party[0]);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
 
-  const acceptComming = async (name) => { //accepter la demande d'un menbre a rejoindre la sortie
+  const party = async (name = "", action ="") => {
     console.log(name);
     var _id = actualParty._id;
     try {
-      const response = await axios.post("http://localhost:4242/api/party/acceptInvitation", {name, _id}); 
+      const response = await axios.post("http://localhost:4242/api/party/"+action , {name, _id}); 
       console.log(response);
-      setActualParty(response.data.party[0]);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
-  const refuseComming = async (name) => { //refuser la demande d'un menbre a rejoindre la sortie
-    console.log(name);
-    var _id = actualParty._id;
-    try {
-      const response = await axios.post("http://localhost:4242/api/party/refuseInvitation", {name, _id}); 
-      console.log(response);
-      setActualParty(response.data.party[0]);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
-  const cancelInvite = async (name) => { //annuler la demande a un menbre de venir a la sortie
-    console.log(name);
-    var _id = actualParty._id;
-    try {
-      const response = await axios.post("http://localhost:4242/api/party/cancelInvite", {name, _id}); 
-      console.log(response);
-      setActualParty(response.data.party[0]);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
-  const cancelMyAsking = async (name) => { //annuler la demande de l'user a se joindre a la sortie
-    console.log(name);
-    var _id = actualParty._id;
-    try {
-      const response = await axios.post("http://localhost:4242/api/party/cancelMyAsking", {name, _id}); 
-      console.log(response);
-      setActualParty(response.data.party[0]);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-  
-  const wantComming = async (name) => { //cree une demande de l'user pour rejoindre la sortie
-    console.log(name);
-    var _id = actualParty._id;
-    try {
-      const response = await axios.post("http://localhost:4242/api/party/askInvitation", {name, _id}); 
-      console.log(response);
-      setActualParty(response.data.party[0]);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
-
-  const kickUser = async (name) => { //bannie un participant de la sortie
-    console.log(name);
-    var _id = actualParty._id;
-    try {
-      const response = await axios.post("http://localhost:4242/api/party/kickUser", {name, _id}); 
-      console.log(response);
-      setActualParty(response.data.party[0]);
+      if (action === "cancelParty" || action === "cancelInvite") {
+        props.history.go(0); // route evenet anuuler
+      }else{
+        setActualParty(response.data.party[0]);
+      }
     } catch (error) {
       console.log(error.response);
     }
@@ -192,7 +116,7 @@ function ProfilPage(props) {
     } catch (error) {
       console.log(error.response);
     }
-  };
+  }; //special
   
   
   const submitHandlerParty = async (e) => {
@@ -201,7 +125,6 @@ function ProfilPage(props) {
     try {
       const response = await axios.post("http://localhost:4242/api/party/setFieldParty", {titleActualParty, adressActualParty, descriptionActualParty, _id}); 
       console.log(response);
-      setActualParty(response.data.party[0]);
       setActualParty(response.data.party[0]);
     } catch (error) {
       console.log(error.response);
@@ -217,20 +140,30 @@ function ProfilPage(props) {
     try {
       const response = await axios.put("http://localhost:4242/api/party/chat", {message, _id});
       console.log(response.data.party[0]);
+      setNewMessage("");
     } catch (error) {
       console.log(error.response);
     }
   };
 
   const refreshChat = async (e) => {
-    var _id = actualParty._id;
-    if (_id) {
-      try {
-        const response = await axios.post("http://localhost:4242/api/party/chat", {_id});
-        setActualParty(response.data.party[0]);
-        // console.log(response.data.party[0]);
-      } catch (error) {
-        console.log(error.response);
+    if(actualParty){
+      var _id = actualParty._id;
+      if (_id) {
+        try {
+          const response = await axios.post("http://localhost:4242/api/party/chat", {_id});
+          setActualParty(response.data.party[0]);
+          if(response.data.party[0].lenght == 0){
+            props.history.go(0); // reirection to cancel party
+          }
+          // console.log(response.data.party[0]);
+        } catch (error) {
+          props.history.go(0);
+        }
+      }
+    }else{
+      if(actualParty){
+        props.history.go(0);
       }
     }
   }
@@ -245,6 +178,7 @@ function ProfilPage(props) {
       console.log(error.response);
     }
   };
+
   const setVisibility = async (visibility) => {
     var _id = actualParty._id;
     try {
@@ -328,7 +262,7 @@ function ProfilPage(props) {
             </Col>
             <Col className="back-black">
               { actualParty && actualParty.email_auth === token.email &&
-                <Button variant="outline-warning" className="btn-home" onClick={() => cancelParty()}>
+                <Button variant="outline-warning" className="btn-home" onClick={() => party("","cancelParty")}>
                   Annuler la sortie
                 </Button>
               }
@@ -420,7 +354,7 @@ function ProfilPage(props) {
                         <div className="back-slime">
                           <p key={i}> {user}</p>
                           {actualParty.name_auth === token.name && 
-                            <Button onClick={() => kickUser(user)}>
+                            <Button onClick={() => party(user, "kickUser")}>
                               retirer
                             </Button>
                           }
@@ -448,7 +382,7 @@ function ProfilPage(props) {
                           {user.name !== token.name && (!(actualParty.askingInvitation.indexOf(user.name) > -1)) && (!(actualParty.askingInvitationByAuthor.indexOf(user.name) > -1)) &&
                           <>
                             <span>{user.name}</span>
-                            <Button variant="info" className="btn-home" onClick={() => inviteUser(user.name)}>
+                            <Button variant="info" className="btn-home" onClick={() => party(user.name, "inviteUser")}>
                               inviter
                             </Button>
                           </>
@@ -466,11 +400,11 @@ function ProfilPage(props) {
               <Col className="back-prune"  > {/*demmande au createur a venir*/}
                   <>
                     {(actualParty.askingInvitation.indexOf(token.name) > -1) && 
-                      <Button variant="warning" onClick={() => refuseComming(token.name)}>
+                      <Button variant="warning" onClick={() => party(token.name, "refuseInvitation")}>
                         Annuler la demande d'invitation
                       </Button>
                     ||
-                      <Button variant="info" className="btn-home" onClick={() => wantComming(token.name)}>
+                      <Button variant="info" className="btn-home" onClick={() => party(token.name, "askInvitation")}>
                         demander a se faire inviter
                       </Button>
                     }
@@ -478,13 +412,13 @@ function ProfilPage(props) {
               </Col>
             </Row>
           }
-          {actualParty && actualParty.name_auth !== token.name && (!(actualParty.menber.indexOf(token.name) > -1)) && actualParty.visibility === "private" && actualParty.askingInvitationByAuthor.indexOf(token.name) > -1 &&
+          {actualParty && actualParty.name_auth !== token.name && (!(actualParty.menber.indexOf(token.name) > -1)) && actualParty.askingInvitationByAuthor.indexOf(token.name) > -1 &&
             <Row>
               <Col>
-                <Button variant="info" className="btn-home" onClick={() => acceptComming(token.name)}>
+                <Button variant="info" className="btn-home" onClick={() => party(token.name, "acceptInvitation")}>
                   accepter l'invitation
                 </Button>
-                <Button variant="info" className="btn-home" onClick={() => cancelInvite(token.name)}>
+                <Button variant="info" className="btn-home" onClick={() => party(token.name, "cancelInvite")}>
                   refuser l'invitation
                 </Button>
               </Col>
@@ -500,10 +434,10 @@ function ProfilPage(props) {
                   {actualParty.askingInvitation.map((user, i) =>
                   <div style={{display:"flex",}}>
                     <h5>{user}</h5>
-                    <Button style={{width:15, }} variant="success"  onClick={() => acceptComming(user)}>
+                    <Button style={{width:15, }} variant="success"  onClick={() => party(user, "acceptInvitation")}>
                     ✓
                     </Button>
-                    <Button  style={{width:15,}} variant="danger" onClick={() => refuseComming(user)}>
+                    <Button  style={{width:15,}} variant="danger" onClick={() => party(user, "refuseInvitation")}>
                     X
                     </Button>
                   </div>
@@ -518,12 +452,16 @@ function ProfilPage(props) {
                 <Col className="back-black">
                   <div className="scroll_div">
                   {actualParty.askingInvitationByAuthor.map((user, i) =>
-                  <div style={{display:"flex",}}>
-                    <h5>{user}</h5>
-                    <Button  style={{width:15,}} variant="danger" onClick={() => cancelInvite(user)}>
-                      X
-                    </Button>
-                  </div>
+                  <>
+                    {(!(actualParty.menber.indexOf(user) > -1)) &&
+                    <div style={{display:"flex",}}>
+                      <h5>{user}</h5>
+                      <Button  style={{width:15,}} variant="danger" onClick={() => party(user, "cancelInvite")}>
+                        X
+                      </Button>
+                    </div>
+                    }
+                  </>
                   )}
                   </div>
                 </Col>

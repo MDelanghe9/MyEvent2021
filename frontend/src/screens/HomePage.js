@@ -20,7 +20,8 @@ import {
   Dropdown,
   PopoverTitle
 } from "react-bootstrap";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function HomePage() {
   const [events, setEvents] = useState(false);
@@ -56,8 +57,17 @@ function HomePage() {
     window.addEventListener("resize", handleResize)
   })*/
 
-  useEffect(() => {
 
+  useEffect(() => {
+    toast('🦄 Wow so easy!', {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
 //verif if token
 //si token set token
     var tokenExist = localStorage.getItem('authToken');
@@ -215,6 +225,7 @@ const creatParty = async (event) => {
     const response = await axios.post("http://localhost:4242/api/party/creatparty", {id_event, email_auth, name_auth, title, picture, date, adress, description}, config); 
     //console.log(response);
     alert("Votre sortie a bien été créée")
+    
   } catch (error) {
    //console.log(error.response);
    alert("Une erreur s'est produite, veuillez réessayer.")
@@ -380,11 +391,12 @@ let date = "";
           </Row>
       }
       <Footer/>
-      <ScrollTop
-        breakpoint={3000}
-        text=' '
-        icon={<img src="https://img.icons8.com/dotty/80/000000/thick-arrow-pointing-up.png" width="30px" height="30px"/>}
-      />
+<ScrollTop
+  breakpoint={3000}
+  text=' '
+  icon={<img src="https://img.icons8.com/dotty/80/000000/thick-arrow-pointing-up.png" width="30px" height="30px"/>}
+/>
+<ToastContainer />
     </Container>
     </>
   );
