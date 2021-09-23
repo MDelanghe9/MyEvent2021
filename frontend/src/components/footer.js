@@ -22,9 +22,9 @@ export default class Footer extends Component {
                             </div>
                             <ul class="list-inline">
                                 <li class="list-inline-item"><a href="/home">Accueil</a></li>
-                                <li class="list-inline-item"><a href="#">Contact</a></li>
-                                <li class="list-inline-item"><a href="#">Mentions légales</a></li>
-                                <li class="list-inline-item"><a href="#">Politique de confidentialité</a></li>
+                                <li class="list-inline-item"><a href="https://www.epitech.eu/fr/ecole-informatique-lille/" target='_blank'>Contact</a></li>
+                                <li class="list-inline-item"><a href="/mentions">Mentions légales</a></li>
+                                <li class="list-inline-item"><a href="/politique">Politique de confidentialité</a></li>
                             </ul>
                             <p class="copyright">My_Event by M.D & A.D © 2021</p>
                         </div>

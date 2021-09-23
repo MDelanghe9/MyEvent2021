@@ -19,7 +19,7 @@ export default class MyNav extends Component {
                                 <Nav.Link className='icon-log' href="/login"><img src="https://img.icons8.com/dotty/80/enter-2.png"/></Nav.Link>
                                     <Nav.Link href="/profil">
                                         {this.props.token && 
-                                        <img src={this.props.token.picture} alt="Image de profil" className='profilImg'/>
+                                        <img src={this.props.token.picture} alt="Image derofil" className='profilImg'/>
                                         ||
                                         <img src="https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" alt="Image du profil par default"  className='profilImg'/>
                                         }

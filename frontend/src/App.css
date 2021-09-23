@@ -283,7 +283,8 @@ code {
   box-shadow: 12px 12px 8px rgba(19, 8, 80, 0.609);
   margin: 10px 0px 20px 10px !important;
   list-style-type: none;
-  background-image:url('https://image.freepik.com/vecteurs-libre/fond-aquarelle-feuille-or_52683-46208.jpg');
+  background-color:#dcdcdc54;
+  /* background-image:url('https://image.freepik.com/vecteurs-libre/fond-aquarelle-feuille-or_52683-46208.jpg'); */
   background-size:cover;
   background-position: center;
 }
@@ -324,6 +325,9 @@ code {
 .modal{
   padding-right:0 !important;
 }
+.modal-body{
+  background-color:rgb(236, 234, 224);
+}
 .modal-backdrop {
   z-index:1031 !important;
 }
@@ -341,6 +345,7 @@ code {
   text-align:center;
 }
 .modal-img{
+  margin:auto;
   max-width:500px;
   height:auto;
   display: flex;
@@ -353,6 +358,7 @@ code {
 .textEvent{
   margin-top:25px;
   text-align:justify;
+  margin-right:25px;
 }
 
 /*Chargement */
@@ -523,7 +529,7 @@ code {
 }
 .footer .social {
   text-align:center;
-  padding-bottom:25px;
+  padding-bottom:10px;
 }
 
 .footer .social img:hover {
