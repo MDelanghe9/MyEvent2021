@@ -288,8 +288,8 @@ let date = "";
                           <p>Créateur : {data.name_auth}</p>
                           <p>Nombre de participants: {((data.menber).lenght) > 0 || 0}</p>
                           {((data.menber.indexOf(token.name) > -1)) &&
-                            <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
-                              Déja menbre
+                            <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("Vous êtes déjà menbre, rendez voussur votre profil pour plus de posibilités")}>
+                              Déjà membre
                             </Button>
                           ||
                           <>
