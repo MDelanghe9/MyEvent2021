@@ -527,20 +527,20 @@ function ProfilPage(props) {
           <Container className="memberContainer resume">
             {actualParty &&
               <Row>
-              <h4 style={{marginTop:20}}>Listes des participants</h4>
-                <Col className="back-green"  >  {/*list des gens qui ont rejoins*/}
+              <h5 style={{marginTop:20, textDecoration:'underline'}}>Liste des participants</h5>
+                <Col>  {/*list des gens qui ont rejoins*/}
                 <div className="scroll_div">
                     <>
                       {actualParty.menber.map((user, i) =>
-                        <div className="back-slime">
+                        <div>
                           <p key={i}> {user}</p>
                           {actualParty.name_auth === token.name && 
-                            <Button onClick={() => party(user, "kickUser")}>
+                            <Button onClick={() => party(user, "kickUser")} variant="outline-danger">
                               Retirer de la liste
                             </Button>
                           }
                           {(actualParty.menber.indexOf(token.name) > -1) &&
-                            <Button onClick={() => leaveParty(token.name)}>
+                            <Button onClick={() => leaveParty(token.name)} variant="outline-danger">
                               Quitter cet événement
                             </Button>
                           }
@@ -553,19 +553,19 @@ function ProfilPage(props) {
             }
             { actualParty && actualParty.name_auth === token.name &&
               <Row>
-                <h4 style={{marginTop:20}}>Membres à inviter</h4>
-                <Col className="back-prune"  > {/*list des gens a inviter*/}
+                <h5 style={{marginTop:20, textDecoration:'underline'}}>Membres</h5>
+                <Col> {/*list des gens a inviter*/}
                   <div className="scroll_div">
                   <>
                     {Users && Users.map((user, i) =>
                       <>
-                        <div className="back-slime" style={{marginBottom:10, marginTop:10}}>
+                        <div style={{marginBottom:10, marginTop:10}}>
                           {user.name !== token.name && (!(actualParty.askingInvitation.indexOf(user.name) > -1)) && (!(actualParty.askingInvitationByAuthor.indexOf(user.name) > -1)) &&
                           <>
                             <span>{user.name}</span>
-                            <span onClick={() => (setDisplayModal(true), getUser(user.email, "profil"), getTargetUserPartys(user.name))}>profil 🔍</span>
-                            
-                            <Button variant="info" className="btn-home" onClick={() => party(user.name, "inviteUser")}>
+                            <span onClick={() => (setDisplayModal(true), getUser(user.email, "profil"), getTargetUserPartys(user.name))}> 🔍</span>
+                            <br></br>
+                            <Button variant="info" className="outline-purple" onClick={() => party(user.name, "inviteUser")}>
                               Inviter
                             </Button>
                           </>
@@ -580,20 +580,20 @@ function ProfilPage(props) {
           }
           {actualParty && actualParty.name_auth !== token.name && (!(actualParty.menber.indexOf(token.name) > -1)) && actualParty.visibility === "public" &&
             <Row>
-              <Col className="back-prune"  > {/*demmande au createur a venir*/}
+              <Col> {/*demmande au createur a venir*/}
                   <>
                     {(actualParty.askingInvitation.indexOf(token.name) > -1) && 
-                      <Button variant="warning" onClick={() => party(token.name, "refuseInvitation")}>
+                      <Button variant="outline-danger" className="btn-member mb-1" onClick={() => party(token.name, "refuseInvitation")}>
                         Annuler l'invitation
                       </Button>
                     ||
                     <>
                       {actualParty.askingRequired === true && 
-                        <Button variant="info" className="btn-home" onClick={() => party(token.name, "askInvitation")}>
+                        <Button variant="outline-warning" className="btn-member mb-1" onClick={() => party(token.name, "askInvitation")}>
                           Demander à participer
                         </Button>
                         ||
-                        <Button variant="info" className="btn-home" onClick={() => party(token.name, "acceptInvitation")}>
+                        <Button variant="outline-warning" className="btn-member mb-1" onClick={() => party(token.name, "acceptInvitation")}>
                           Participer
                         </Button>
                       } 
@@ -606,10 +606,10 @@ function ProfilPage(props) {
           {actualParty && actualParty.name_auth !== token.name && (!(actualParty.menber.indexOf(token.name) > -1)) && actualParty.askingInvitationByAuthor.indexOf(token.name) > -1 &&
             <Row>
               <Col>
-                <Button variant="info" className="btn-home" onClick={() => party(token.name, "acceptInvitation")}>
+                <Button variant="outline-info" className="btn-member mb-1" onClick={() => party(token.name, "acceptInvitation")}>
                   Accepter l'invitation
                 </Button>
-                <Button variant="info" className="btn-home" onClick={() => party(token.name, "cancelInvite")}>
+                <Button variant="outline-info" className="btn-member mb-1" onClick={() => party(token.name, "cancelInvite")}>
                   Refuser l'invitation
                 </Button>
               </Col>
@@ -619,16 +619,16 @@ function ProfilPage(props) {
 
             { actualParty && actualParty.name_auth === token.name &&
               <Row> {/*list de demande*/}
-                <h4 style={{marginTop:20}}>Demandes de participation</h4>
-                <Col className="back-red">
+                <h5 style={{marginTop:20, textDecoration:'underline'}}>Demandes de participation</h5>
+                <Col>
                   <div className="scroll_div">
                   {actualParty.askingInvitation.map((user, i) =>
                   <div style={{display:"flex",}}>
                     <h5>{user}</h5>
-                    <Button style={{width:15, }} variant="success"  onClick={() => party(user, "acceptInvitation")}>
+                    <Button className="btnShort" variant="outline-success"  onClick={() => party(user, "acceptInvitation")}>
                     ✔
                     </Button>
-                    <Button  style={{width:15,}} variant="danger" onClick={() => party(user, "refuseInvitation")}>
+                    <Button className="btnShort" variant="outline-danger" onClick={() => party(user, "refuseInvitation")}>
                     ✘
                     </Button>
                   </div>
@@ -639,16 +639,16 @@ function ProfilPage(props) {
             }
             { actualParty && actualParty.name_auth === token.name &&
               <Row> {/*list des demande de l'auteur en attente d'acceptation*/}
-                <h4 style={{marginTop:20}}>Liste en attente</h4>
-                <Col className="back-black">
+                <h5 style={{marginTop:20, textDecoration:'underline'}}>Liste en attente</h5>
+                <Col className="">
                   <div className="scroll_div">
                   {actualParty.askingInvitationByAuthor.map((user, i) =>
                   <>
                     {(!(actualParty.menber.indexOf(user) > -1)) &&
                     <div style={{display:"flex",}}>
                       <h5>{user}</h5>
-                      <Button  style={{width:15,}} variant="danger" onClick={() => party(user, "cancelInvite")}>
-                        X
+                      <Button variant="outline-danger" className='btnShort' onClick={() => party(user, "cancelInvite")}>
+                      ✘
                       </Button>
                     </div>
                     }
