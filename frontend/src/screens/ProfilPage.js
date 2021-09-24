@@ -36,7 +36,6 @@ function ProfilPage(props) {
  const [token, setToken] = useState(false);
  const [Users, setUsers] = useState([]);
  const [User, setUser] = useState(false);
- const [curentDate, setCurentDate] = useState(1000);
  const [imgProfil, setImgProfil] = useState(false);
 
  const [partyList, setPartyList] = useState([]);
@@ -57,7 +56,7 @@ function ProfilPage(props) {
  
  useInterval(() => {
    // Do some API call here
-   //refreshChat();
+   refreshChat();
    setTimeout(() => {
    }, 5000);
  }, intervalTime);
