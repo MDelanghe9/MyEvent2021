@@ -274,20 +274,20 @@ function ProfilPage(props) {
           { actualParty &&
           <>
           <Row>
-            <Col  className="back-grey"  xs={9} sm={9} md={9} lg={9} xl={9} xxl={9}> {/* donner une taille par default */}
-              <Row className="back-red">
-                <Col className="back-blue2"> 
+            <Col className="" xs={9} sm={9} md={9} lg={9} xl={9} xxl={9}> {/* donner une taille par default */}
+              <Row>
+                <Col className="resume"> 
                 { actualParty && actualParty.email_auth === token.email &&
                   <>
-                  <h4>Résumé</h4>
-                    <p><span className='gras'>Titre de l'event : </span> {actualParty.title}</p>
-                    <p><span className='gras'>Date de l'event : </span> {(actualParty.date.substring(8)) + "-" + (actualParty.date.substring(5, 7)) + "-" + (actualParty.date.substring(0,4))}</p>
-                    <p><span className='gras'>Adresse de l'event : </span> {actualParty.adress}</p>
-                    <p><img className="" src={actualParty.picture} alt="Image de la sortie" width="50" height="50" /></p>
+                  <h2>{actualParty.title}</h2>
+                    <p className="resumeDate"><span className='gras'>Date : </span> {(actualParty.date.substring(8)) + "-" + (actualParty.date.substring(5, 7)) + "-" + (actualParty.date.substring(0,4))}</p>
+                    <p className="resumeImg"><img src={actualParty.picture} alt="Image de la sortie"/></p>
+                    <p className="resumeAdress"><span className='gras'>Adresse : </span> {actualParty.adress}</p>
                     <p><span className='gras'>Description : </span> {actualParty.description}</p>
 
                     <Form onSubmit={submitHandlerParty}>
                         <Form.Group>
+                          <h3>Personnalisation de ma sortie</h3>
                           <Form.Label>Titre de ma sortie :</Form.Label>
                           <Form.Control
                             type="text"
@@ -314,19 +314,21 @@ function ProfilPage(props) {
                             onChange={(e) => setDescriptionActualParty(e.target.value)}
                           />
                         </Form.Group>
-                        <Button className="outline-purple" type="submit">
+                        <Button className="outline-purple mt-3 mb-3" type="submit" style={{marginRight:"10px"}}>
                           Valider
                         </Button>
-                      </Form>
-                      {actualParty.visibility === "private" &&
-                        <Button style={{marginTop:10}} onClick={() => setVisibility("public")} variant="outline-dark">
+
+                        {actualParty.visibility === "private" &&
+                        <Button onClick={() => setVisibility("public")} variant="outline-dark" className="mt-3 mb-3">
                           Ma sortie est actuelement privée
                         </Button>
                         ||
-                        <Button style={{marginTop:10}} onClick={() => setVisibility("private")} variant="outline-success">
+                        <Button onClick={() => setVisibility("private")} variant="outline-success" className="mt-3 mb-3">
                           Ma sortie est actuelement publique
                         </Button>
                       }
+                      </Form>
+                     
 
                   </>
                   ||
@@ -474,30 +476,47 @@ function ProfilPage(props) {
           </Container>
         </Col>
         </Row>
-        <Row className="back-yellow"> {/*Chat*/}
+        <Row className="back-yellow msgBox mt-2"> {/*Chat*/}
+            <h3>Discussions : </h3>
             {actualParty && actualParty.chat.map((msg, i) =>
             <>
             { Object.keys(msg)[0] === token.name && Object.keys(msg)[0] !== actualParty.name_auth &&
-              <p /* msg de l'user quand pas auteur*/ style={{color:'red'}}>{Object.keys(msg)[0]} : {msg[Object.keys(msg)[0]]}</p>
+              /* msg de l'user quand pas auteur*/
+              <div className="msg lesAutres">
+                <p className="auteurMsg" style={{color:'red'}}> {Object.keys(msg)[0]} </p> 
+                <p> {msg[Object.keys(msg)[0]]}</p>
+              </div>
             }
             { Object.keys(msg)[0] === token.name && Object.keys(msg)[0] === actualParty.name_auth && 
-              <p /* msg de l'auteur quand user aussi*/ style={{color:'yellow'}}>{Object.keys(msg)[0]} : {msg[Object.keys(msg)[0]]}</p>
+              /* msg de l'auteur quand user aussi*/
+              <div className="msg">
+                <p className="auteurMsg" style={{color:'blue'}}> {Object.keys(msg)[0]} </p>
+                <p> {msg[Object.keys(msg)[0]]}</p>
+              </div>
             }
             { Object.keys(msg)[0] !== token.name && Object.keys(msg)[0] === actualParty.name_auth && 
-              <p /* msg de l'auteur quand pas user*/ style={{color:'blue'}}>{Object.keys(msg)[0]} : {msg[Object.keys(msg)[0]]}</p>
+              /* msg de l'auteur quand pas user*/
+              <div className="msg lesAutres">
+                <p className="auteurMsg" style={{color:'yellow'}} >{Object.keys(msg)[0]} </p>
+                <p> {msg[Object.keys(msg)[0]]}</p>
+              </div>
             }
             { Object.keys(msg)[0] !== token.name && Object.keys(msg)[0] !== actualParty.name_auth && 
-              <p /* msg des autres */ style={{color:'green'}}>{Object.keys(msg)[0]} : {msg[Object.keys(msg)[0]]}</p>
+               /* msg des autres */ 
+              <div className=" msg lesAutres">
+                <p className="auteurMsg" style={{color:'green'}}> {Object.keys(msg)[0]}</p>
+                <p> {msg[Object.keys(msg)[0]]} </p>
+              </div>
             }
             { Object.keys(msg)[0] === token.name &&
-              <Button  style={{width:15,}} variant="danger" onClick={() => deleteMsg(msg)}>
-                X
+              <Button variant="danger" onClick={() => deleteMsg(msg)} className="eraseMsg">
+                Supprimer le message
               </Button>
               ||
               <>
               { actualParty.name_auth === token.name &&
-                <Button  style={{width:15,}} variant="danger" onClick={() => deleteMsg(msg)}>
-                  X
+                <Button variant="danger" onClick={() => deleteMsg(msg)} className="eraseMsg2">
+                  Supprimer le message
                 </Button>
               }
               </>
@@ -506,10 +525,10 @@ function ProfilPage(props) {
           )}
         </Row>
 
-        <Row>
+        <Row className="mt-1">
           <Form onSubmit={submitMessage}>
             <Form.Group>
-              <Form.Label>Message</Form.Label>
+              {/* <Form.Label>Message</Form.Label> */}
               <Form.Control
                 type="text"
                 value={newMessage}
@@ -517,7 +536,7 @@ function ProfilPage(props) {
                 onChange={(e) => setNewMessage(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="outline-dark mt-1 mb-3" type="submit">
               Valider
             </Button>
           </Form>
