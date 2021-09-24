@@ -294,7 +294,7 @@ function ProfilPage(props) {
                       <p>Nombre de participant: {((data.menber).lenght) > 0 || 0}</p>
                           {((data.menber.indexOf(token.name) > -1)) &&
                             <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
-                              Deja menbre
+                              Déjà membre
                             </Button>
                           ||
                           <>
@@ -306,7 +306,7 @@ function ProfilPage(props) {
                               <>
                                 {data.askingRequired === true && 
                                 <Button variant="outline-info" className="btn-home" onClick={() => partyTwo(data, "askInvitation", targetUser.name)}>
-                                  Demander a rejoindre
+                                  Demander à rejoindre
                                 </Button>
                                 ||
                                 <Button variant="outline-info" className="btn-home" onClick={() => partyTwo(data, "acceptInvitation", targetUser.name)}>
@@ -335,36 +335,36 @@ function ProfilPage(props) {
               <img className="fond-profil" alt="fond profil" src='https://cdn4.vectorstock.com/i/thumb-large/76/78/abstract-light-gray-watercolor-stain-shape-vector-37737678.jpg'/>
               
               {User && User.image && User.image !== "" &&
-                <img onClick={() => (setImgInput(true))}  src={User.image}
+                <img className="profilChange" title="Cliquez pour modifier votre photo de profil" onClick={() => (setImgInput(true))}  src={User.image}
                  alt="Image de profil" 
                  style={{borderRadius:'100%', width:'50px', height:'50px', marginRight:'10px'}}/>
                 ||
-                <img onClick={() => (setImgInput(true))}  src={token.picture} alt="Image de profil" style={{borderRadius:'100%', maxWidth:'40px', height:'auto', marginRight:'10px'}}/>
+                <img className="profilChange" title="Cliquez pour modifier votre photo de profil"  onClick={() => (setImgInput(true))}  src={token.picture} alt="Image de profil" style={{borderRadius:'100%', maxWidth:'40px', height:'auto', marginRight:'10px'}}/>
               }
                 { imgInput &&
                   <>
-                    <input  placeholder="Taper google pour revenir a votre image google" onChange={(e) => setImageUser(e.target.value)} type="text" />
+                    <input  placeholder="Taper google pour restaurer votre image de profil google" onChange={(e) => setImageUser(e.target.value)} type="text" />
                     <Button onClick={() => (updateUser(imageUser), setImgInput(false))} variant="outline-success">
-                      valider
+                      Valider
                     </Button>
                     <Button onClick={() => (setImageUser(false), setImgInput(false))} variant="outline-warning">
-                      annuler
+                      Annuler
                     </Button>
                   </>
                 }
 
                 {token.name}
                 <hr></hr>
-                <span className="email">{token.email}</span>
-                <p onClick={() => (setDescInput(true))} className="email">{User.description}</p>
+                <span className="email">{token.email}</span><br></br>
+                <span title="Cliquez pour modifier votre description" onClick={() => (setDescInput(true))} className="userDesc">{User.description}</span>
                 { descInput &&
                   <>
-                    <input  onChange={(e) => setDescUser(e.target.value)} type="text" />
-                    <Button onClick={() => (updateUser(descUser), setDescInput(false))} variant="outline-success">
-                      valider
+                    <span><input  onChange={(e) => setDescUser(e.target.value)} type="text" /></span><br></br>
+                    <Button onClick={() => (updateUser(descUser), setDescInput(false))} variant="outline-success" className="m-1">
+                      Valider
                     </Button>
-                    <Button onClick={() => (setDescUser(false), setDescInput(false))} variant="outline-warning">
-                      annuler
+                    <Button onClick={() => (setDescUser(false), setDescInput(false))} variant="outline-danger">
+                      Annuler
                     </Button>
                   </>
                 }
@@ -505,16 +505,18 @@ function ProfilPage(props) {
                   </>
                   ||
                   <>
-                    <p>Titre de l'event : {actualParty.title}</p>
-                    <p>Date de l'event : {(actualParty.date.substring(8)) + "-" + (actualParty.date.substring(5, 7)) + "-" + (actualParty.date.substring(0,4))}</p>
-                    <p>Adresse de l'event : {actualParty.adress}</p>
-                    <img className="" src={actualParty.picture} alt="Image de la sortie" width="50" height="50" />
-                    <p>Description : {actualParty.description}</p>
-                    
-                    { actualParty.name_auth && <p>Createur/Creatrice de la sortie : {actualParty.name_auth}</p>}
-                    <p>Titre : { actualParty.title_auth && <span>{actualParty.title_auth}</span> || <span>Le créateur de cette sortie n'a pas encore défini sa sortie</span> }</p>
-                    <p>Lieu : { actualParty.adress_auth && <span>{actualParty.adress_auth}</span> || <span>Le créateur n'a pas encore choisi le lieu</span> }</p>
-                    <p>Description de la sortie : { actualParty.description_auth && <span>{actualParty.description_auth}</span> || <span>Le créateur n'a pas encore édité de description</span> }</p>
+                    <h2>Titre de l'event : {actualParty.title}</h2>
+                      <p className="resumeDate"><span className='gras'>Date : </span> {(actualParty.date.substring(8)) + "-" + (actualParty.date.substring(5, 7)) + "-" + (actualParty.date.substring(0,4))}</p>
+                      <p className="resumeImg"><img src={actualParty.picture} alt="Image de la sortie"/></p>
+                      <p className="resumeAdress"><span className='gras'>Adresse : </span> {actualParty.adress}</p>
+                      <p><span className='gras'>Description : </span> {actualParty.description}</p>
+
+                    <div className='events-list m-2'>
+                      { actualParty.name_auth && <p><span className='gras'>Createur/Creatrice de la sortie : </span> {actualParty.name_auth}</p>}
+                      <p><span className='gras'>Titre : </span>{ actualParty.title_auth && <span>{actualParty.title_auth}</span> || <span>Le créateur n'a pas encore défini sa sortie</span> }</p>
+                      <p><span className='gras'>Lieu :  </span>{ actualParty.adress_auth && <span>{actualParty.adress_auth}</span> || <span>Le créateur n'a pas encore choisi le lieu</span> }</p>
+                      <p><span className='gras'>Description de la sortie :  </span>{ actualParty.description_auth && <span>{actualParty.description_auth}</span> || <span>Le créateur n'a pas encore édité de description</span> }</p>
+                    </div>
                   </>
                 }
                 </Col>
@@ -658,8 +660,8 @@ function ProfilPage(props) {
           </Container>
         </Col>
         </Row>
-        <Row className="back-yellow msgBox mt-2"> {/*Chat*/}
-            <h3>Discussions : </h3>
+        <Row className="msgBox mt-2"> {/*Chat*/}
+          <h3>Discussions : </h3>
             {actualParty && actualParty.chat.map((msg, i) =>
             <>
             { Object.keys(msg)[0] === token.name && Object.keys(msg)[0] !== actualParty.name_auth &&
