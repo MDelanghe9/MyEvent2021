@@ -536,6 +536,67 @@ code {
   color:red !important;
   font-size:18px !important;
 }
+.resume, .msg{
+  margin:5px !important;
+  border-radius:5px;
+  color:black !important;
+  border: 1px solid rgba(87, 10, 131, 0.075) !important;
+  box-shadow: 4px 4px 8px rgba(19, 8, 80, 0.609) !important;
+  background-color:#dcdcdc54 !important;
+}
+.resume h2{
+  text-align: center !important;
+  margin:10px !important;
+}
+.resumeDate, .resumeImg{
+  text-align: center !important;
+  color:purple;
+}
+.resume img {
+  width:20em;
+  height:auto;
+}
+.msgBox p{
+  position:relative;
+  font-size:17px;
+
+}
+.msg{
+  margin:0 10px 0 10px !important; 
+}
+.eraseMsg{
+  background-color:transparent !important;
+  color:grey !important;
+  font-size:12px !important;
+  width: 122px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position:relative;
+  top:-20px;
+  left:21px;
+  border:none !important;
+}
+.eraseMsg2{
+  background-color:transparent !important;
+  color:grey !important;
+  font-size:12px !important;
+  width: 122px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  position:relative;
+  border:none !important;
+  top:-20px;
+  left: 618px;
+}
+.auteurMsg{
+  margin:0 !important;
+}
+.lesAutres{
+  text-align: right;
+}
+.eraseMsg:hover{
+  text-decoration:underline;
+}
 
 /*Footer*/
 .footer {
