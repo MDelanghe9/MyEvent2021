@@ -279,7 +279,7 @@ let date = "";
                       </Col>
                   </Row>
                   <Row>
-                      <h4 className="mb-3" style={{borderTop:"1px solid black", marginTop:20}}>Les sorties de cette evenements</h4>
+                      <h4 className="mb-3" style={{borderTop:"1px solid black", marginTop:20}}>Les sorties de cet événement</h4>
                       {partysOfEvent && partysOfEvent.map((data, i) =>
                       <div  style={{backgroundColor:"rgb("+ (i%2 * 197 + 120)+","+(i%2 * 197 + 120)+","+(i%2 * 197 + 120)+")", margin:20, 
                       }}>
