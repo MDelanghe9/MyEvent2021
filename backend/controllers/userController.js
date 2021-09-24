@@ -145,4 +145,65 @@ const getAllUser = asyncHandler(async (req, res) => {
     });
   }
 });
-export { authUser, updateUserProfile, registerUser, getAllUser };
+
+// @desc    GET user actual
+// @route   GET /api/users/one
+const one = asyncHandler(async (req, res) => {
+  const {email} = req.body;
+  const user = await User.find(email);
+  if (user) {
+    res.json({
+      user
+    });
+  } else {
+    res.status({
+      error: "pas d'utilisateur trouver",
+    });
+  }
+});
+
+// @desc    update info profil
+// @route   POST /api/users/updateInfo
+const updateInfo = asyncHandler(async (req, res) => {
+  const {email} = req.body;
+  const userOld = await User.find({email});
+  if (userOld) {
+    const image = req.body.image || userOld.image;
+    const description = req.body.description || userOld.description;
+    const response = await User.updateOne({email}, 
+    {
+      image : image,
+      description : description
+    });
+    if (response) {
+      const user = await User.find({email});
+      res.json({
+        user
+      });
+    } else {
+      res.status({
+        error: "pas d'utilisateur trouver",
+      });
+    }
+  }
+
+});
+
+// @desc    POST all partys of tagert user
+// @route   POST /api/users/allPartys
+const allPartys = asyncHandler(async (req, res) => {
+  const {name_auth} = req.body;
+  const partys = await Party.find(name_auth);
+  if (partys) {
+    res.json({
+      partys
+    });
+  } else {
+    res.status({
+      error: "pas de party trouver",
+    });
+  }
+});
+
+allPartys
+export { authUser, updateUserProfile, registerUser, getAllUser, one, updateInfo, allPartys};

@@ -8,7 +8,7 @@ import {
   Col,
   Container,
   Button,
-  Form,
+  Form,  Modal,
   Dropdown,
 } from "react-bootstrap";
 
@@ -35,6 +35,7 @@ const useInterval = (callback, delay) => {
 function ProfilPage(props) {
  const [token, setToken] = useState(false);
  const [Users, setUsers] = useState([]);
+ const [User, setUser] = useState(false);
  const [curentDate, setCurentDate] = useState(1000);
  const [imgProfil, setImgProfil] = useState(false);
 
@@ -45,8 +46,15 @@ function ProfilPage(props) {
  const [descriptionActualParty, setDescriptionActualParty] = useState("Vindez vous amusez !!");
  const [newMessage, setNewMessage] = useState("");
  const [intervalTime, setIntervalTime] = useState(5000);
+ const [imgInput, setImgInput] = useState(false);
+ const [imageUser, setImageUser] = useState(false);
+ const [descInput, setDescInput] = useState(false);
+ const [descUser, setDescUser] = useState("");
+ const [displayModal, setDisplayModal] = useState(false);
+ const [targetUser, setTargetUser] = useState(false);
+ const [targetUserPartys, setTargetUserPartys] = useState(false);
 
-
+ 
  useInterval(() => {
    // Do some API call here
    //refreshChat();
@@ -63,6 +71,7 @@ function ProfilPage(props) {
       //console.log("token =>" , decoded);
     }
     getUsers();
+    getUser(token.email, "token");
     getPartys();
   }, []);
 
@@ -75,6 +84,25 @@ function ProfilPage(props) {
       console.log(error.response);
     }
   }
+
+  const getUser = async (email, mode) => {
+    if (typeof email !== 'object') {
+      email = { email }
+    }
+    try {
+      const response = await axios.post("http://localhost:4242/api/users/one", {email}); 
+      console.log(response.data.user);
+      if (mode == "token") {
+        setUser(response.data.user[0]);
+      }else{
+        setTargetUser(response.data.user[0]);
+      }
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+
+  
   const getPartys = async () => {
     try {
       const response = await axios.get("http://localhost:4242/api/party/all"); 
@@ -84,6 +112,7 @@ function ProfilPage(props) {
       console.log(error.response);
     }
   }
+
   const onchangePartyList= (data) => {
     setActualParty(data)
     setTitleActualParty(data.title_auth);
@@ -103,6 +132,18 @@ function ProfilPage(props) {
       }else{
         setActualParty(response.data.party[0]);
       }
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const partyTwo = async (name = "", action ="", auth) => {
+    console.log(name);
+    var _id = actualParty._id;
+    try {
+      const response = await axios.post("http://localhost:4242/api/party/"+action , {name, _id}); 
+      console.log(response);
+      getTargetUserPartys(auth);
     } catch (error) {
       console.log(error.response);
     }
@@ -191,18 +232,144 @@ function ProfilPage(props) {
     }
   };
   
+  const setAskingRequired = async (askingRequired) => {
+    var _id = actualParty._id;
+    try {
+      const response = await axios.post("http://localhost:4242/api/party/askingRequired", {askingRequired, _id});
+      setActualParty(response.data.party[0]);
+      console.log(response.data.party[0]);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  const updateUser = async (data) => {
+    var email = User.email;
+    var description = descUser;
+    var image = imageUser;
+    if (image == "google") {
+      image = token.picture;
+    }
+    console.log(email);
+    console.log(description);
+    console.log(image);
+    try {
+      const response = await axios.post("http://localhost:4242/api/users/updateInfo", {email, description, image});
+      console.log(response.data.user[0]);
+      setUser(response.data.user[0]);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+  
+  const getTargetUserPartys = async (name_auth) => {
+    if (typeof name_auth !== 'object') {
+      name_auth = { name_auth }
+    }
+    try {
+      const response = await axios.post("http://localhost:4242/api/users/allPartys", {name_auth}); 
+      console.log(response.data.partys);
+      setTargetUserPartys(response.data.partys);
+    } catch (error) {
+      console.log(error.response);
+    }
+  }
+  
+
   return (
     <>
       <MyNav token={token}/>
+        <Modal show={displayModal}>
+                <Modal.Header>
+                  <Modal.Title>Profil de : {targetUser.name}</Modal.Title>
+                </Modal.Header>
+
+                <Modal.Body>
+                {targetUser.description}
+                {targetUserPartys && targetUserPartys.map((data) =>
+                <>
+                  {data.visibility !== "private" &&
+                    <div>
+                      {data.adress}
+                      <p>Nombre de participant: {((data.menber).lenght) > 0 || 0}</p>
+                          {((data.menber.indexOf(token.name) > -1)) &&
+                            <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
+                              Deja menbre
+                            </Button>
+                          ||
+                          <>
+                              { ((data.askingInvitation.indexOf(token.name) > -1)) && 
+                                <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
+                                  En attente
+                                </Button>
+                              ||
+                              <>
+                                {data.askingRequired === true && 
+                                <Button variant="outline-info" className="btn-home" onClick={() => partyTwo(data, "askInvitation", targetUser.name)}>
+                                  Demander a rejoindre
+                                </Button>
+                                ||
+                                <Button variant="outline-info" className="btn-home" onClick={() => partyTwo(data, "acceptInvitation", targetUser.name)}>
+                                  Rejoindre
+                                </Button>
+                                }
+                              </>
+                              }
+                          </>
+                          }
+                      } 
+                    </div>
+                  }
+                </>
+                )}
+                </Modal.Body>
+
+                <Modal.Footer>
+                  <Button variant="outline-dark" onClick={() => (setDisplayModal(false))}>
+                    Retour
+                  </Button>
+                </Modal.Footer>
+            </Modal>
         <Container style={{marginTop:100}} fluid >
           <Row>
             <Col className='profil'>
               <p className='name'>
               <img className="fond-profil" alt="fond profil" src='https://cdn4.vectorstock.com/i/thumb-large/76/78/abstract-light-gray-watercolor-stain-shape-vector-37737678.jpg'/>
-              <img src={token.picture} alt="Image de profil" style={{borderRadius:'100%', maxWidth:'40px', height:'auto', marginRight:'10px'}}/>
+              
+              {User && User.image && User.image !== "" &&
+                <img onClick={() => (setImgInput(true))}  src={User.image}
+                 alt="Image de profil" 
+                 style={{borderRadius:'100%', width:'50px', height:'50px', marginRight:'10px'}}/>
+                ||
+                <img onClick={() => (setImgInput(true))}  src={token.picture} alt="Image de profil" style={{borderRadius:'100%', maxWidth:'40px', height:'auto', marginRight:'10px'}}/>
+              }
+                { imgInput &&
+                  <>
+                    <input  placeholder="Taper google pour revenir a votre image google" onChange={(e) => setImageUser(e.target.value)} type="text" />
+                    <Button onClick={() => (updateUser(imageUser), setImgInput(false))} variant="outline-success">
+                      valider
+                    </Button>
+                    <Button onClick={() => (setImageUser(false), setImgInput(false))} variant="outline-warning">
+                      annuler
+                    </Button>
+                  </>
+                }
+
                 {token.name}
                 <hr></hr>
                 <span className="email">{token.email}</span>
+                <p onClick={() => (setDescInput(true))} className="email">{User.description}</p>
+                { descInput &&
+                  <>
+                    <input  onChange={(e) => setDescUser(e.target.value)} type="text" />
+                    <Button onClick={() => (updateUser(descUser), setDescInput(false))} variant="outline-success">
+                      valider
+                    </Button>
+                    <Button onClick={() => (setDescUser(false), setDescInput(false))} variant="outline-warning">
+                      annuler
+                    </Button>
+                  </>
+                }
               </p>
             </Col>
 
@@ -327,6 +494,15 @@ function ProfilPage(props) {
                           Ma sortie est actuelement publique
                         </Button>
                       }
+                      {actualParty.askingRequired === true &&
+                        <Button style={{marginTop:10}} onClick={() => setAskingRequired(false)} variant="outline-dark">
+                          Ma sortie est actuellement restreinte
+                        </Button>
+                        ||
+                        <Button style={{marginTop:10}} onClick={() => setAskingRequired(true)} variant="outline-success">
+                          Tout le monde peux rejoindre ma sortie
+                        </Button>
+                      }
 
                   </>
                   ||
@@ -386,6 +562,8 @@ function ProfilPage(props) {
                           {user.name !== token.name && (!(actualParty.askingInvitation.indexOf(user.name) > -1)) && (!(actualParty.askingInvitationByAuthor.indexOf(user.name) > -1)) &&
                           <>
                             <span>{user.name}</span>
+                            <span onClick={() => (setDisplayModal(true), getUser(user.email, "profil"), getTargetUserPartys(user.name))}>profil 🔍</span>
+                            
                             <Button variant="info" className="btn-home" onClick={() => party(user.name, "inviteUser")}>
                               Inviter
                             </Button>
@@ -408,9 +586,17 @@ function ProfilPage(props) {
                         Annuler l'invitation
                       </Button>
                     ||
-                      <Button variant="info" className="btn-home" onClick={() => party(token.name, "askInvitation")}>
-                        Demander à participer
-                      </Button>
+                    <>
+                      {actualParty.askingRequired === true && 
+                        <Button variant="info" className="btn-home" onClick={() => party(token.name, "askInvitation")}>
+                          Demander à participer
+                        </Button>
+                        ||
+                        <Button variant="info" className="btn-home" onClick={() => party(token.name, "acceptInvitation")}>
+                          Participer
+                        </Button>
+                      } 
+                    </>
                     }
                   </>
               </Col>
@@ -505,9 +691,9 @@ function ProfilPage(props) {
             </>
           )}
         </Row>
-
-        <Row>
-          <Form onSubmit={submitMessage}>
+        {( actualParty.name_auth === token.name || (actualParty.menber.indexOf(token.name) > -1)) &&
+          <Row>
+            <Form onSubmit={submitMessage}>
             <Form.Group>
               <Form.Label>Message</Form.Label>
               <Form.Control
@@ -521,7 +707,9 @@ function ProfilPage(props) {
               Valider
             </Button>
           </Form>
-        </Row>
+        </Row>          
+        }
+
         </>
         }
       </Container>
