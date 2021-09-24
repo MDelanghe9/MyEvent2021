@@ -129,7 +129,7 @@ function ProfilPage(props) {
     try {
       const response = await axios.post("http://localhost:4242/api/party/"+action , {name, _id}); 
       console.log(response);
-      if (action === "cancelParty" || action === "cancelInvite") {
+      if (action === "cancelParty") {
         props.history.go(0); // route evenet anuuler
       }else{
         setActualParty(response.data.party[0]);
