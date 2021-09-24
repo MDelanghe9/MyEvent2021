@@ -501,8 +501,8 @@ code {
   height: 334px;
   position: absolute;
   z-index: -1;
-  bottom: -83px;
-  left: -36px;
+  bottom: -70px;
+  left: -25px;
 }
 .profil p {
   padding:30px;
@@ -527,16 +527,24 @@ code {
   font-size:25px;
   position:relative;
 }
-.email{
+.email, .userDesc{
   font-size:15px;
   color:rgb(94, 100, 100);
+}
+/*Hover description*/
+.userDesc:hover{
+  color:rgb(175, 6, 175);
+}
+.profilChange:hover{
+  border:2px solid purple;
+  padding:1px;
 }
 .btn-none{
   background-color: rgba(255, 2, 2, 0.068) !important;
   color:red !important;
   font-size:18px !important;
 }
-.resume, .msg{
+.resume {
   margin:5px !important;
   border-radius:5px;
   color:black !important;
@@ -556,13 +564,16 @@ code {
   width:20em;
   height:auto;
 }
-.msgBox p{
+.msgBox div{
   position:relative;
   font-size:17px;
-
+  background-color:rgba(167, 143, 167, 0.349);
 }
 .msg{
-  margin:0 10px 0 10px !important; 
+  margin:0 10px 0 10px !important;
+  border:1px solid rgba(128, 128, 128, 0.233);
+  border-radius:10px;
+  box-shadow: 2px 2px 3px rgba(19, 8, 80, 0.609) !important;
 }
 .eraseMsg{
   background-color:transparent !important;
@@ -576,18 +587,6 @@ code {
   left:21px;
   border:none !important;
 }
-.eraseMsg2{
-  background-color:transparent !important;
-  color:grey !important;
-  font-size:12px !important;
-  width: 122px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  position:relative;
-  border:none !important;
-  top:-20px;
-  left: 618px;
-}
 .auteurMsg{
   margin:0 !important;
 }
@@ -596,6 +595,17 @@ code {
 }
 .eraseMsg:hover{
   text-decoration:underline;
+}
+/*Liste des membres*/
+.btn-member{
+  width:200px !important;
+}
+.btnShort{
+  width:15px !important;
+  height:25px !important;
+  line-height: 0.5 !important;
+  padding:0 !important;
+  margin-left:10px !important;
 }
 
 /*Footer*/
@@ -674,6 +684,18 @@ code {
   /*log*/
   .headerContainer{
     margin-left:-4% !important;
+  }
+}
+@media(max-width:991px){
+  .resume {
+    margin-bottom:20px !important;
+  }
+  .memberContainer{
+    display:flex;
+    margin:auto !important;
+  }
+  .btn-member{
+    margin:12px !important;
   }
 }
 @media (max-width: 900px) {
