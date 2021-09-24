@@ -279,15 +279,17 @@ let date = "";
                       </Col>
                   </Row>
                   <Row>
+                      <h4 className="mb-3" style={{borderTop:"1px solid black", marginTop:20}}>Les sorties de cette evenements</h4>
                       {partysOfEvent && partysOfEvent.map((data, i) =>
-                      <div  style={{backgroundColor:"rgb("+ (i%2 * 100)+", 115, 200)"}}>
+                      <div  style={{backgroundColor:"rgb("+ (i%2 * 197 + 120)+","+(i%2 * 197 + 120)+","+(i%2 * 197 + 120)+")", margin:20, 
+                      }}>
                         {data.visibility === "private" && 
                         <div key={i}>
-                          <p>Createur : {data.name_auth}</p>
-                          <p>Nombre de participant: {((data.menber).lenght) > 0 || 0}</p>
+                          <p>Créateur : {data.name_auth}</p>
+                          <p>Nombre de participants: {((data.menber).lenght) > 0 || 0}</p>
                           {((data.menber.indexOf(token.name) > -1)) &&
                             <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
-                              Deja menber
+                              Déja menbre
                             </Button>
                           ||
                           <>
@@ -299,7 +301,7 @@ let date = "";
                               <>
                                 {data.askingRequired === true && 
                                 <Button variant="outline-info" className="btn-home" onClick={() => party(data, "askInvitation")}>
-                                  Demander a rejoindre
+                                  Demander à rejoindre
                                 </Button>
                                 ||
                                 <Button variant="outline-info" className="btn-home" onClick={() => party(data, "acceptInvitation")}>
