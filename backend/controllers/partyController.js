@@ -359,5 +359,31 @@ const party = asyncHandler(async (req, res) => {
   });
 });
 
+// @desc    POST change restreinte of party
+// @route   POST /api/party/askingRequired
+const askingRequired = asyncHandler(async (req, res) => {
+  const { _id, askingRequired } = req.body;
+  const partyEvent = await Party.updateOne({_id}, 
+    {askingRequired: askingRequired }
+  )
+  if (partyEvent) {
+    const party = await Party.find({_id});
+    if (party) {
+      res.json({
+        party
+      });
+    }else{
+      res.status({
+        error: "Party not find",
+      });
+    }
+  } else {
+    res.status({
+      error: "la demande de supresion de la demande n'a put aboutir",
+    });
+  }
+});
+
+
 export { partyCreat, cancelParty, getAllPartys, newMessage, deleteMsg, getParty, setFieldParty, setVisibility,
-   askInvitation, refuseInvitation, acceptInvitation, kickUser, inviteUser, cancelInvite, leaveParty, party};
+   askInvitation, refuseInvitation, acceptInvitation, kickUser, inviteUser, cancelInvite, leaveParty, party, askingRequired};
