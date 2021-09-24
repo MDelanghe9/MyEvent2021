@@ -15,7 +15,8 @@ import {
   deleteMsg,
   setFieldParty,
   setVisibility,
-  party
+  party,
+  askingRequired
 } from "../controllers/partyController.js";
 import { protect } from "../middleware/authMiddleware.js";
 const router = express.Router();
@@ -36,5 +37,7 @@ router.route("/leaveParty").post(leaveParty);
 router.route("/deleteMsg").post(deleteMsg);
 router.route("/setFieldParty").post(setFieldParty);
 router.route("/setVisibility").post(setVisibility);
+router.route("/askingRequired").post(askingRequired);
+
 
 export default router;

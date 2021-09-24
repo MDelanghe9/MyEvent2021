@@ -291,12 +291,6 @@ let date = "";
                             </Button>
                           ||
                           <>
-                            { ((data.menber.indexOf(token.name) > -1)) && 
-                              <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
-                                Deja menbre
-                              </Button>
-                              ||
-                              <>
                               { ((data.askingInvitation.indexOf(token.name) > -1)) && 
                                 <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
                                   En attente
@@ -314,8 +308,6 @@ let date = "";
                                 }
                               </>
                               }
-                            </>
-                            }
                           </>
                           }
                         </div>

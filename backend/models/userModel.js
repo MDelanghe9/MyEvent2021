@@ -21,6 +21,13 @@ const userSchema = mongoose.Schema(
     },
     picture:{
       type: String,
+    },
+    description:{
+      type: String,
+      default:"Pas encore de description de profil"
+    },
+    image:{
+      type: String,
     }
   },
   {
