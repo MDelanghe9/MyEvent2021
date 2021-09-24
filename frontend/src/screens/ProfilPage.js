@@ -343,13 +343,14 @@ function ProfilPage(props) {
               }
                 { imgInput &&
                   <>
-                    <input  placeholder="Taper google pour restaurer votre image de profil google" onChange={(e) => setImageUser(e.target.value)} type="text" />
-                    <Button onClick={() => (updateUser(imageUser), setImgInput(false))} variant="outline-success">
+                    <input  placeholder="Taper google pour restaurer votre image de profil google" title="Entrez un URL" onChange={(e) => setImageUser(e.target.value)} type="text" style={{fontSize:'15px', minWidth:'380px'}}/><br></br>
+                    <Button onClick={() => (updateUser(imageUser), setImgInput(false))} variant="outline-success" className="m-1">
                       Valider
                     </Button>
-                    <Button onClick={() => (setImageUser(false), setImgInput(false))} variant="outline-warning">
+                    <Button onClick={() => (setImageUser(false), setImgInput(false))} variant="outline-warning" className="m-1">
                       Annuler
                     </Button>
+                    <br></br>
                   </>
                 }
 
@@ -439,7 +440,7 @@ function ProfilPage(props) {
           { actualParty &&
           <>
           <Row>
-            <Col className="" xs={9} sm={9} md={9} lg={9} xl={9} xxl={9}> {/* donner une taille par default */}
+            <Col xs={11} sm={11} md={11} lg={9} xl={9} xxl={9}> {/* donner une taille par default */}
               <Row>
                 <Col className="resume"> 
                 { actualParty && actualParty.email_auth === token.email &&
@@ -484,21 +485,21 @@ function ProfilPage(props) {
                         </Button>
 
                         {actualParty.visibility === "private" &&
-                        <Button onClick={() => setVisibility("public")} variant="outline-dark" className="mt-3 mb-3">
+                        <Button onClick={() => setVisibility("public")} variant="outline-dark" className="mt-3 mb-3" style={{marginRight:"10px"}}>
                           Ma sortie est actuelement privée
                         </Button>
                         ||
-                        <Button onClick={() => setVisibility("private")} variant="outline-success" className="mt-3 mb-3">
+                        <Button onClick={() => setVisibility("private")} variant="outline-success" className="mt-3 mb-3" style={{marginRight:"10px"}}>
                           Ma sortie est actuelement publique
                         </Button>
                         }
                         {actualParty.askingRequired === true &&
-                          <Button style={{marginTop:10}} onClick={() => setAskingRequired(false)} variant="outline-dark">
+                          <Button onClick={() => setAskingRequired(false)} variant="outline-dark" className="mt-3 mb-3">
                             Ma sortie est actuellement restreinte
                           </Button>
                           ||
-                          <Button style={{marginTop:10}} onClick={() => setAskingRequired(true)} variant="outline-success">
-                            Tout le monde peux rejoindre ma sortie
+                          <Button onClick={() => setAskingRequired(true)} variant="outline-success" className="mt-3 mb-3">
+                            Tout le monde peut rejoindre ma sortie
                           </Button>
                         }
                       </Form>
@@ -522,8 +523,8 @@ function ProfilPage(props) {
                 </Col>
               </Row>
           </Col>
-          <Col className="back-blue"  xs={3} sm={3} md={3} lg={3} xl={3} xxl={3}> 
-          <Container>
+          <Col xs={10} sm={10} md={11} lg={3} xl={3} xxl={3}> 
+          <Container className="memberContainer resume">
             {actualParty &&
               <Row>
               <h4 style={{marginTop:20}}>Listes des participants</h4>
@@ -660,21 +661,21 @@ function ProfilPage(props) {
           </Container>
         </Col>
         </Row>
-        <Row className="msgBox mt-2"> {/*Chat*/}
+        <Row className="msgBox m-2" sm="true"> {/*Chat*/}
           <h3>Discussions : </h3>
             {actualParty && actualParty.chat.map((msg, i) =>
             <>
             { Object.keys(msg)[0] === token.name && Object.keys(msg)[0] !== actualParty.name_auth &&
               /* msg de l'user quand pas auteur*/
-              <div className="msg lesAutres">
-                <p className="auteurMsg" style={{color:'red'}}> {Object.keys(msg)[0]} </p> 
+              <div className="msg">
+                <p className="auteurMsg" style={{color:'red'}}> {Object.keys(msg)[0]} <span style={{color:'grey'}}>(auteur)</span></p> 
                 <p> {msg[Object.keys(msg)[0]]}</p>
               </div>
             }
             { Object.keys(msg)[0] === token.name && Object.keys(msg)[0] === actualParty.name_auth && 
               /* msg de l'auteur quand user aussi*/
               <div className="msg">
-                <p className="auteurMsg" style={{color:'blue'}}> {Object.keys(msg)[0]} </p>
+                <p className="auteurMsg" style={{color:'blue'}}> {Object.keys(msg)[0]} <span style={{color:'grey'}}>(auteur)</span></p>
                 <p> {msg[Object.keys(msg)[0]]}</p>
               </div>
             }
@@ -687,19 +688,19 @@ function ProfilPage(props) {
             }
             { Object.keys(msg)[0] !== token.name && Object.keys(msg)[0] !== actualParty.name_auth && 
                /* msg des autres */ 
-              <div className=" msg lesAutres">
+              <div className="msg lesAutres">
                 <p className="auteurMsg" style={{color:'green'}}> {Object.keys(msg)[0]}</p>
                 <p> {msg[Object.keys(msg)[0]]} </p>
               </div>
             }
             { Object.keys(msg)[0] === token.name &&
-              <Button variant="danger" onClick={() => deleteMsg(msg)} className="eraseMsg">
+              <Button onClick={() => deleteMsg(msg)} className="eraseMsg">
                 Supprimer le message
               </Button>
               ||
               <>
               { actualParty.name_auth === token.name &&
-                <Button variant="danger" onClick={() => deleteMsg(msg)} className="eraseMsg2">
+                <Button onClick={() => deleteMsg(msg)} className="eraseMsg">
                   Supprimer le message
                 </Button>
               }

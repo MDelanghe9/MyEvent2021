@@ -564,12 +564,10 @@ code {
   width:20em;
   height:auto;
 }
-.msgBox{
-  background-color:rgba(167, 143, 167, 0.349);
-}
-.msgBox p{
+.msgBox div{
   position:relative;
   font-size:17px;
+  background-color:rgba(167, 143, 167, 0.349);
 }
 .msg{
   margin:0 10px 0 10px !important;
@@ -589,18 +587,6 @@ code {
   left:21px;
   border:none !important;
 }
-.eraseMsg2{
-  background-color:transparent !important;
-  color:grey !important;
-  font-size:12px !important;
-  width: 122px !important;
-  padding: 0 !important;
-  margin: 0 !important;
-  position:relative;
-  border:none !important;
-  top:-20px;
-  left: 618px;
-}
 .auteurMsg{
   margin:0 !important;
 }
@@ -610,6 +596,8 @@ code {
 .eraseMsg:hover{
   text-decoration:underline;
 }
+/*Liste des membres*/
+.memberContainer
 
 /*Footer*/
 .footer {
@@ -687,6 +675,12 @@ code {
   /*log*/
   .headerContainer{
     margin-left:-4% !important;
+  }
+}
+@media(max-width:991px){
+  .memberContainer{
+    display:flex;
+    margin:auto !important;
   }
 }
 @media (max-width: 900px) {
