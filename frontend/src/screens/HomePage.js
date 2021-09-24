@@ -279,7 +279,7 @@ let date = "";
                       </Col>
                   </Row>
                   <Row>
-                      <h4 className="mb-3" style={{borderTop:"1px solid black", marginTop:20}}>Les sorties de cette evenements</h4>
+                      <h4 className="mb-3" style={{borderTop:"1px solid black", marginTop:20}}>Les sorties de cet événement</h4>
                       {partysOfEvent && partysOfEvent.map((data, i) =>
                       <div  style={{backgroundColor:"rgb("+ (i%2 * 197 + 120)+","+(i%2 * 197 + 120)+","+(i%2 * 197 + 120)+")", margin:20, 
                       }}>
@@ -288,8 +288,8 @@ let date = "";
                           <p>Créateur : {data.name_auth}</p>
                           <p>Nombre de participants: {((data.menber).lenght) > 0 || 0}</p>
                           {((data.menber.indexOf(token.name) > -1)) &&
-                            <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
-                              Déja menbre
+                            <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("Vous êtes déjà menbre, rendez voussur votre profil pour plus de posibilités")}>
+                              Déjà membre
                             </Button>
                           ||
                           <>
