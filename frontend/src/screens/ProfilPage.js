@@ -56,6 +56,7 @@ function ProfilPage(props) {
 
  
  useInterval(() => {
+
    // Do some API call here
    //refreshChat();
    setTimeout(() => {
@@ -73,6 +74,7 @@ function ProfilPage(props) {
     getUsers();
     getUser(token.email, "token");
     getPartys();
+    
   }, []);
 
   const getUsers = async () => {
@@ -196,7 +198,8 @@ function ProfilPage(props) {
           const response = await axios.post("http://localhost:4242/api/party/chat", {_id});
           setActualParty(response.data.party[0]);
           if(response.data.party[0].lenght == 0){
-            props.history.go(0); // reirection to cancel party
+            props.history.go('/partyCancel'); // reirection to cancel party
+
           }
           // console.log(response.data.party[0]);
         } catch (error) {
@@ -285,39 +288,60 @@ function ProfilPage(props) {
                 </Modal.Header>
 
                 <Modal.Body>
-                {targetUser.description}
+                  { targetUser && targetUser.image &&
+                    <img style={{width:125, height:125}} src={targetUser.image}/>
+                    ||
+                    <img style={{width:125, height:125}} src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg"/>
+                    
+                  }
+                <p>Bio : {targetUser.description}</p>
                 {targetUserPartys && targetUserPartys.map((data) =>
                 <>
                   {data.visibility !== "private" &&
-                    <div>
-                      {data.adress}
+                    <Container style={{margin:20, border:"1px solid black"}}>
+                      <Row>
+                        <Col>
+                      <p>Titre de l'event : {data.title}</p>
+                      <p>Date de l'event : {(data.date.substring(8)) + "-" + (data.date.substring(5, 7)) + "-" + (data.date.substring(0,4))}</p>
+                      <p>Adresse de l'event : {data.adress}</p>
                       <p>Nombre de participant: {((data.menber).lenght) > 0 || 0}</p>
-                          {((data.menber.indexOf(token.name) > -1)) &&
+                          {((data.menber.indexOf(token.name) > -1)) &&   token.name === targetUser.name &&
                             <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
                               Deja menbre
                             </Button>
                           ||
                           <>
-                              { ((data.askingInvitation.indexOf(token.name) > -1)) && 
+                              { ((data.askingInvitation.indexOf(token.name) > -1)) &&   token.name === targetUser.name &&
                                 <Button variant="outline-info" className="btn-home disabled" onClick={() => alert("vous etes deja menbre, rdv profil pour plus de posibiliter")}>
                                   En attente
                                 </Button>
                               ||
                               <>
-                                {data.askingRequired === true && 
+                                {data.askingRequired === true &&   token.name === targetUser.name &&
                                 <Button variant="outline-info" className="btn-home" onClick={() => partyTwo(data, "askInvitation", targetUser.name)}>
                                   Demander a rejoindre
                                 </Button>
                                 ||
-                                <Button variant="outline-info" className="btn-home" onClick={() => partyTwo(data, "acceptInvitation", targetUser.name)}>
-                                  Rejoindre
-                                </Button>
+                                <>
+                                 {token.name === targetUser.name &&
+                                  <Button variant="outline-info" className="btn-home" onClick={() => partyTwo(data, "acceptInvitation", targetUser.name)}>
+                                    Rejoindre
+                                  </Button>
+                                  }
+                                </>
                                 }
                               </>
                               }
                           </>
                           }
-                    </div>
+                          </Col>
+                          <Col  xs={2} sm={2} md={2} lg={2} xl={2} xxl={2}>
+                          <img className="" src={data.picture} alt="Image de la sortie" width="200" height="200" />
+                          </Col>
+                          <Col  xs={0} sm={0} md={0} lg={1} xl={1} xxl={1}>
+                          </Col>
+                        </Row>
+                    </Container>
                   }
                 </>
                 )}
@@ -560,7 +584,7 @@ function ProfilPage(props) {
                           {user.name !== token.name && (!(actualParty.askingInvitation.indexOf(user.name) > -1)) && (!(actualParty.askingInvitationByAuthor.indexOf(user.name) > -1)) &&
                           <>
                             <span>{user.name}</span>
-                            <span onClick={() => (setDisplayModal(true), getUser(user.email, "profil"), getTargetUserPartys(user.name))}>profil 🔍</span>
+                            <span onClick={() => (setDisplayModal(true), getUser(user.email, "profil"), getTargetUserPartys(user.name))}>  🔍</span>
                             
                             <Button variant="info" className="btn-home" onClick={() => party(user.name, "inviteUser")}>
                               Inviter
@@ -664,7 +688,7 @@ function ProfilPage(props) {
             <>
             { Object.keys(msg)[0] === token.name && Object.keys(msg)[0] !== actualParty.name_auth &&
               /* msg de l'user quand pas auteur*/
-              <div className="msg lesAutres">
+              <div className="msg">
                 <p className="auteurMsg" style={{color:'red'}}> {Object.keys(msg)[0]} </p> 
                 <p> {msg[Object.keys(msg)[0]]}</p>
               </div>
